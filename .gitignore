@@ -1,0 +1,31 @@
+# Environment variables (DO NOT COMMIT REAL API KEYS)
+.env
+.env*.local
+.env.production
+.env.development
+
+# Excluded Reference & Duplicate Repositories
+reference-repos/
+stitch_viral_spiral_ai_dashboard (1)/
+
+# Python & Dependencies
+.venv/
+env/
+venv/
+__pycache__/
+*.pyc
+
+# Node & Frontend Dependencies
+node_modules/
+.next/
+out/
+build/
+dist/
+
+# Output / Temporary PDF Decks
+packages/pdf-generator/output/
+
+# Logs & System Files
+*.log
+.DS_Store
+Thumbs.db

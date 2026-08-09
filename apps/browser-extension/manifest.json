@@ -1,0 +1,23 @@
+{
+  "manifest_version": 3,
+  "name": "MIL ECHO - Viral Spiral Web Scraper",
+  "version": "1.0.0",
+  "description": "1-Click web headline capture & Socratic audit for MIL ECHO Viral Spiral game arena.",
+  "permissions": [
+    "contextMenus",
+    "activeTab",
+    "scripting",
+    "storage"
+  ],
+  "host_permissions": [
+    "http://localhost:8000/*",
+    "http://localhost:3000/*",
+    "<all_urls>"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup.html"
+  }
+}

@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Viral Spiral AI - Game Arena</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;700&amp;family=Oswald:wght@400;500;700&amp;family=Space+Grotesk:wght@400;500;700;900&amp;family=VT323&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "neo-mint": "#bef264",
+                        "neo-lavender": "#d8b4fe",
+                        "neo-coral": "#fda4af",
+                        "neo-black": "#000000",
+                        "on-secondary": "#67001b",
+                        "on-surface-variant": "#bbcabf",
+                        "tertiary-fixed": "#e9ddff",
+                        "on-tertiary-fixed-variant": "#5516be",
+                        "background": "#0f172a", /* Slightly bluer dark background for contrast */
+                        "on-primary": "#003824",
+                        "surface-bright": "#31394d",
+                        "on-secondary-container": "#ffc2c4",
+                        "surface-container": "#1e293b",
+                        "surface-dim": "#0b1326",
+                        "on-tertiary": "#3c0091",
+                        "primary-fixed": "#6ffbbe",
+                        "tertiary-fixed-dim": "#d0bcff",
+                        "secondary-fixed-dim": "#ffb2b7",
+                        "error-container": "#93000a",
+                        "tertiary-container": "#b090ff",
+                        "surface-tint": "#4edea3",
+                        "primary": "#4edea3",
+                        "error": "#ffb4ab",
+                        "surface-container-lowest": "#020617",
+                        "on-secondary-fixed": "#40000d",
+                        "tertiary": "#d0bcff",
+                        "outline-variant": "#3c4a42",
+                        "secondary-fixed": "#ffdadb",
+                        "surface-container-low": "#0f172a",
+                        "primary-fixed-dim": "#4edea3",
+                        "on-primary-fixed": "#002113",
+                        "on-secondary-fixed-variant": "#92002a",
+                        "inverse-primary": "#006c49",
+                        "inverse-surface": "#dae2fd",
+                        "outline": "#86948a",
+                        "on-primary-container": "#00422b",
+                        "on-surface": "#dae2fd",
+                        "inverse-on-surface": "#283044",
+                        "on-primary-fixed-variant": "#005236",
+                        "on-error": "#690005",
+                        "surface-container-highest": "#334155",
+                        "on-background": "#f8fafc",
+                        "secondary": "#ffb2b7",
+                        "on-tertiary-container": "#4600a7",
+                        "secondary-container": "#b50036",
+                        "surface-container-high": "#1e293b",
+                        "on-error-container": "#ffdad6",
+                        "surface-variant": "#334155",
+                        "primary-container": "#10b981",
+                        "on-tertiary-fixed": "#23005c",
+                        "surface": "#1e293b"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0px", /* Brutalist sharp corners */
+                        "lg": "0px",
+                        "xl": "0px",
+                        "full": "9999px"
+                    },
+                    spacing: {
+                        "max-width": "1400px",
+                        "base": "8px",
+                        "margin-desktop": "32px",
+                        "gutter": "24px",
+                        "margin-mobile": "16px"
+                    },
+                    fontFamily: {
+                        "label-mono": ["JetBrains Mono", "monospace"],
+                        "body-md": ["Inter", "sans-serif"],
+                        "score-display": ["VT323", "monospace"], /* LCD style */
+                        "headline-lg-mobile": ["Oswald", "sans-serif"],
+                        "display-xl": ["Oswald", "sans-serif"],
+                        "headline-lg": ["Oswald", "sans-serif"]
+                    },
+                    fontSize: {
+                        "label-mono": ["14px", { lineHeight: "20px", letterSpacing: "0.05em", fontWeight: "700" }],
+                        "body-md": ["18px", { lineHeight: "28px", fontWeight: "500" }],
+                        "score-display": ["64px", { lineHeight: "64px", fontWeight: "400" }],
+                        "headline-lg-mobile": ["32px", { lineHeight: "40px", fontWeight: "700", textTransform: "uppercase" }],
+                        "display-xl": ["80px", { lineHeight: "88px", letterSpacing: "-0.02em", fontWeight: "700", textTransform: "uppercase" }],
+                        "headline-lg": ["40px", { lineHeight: "48px", fontWeight: "700", textTransform: "uppercase" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        /* Custom Scrollbar for inner elements */
+        ::-webkit-scrollbar {
+            width: 12px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0f172a; 
+            border-left: 4px solid #000;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #bef264; 
+            border: 4px solid #000;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #fda4af; 
+        }
+        
+        /* Neubrutalist Base Utilities */
+        .neu-border {
+            border: 4px solid #000;
+        }
+        .neu-shadow {
+            box-shadow: 6px 6px 0px 0px #000;
+        }
+        .neu-shadow-lg {
+            box-shadow: 12px 12px 0px 0px #000;
+        }
+        .neu-btn {
+            transition: transform 0.1s ease, box-shadow 0.1s ease;
+        }
+        .neu-btn:active, .neu-btn.active {
+            transform: translate(6px, 6px);
+            box-shadow: 0px 0px 0px 0px #000;
+        }
+        
+        .lcd-text {
+            text-shadow: 0 0 5px currentColor;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex flex-col selection:bg-neo-mint selection:text-neo-black">
+<!-- TopNavBar (Shared Component) -->
+<nav class="sticky top-0 w-full z-50 flex justify-between items-center px-margin-desktop h-24 neu-border bg-surface-container shadow-[8px_8px_0px_0px_#000]">
+<!-- Brand & Badge -->
+<div class="flex items-center gap-4 relative">
+<h1 class="font-display-xl text-headline-lg text-neo-mint italic tracking-tighter" style="text-shadow: 2px 2px 0 #000;">
+                VIRAL SPIRAL AI
+            </h1>
+<!-- Sticker Badge -->
+<div class="absolute -top-4 -right-8 transform rotate-12 bg-neo-coral text-neo-black neu-border px-3 py-1 font-label-mono text-[12px] uppercase font-bold shadow-[4px_4px_0px_0px_#000] z-10 hidden lg:block">
+                BETA v2.0
+            </div>
+<span class="hidden lg:inline-flex items-center px-3 py-1.5 bg-neo-lavender text-neo-black font-label-mono text-label-mono neu-border shadow-[4px_4px_0px_0px_#000]">
+                UNESCO YOUTH MIL 2026
+            </span>
+</div>
+<!-- Navigation Links -->
+<div class="hidden md:flex items-center gap-8">
+<a class="text-neo-mint font-bold border-b-4 border-neo-mint pb-1 font-headline-lg text-headline-lg-mobile hover:text-neo-coral transition-colors" href="#">ARENA</a>
+<a class="text-on-surface-variant font-bold font-headline-lg text-headline-lg-mobile hover:text-neo-mint transition-colors" href="#">CLASSROOM</a>
+<a class="text-on-surface-variant font-bold font-headline-lg text-headline-lg-mobile hover:text-neo-mint transition-colors" href="#">HISTORY</a>
+<a class="text-on-surface-variant font-bold font-headline-lg text-headline-lg-mobile hover:text-neo-mint transition-colors" href="#">LEADERBOARD</a>
+</div>
+<!-- Trailing Actions & Profile -->
+<div class="flex items-center gap-6">
+<!-- Toggle Group -->
+<div class="hidden xl:flex items-center bg-surface-container-highest neu-border p-1.5 gap-2 shadow-[4px_4px_0px_0px_#000]">
+<button class="px-4 py-2 bg-neo-mint text-neo-black font-label-mono text-label-mono font-bold neu-border shadow-[4px_4px_0px_0px_#000] neu-btn active">ONLINE ROOM</button>
+<button class="px-4 py-2 text-on-background font-label-mono text-label-mono hover:bg-surface-variant transition-colors">CLASSROOM KIT</button>
+</div>
+<!-- Profile & Status -->
+<div class="flex items-center gap-4 pl-6 border-l-4 border-neo-black">
+<div class="text-right hidden sm:block">
+<div class="font-label-mono text-label-mono text-neo-mint flex items-center justify-end gap-2 font-bold">
+<span class="w-3 h-3 rounded-none bg-neo-mint border-2 border-neo-black animate-pulse"></span>
+                        CONNECTED
+                    </div>
+<div class="font-label-mono text-xs text-neo-coral uppercase tracking-widest font-bold bg-neo-black px-1 mt-1 inline-block">LVL 4 RESILIENCE</div>
+</div>
+<div class="relative w-12 h-12 neu-border bg-neo-lavender overflow-hidden shadow-[4px_4px_0px_0px_#000]">
+<span class="material-symbols-outlined absolute inset-0 flex items-center justify-center text-neo-black text-3xl" style="font-variation-settings: 'FILL' 1;">account_circle</span>
+</div>
+</div>
+</div>
+</nav>
+<!-- Main Dashboard Layout -->
+<main class="flex-1 w-full max-w-full flex flex-col lg:flex-row gap-gutter p-gutter bg-background overflow-hidden h-[calc(100vh-96px-72px)]">
+<!-- Left Column: Stats & Feed (25%) -->
+<aside class="w-full lg:w-1/4 flex flex-col gap-gutter overflow-y-auto pr-4 pb-8">
+<!-- Clout Score Card -->
+<div class="bg-surface-container neu-border neu-shadow p-5 flex flex-col gap-4 relative">
+<!-- Annotation -->
+<div class="absolute -top-3 -right-3 text-neo-coral font-label-mono text-xl transform rotate-12 z-10 font-bold bg-neo-black px-1 neu-border">
+                ↑ TRENDING
+            </div>
+<div class="flex justify-between items-start">
+<h2 class="font-label-mono text-label-mono text-neo-coral uppercase tracking-wider font-black bg-neo-black px-2 py-1 inline-block neu-border">CLOUT SCORE</h2>
+<span class="material-symbols-outlined text-neo-coral text-3xl drop-shadow-[2px_2px_0_#000]" style="font-variation-settings: 'FILL' 1;">warning</span>
+</div>
+<div class="bg-[#0f172a] neu-border p-3 mt-2 flex justify-center items-center shadow-[inset_4px_4px_0px_0px_rgba(0,0,0,0.5)]">
+<div class="font-score-display text-display-xl text-neo-coral tracking-widest lcd-text">
+                        8492
+                    </div>
+</div>
+<!-- Brutalist Meter -->
+<div class="w-full h-6 neu-border bg-surface-container-highest overflow-hidden flex mt-2 shadow-[inset_2px_2px_0_#000]">
+<div class="h-full bg-neo-coral w-[85%] border-r-4 border-neo-black relative">
+<div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAiIGhlaWdodD0iMTAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTAgMGwxMCAxME0xMCAwaS0xMCAxMCIgc3Ryb2tlPSIjMDAwIiBzdHJva2Utd2lkdGg9IjIiIGZpbGw9Im5vbmUiIG9wYWNpdHk9IjAuMiIvPjwvc3ZnPg==')]"></div>
+</div>
+</div>
+<div class="font-label-mono text-sm text-neo-coral text-right font-bold uppercase mt-1">Viral Reach: HIGH RISK</div>
+</div>
+<!-- Resilience Score Card -->
+<div class="bg-surface-container neu-border neu-shadow p-5 flex flex-col gap-4 relative">
+<div class="flex justify-between items-start">
+<h2 class="font-label-mono text-label-mono text-neo-mint uppercase tracking-wider font-black bg-neo-black px-2 py-1 inline-block neu-border">CRIT-THINK PTS</h2>
+<span class="material-symbols-outlined text-neo-mint text-3xl drop-shadow-[2px_2px_0_#000]" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+</div>
+<div class="bg-[#0f172a] neu-border p-3 mt-2 flex justify-center items-center shadow-[inset_4px_4px_0px_0px_rgba(0,0,0,0.5)]">
+<div class="font-score-display text-display-xl text-neo-mint tracking-widest lcd-text">
+                        1204
+                    </div>
+</div>
+<div class="w-full h-6 neu-border bg-surface-container-highest overflow-hidden flex mt-2 shadow-[inset_2px_2px_0_#000]">
+<div class="h-full bg-neo-mint w-[30%] border-r-4 border-neo-black relative">
+<div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAiIGhlaWdodD0iMTAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTAgMGwxMCAxME0xMCAwaS0xMCAxMCIgc3Ryb2tlPSIjMDAwIiBzdHJva2Utd2lkdGg9IjIiIGZpbGw9Im5vbmUiIG9wYWNpdHk9IjAuMiIvPjwvc3ZnPg==')]"></div>
+</div>
+</div>
+<div class="font-label-mono text-sm text-neo-mint text-right font-bold uppercase mt-1">Resilience Armor: LOW</div>
+</div>
+<!-- Live Feed -->
+<div class="flex-1 flex flex-col gap-4 mt-6">
+<h3 class="font-headline-lg-mobile text-headline-lg-mobile text-neo-lavender uppercase border-b-4 border-neo-lavender pb-2 mb-2 inline-block w-fit">COMMUNITY FEED</h3>
+<!-- Feed Item -->
+<div class="bg-surface-container-low neu-border p-4 hover:bg-surface-container transition-colors group cursor-pointer neu-shadow">
+<div class="flex justify-between items-center mb-3">
+<span class="px-3 py-1 bg-neo-coral text-neo-black font-label-mono text-xs uppercase font-black neu-border">FLAGGED</span>
+<span class="font-label-mono text-xs text-on-surface-variant font-bold">2m ago</span>
+</div>
+<p class="font-body-md text-base text-on-background group-hover:text-neo-coral transition-colors">AI Voice Clone Scam circulating in Main Chat.</p>
+</div>
+<!-- Feed Item -->
+<div class="bg-surface-container-low neu-border p-4 hover:bg-surface-container transition-colors group cursor-pointer neu-shadow">
+<div class="flex justify-between items-center mb-3">
+<span class="px-3 py-1 bg-neo-lavender text-neo-black font-label-mono text-xs uppercase font-black neu-border">VERIFIED</span>
+<span class="font-label-mono text-xs text-on-surface-variant font-bold">15m ago</span>
+</div>
+<p class="font-body-md text-base text-on-background group-hover:text-neo-lavender transition-colors">Source check complete on 'Mars Colony' image.</p>
+</div>
+</div>
+</aside>
+<!-- Center Column: Active Game Arena (50%) -->
+<section class="w-full lg:w-2/4 flex flex-col gap-6 overflow-y-auto pr-4 pb-8">
+<div class="flex items-center gap-3 mb-2 bg-neo-mint text-neo-black neu-border p-2 w-fit shadow-[4px_4px_0_#000]">
+<span class="material-symbols-outlined text-3xl font-bold">dynamic_feed</span>
+<h2 class="font-display-xl text-headline-lg uppercase tracking-tight m-0 leading-none">ACTIVE ARENA</h2>
+</div>
+<!-- Main Scenario Card -->
+<div class="bg-surface-container-low neu-border neu-shadow-lg p-0 flex flex-col relative group mt-4">
+<!-- Hand-drawn Arrow Annotation -->
+<div class="absolute -top-12 right-10 text-neo-mint z-20 hidden md:block">
+<svg fill="none" height="60" stroke="currentColor" stroke-width="4" viewbox="0 0 100 100" width="60" xmlns="http://www.w3.org/2000/svg">
+<path d="M10,90 Q50,50 90,10 M70,10 L90,10 L90,30" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+<span class="font-label-mono text-neo-mint font-bold bg-neo-black px-2 neu-border absolute top-0 right-16 rotate-[-10deg]">ANALYZE THIS</span>
+</div>
+<!-- Glitch Header -->
+<div class="bg-neo-coral text-neo-black font-label-mono text-base uppercase p-3 border-b-4 border-neo-black flex justify-between items-center font-black">
+<span class="flex items-center gap-2"><span class="material-symbols-outlined text-xl">priority_high</span> AI DEEPFAKE DETECTED</span>
+<span class="animate-pulse bg-neo-black text-neo-coral px-2 py-0.5 neu-border">REC •</span>
+</div>
+<!-- Media Preview -->
+<div class="relative w-full aspect-video border-b-4 border-neo-black overflow-hidden bg-surface-dim">
+<img class="w-full h-full object-cover grayscale contrast-125 brightness-75 group-hover:grayscale-0 transition-all duration-500" data-alt="A highly stylized, slightly glitched digital portrait of a politician giving a speech, generated with a neubrutalist cyberpunk aesthetic. The image features intentional digital artifacts, neon teal and coral magenta color banding, and a harsh, high-contrast lighting setup to emphasize its artificial nature. Set against a deep charcoal background with subtle 8-bit texture overlays, conveying a sense of urgency and technological deception in a modern digital arcade environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBr-v8sokMYyd9_-b3uUCCoEA8M84ao6INfDQT8z5ky0gPS8EeOs7GtoITWQPSYpCKlTP4TbDrzG_bxeqGJFHLuENa00_ILYtgfCf9ixlq19VfU1LKSJGQXaNrGq4tw1EwDEPLxx5TtOnai2SAaNOeE5F9Lk7fswIncBjoYsKJFDQ6cIADi-I2YJQQxpdAFHep0dQKV7YQ2EldJBJH9gmXcTLM0XNDzfCj-rZe2qDW_TimDQ6BEOZP7Ug"/>
+<!-- Visual Highlight Overlay -->
+<div class="absolute top-[20%] left-[30%] w-24 h-24 border-4 border-neo-mint border-dashed rounded-none animate-spin-slow"></div>
+<div class="absolute top-[20%] left-[30%] w-24 h-24 border-4 border-neo-mint rounded-none animate-ping opacity-40"></div>
+<div class="absolute bottom-4 right-4 bg-neo-mint px-3 py-2 font-label-mono text-sm border-4 border-neo-black text-neo-black font-black shadow-[6px_6px_0px_0px_#000]">
+                        ANALYSIS: AUDIO MISMATCH
+                    </div>
+</div>
+<!-- Scenario Text -->
+<div class="p-8 bg-surface-container flex flex-col gap-6">
+<h3 class="font-display-xl text-headline-lg text-on-background leading-tight">"SHOCKING LEAKED AUDIO: MAYOR ADMITS TO BRIBES!"</h3>
+<p class="font-body-md text-on-background text-lg leading-relaxed bg-surface-container-highest p-4 neu-border shadow-[inset_4px_4px_0_rgba(0,0,0,0.5)]">
+                    This audio clip is rapidly spreading across social feeds. The voice matches the Mayor's cadence, but there is no visual verification, and the source account was created 48 hours ago. <strong class="text-neo-coral">Your Clout Score will increase if you share, but if it's fake, your Resilience drops to zero.</strong>
+</p>
+</div>
+<!-- Quick Action Bar -->
+<div class="p-6 bg-surface-container-lowest border-t-4 border-neo-black flex flex-wrap gap-6 justify-between items-center">
+<button class="flex-1 min-w-[180px] flex items-center justify-center gap-3 bg-neo-coral text-neo-black neu-border py-4 px-6 font-headline-lg text-2xl shadow-[8px_8px_0px_0px_#000] neu-btn hover:bg-[#fb7185]">
+<span class="material-symbols-outlined text-3xl font-bold">rocket_launch</span> SHARE (CLOUT)
+                    </button>
+<button class="flex-1 min-w-[180px] flex items-center justify-center gap-3 bg-neo-mint text-neo-black neu-border py-4 px-6 font-headline-lg text-2xl shadow-[8px_8px_0px_0px_#000] neu-btn hover:bg-[#a3e635]">
+<span class="material-symbols-outlined text-3xl font-bold">search</span> PAUSE &amp; AUDIT
+                    </button>
+<button aria-label="Flag Misinformation" class="flex-none flex items-center justify-center p-4 bg-neo-black border-4 border-neo-coral text-neo-coral shadow-[8px_8px_0px_0px_#fda4af] neu-btn hover:bg-neo-coral hover:text-neo-black hover:border-neo-black hover:shadow-[8px_8px_0px_0px_#000]">
+<span class="material-symbols-outlined text-3xl" style="font-variation-settings: 'FILL' 1;">block</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Right Column: Audit Engine (25%) -->
+<aside class="w-full lg:w-1/4 flex flex-col gap-6 overflow-y-auto pr-4 pb-8 h-full">
+<div class="bg-surface-container-high neu-border neu-shadow-lg flex flex-col h-full relative">
+<!-- Header -->
+<div class="p-4 border-b-4 border-neo-black bg-neo-lavender flex items-center gap-3">
+<span class="material-symbols-outlined text-neo-black text-3xl font-bold">smart_toy</span>
+<h2 class="font-headline-lg-mobile text-2xl uppercase font-black text-neo-black m-0 leading-none">AI AUDIT ENGINE</h2>
+</div>
+<!-- 3C2B Checklist (Accordion Area) -->
+<div class="flex-1 overflow-y-auto p-4 flex flex-col gap-4 bg-background">
+<!-- Accordion Item 1 (Open) -->
+<div class="neu-border bg-surface-container-low shadow-[4px_4px_0_#000]">
+<button class="w-full p-4 flex justify-between items-center bg-surface-container hover:bg-surface-container-highest transition-colors font-headline-lg text-xl border-b-4 border-neo-black">
+<span class="text-neo-mint font-bold tracking-wide">1. CONTENT ANALYSIS</span>
+<span class="material-symbols-outlined text-xl">expand_less</span>
+</button>
+<div class="p-4 bg-surface-container-lowest font-body-md text-base flex flex-col gap-4 text-on-background">
+<div class="flex items-center justify-between border-b-4 border-neo-black pb-2 border-dashed">
+<span class="font-bold">Emotional Triggers:</span>
+<span class="text-neo-coral font-black font-label-mono bg-neo-black px-2 py-1 neu-border">OUTRAGE (85%)</span>
+</div>
+<div class="flex items-center justify-between border-b-4 border-neo-black pb-2 border-dashed">
+<span class="font-bold">Plausibility Score:</span>
+<span class="text-neo-lavender font-black font-label-mono bg-neo-black px-2 py-1 neu-border">MEDIUM</span>
+</div>
+<p class="text-sm mt-2 font-label-mono p-3 bg-[#0f172a] neu-border border-l-8 border-l-neo-coral text-neo-coral">
+<span class="material-symbols-outlined text-base align-middle mr-1">warning</span> High emotional valence detected designed to bypass logical processing.
+                            </p>
+</div>
+</div>
+<!-- Accordion Item 2 (Closed) -->
+<div class="neu-border bg-surface-container-low shadow-[4px_4px_0_#000]">
+<button class="w-full p-4 flex justify-between items-center bg-surface-container hover:bg-surface-container-highest transition-colors font-headline-lg text-xl">
+<span class="text-on-background font-bold tracking-wide">2. CREATOR CHECK</span>
+<span class="material-symbols-outlined text-xl">expand_more</span>
+</button>
+</div>
+<!-- Accordion Item 3 (Closed) -->
+<div class="neu-border bg-surface-container-low shadow-[4px_4px_0_#000]">
+<button class="w-full p-4 flex justify-between items-center bg-surface-container hover:bg-surface-container-highest transition-colors font-headline-lg text-xl">
+<span class="text-on-background font-bold tracking-wide">3. CONTEXT &amp; BIAS</span>
+<span class="material-symbols-outlined text-xl">expand_more</span>
+</button>
+</div>
+</div>
+<!-- Chat Input (Bottom) -->
+<div class="p-4 border-t-4 border-neo-black bg-surface-container mt-auto">
+<div class="relative flex items-center">
+<input class="w-full bg-surface-container-lowest neu-border p-4 pr-12 font-label-mono text-base text-on-background placeholder:text-on-surface-variant/50 focus:border-neo-mint focus:ring-0 focus:outline-none shadow-[inset_4px_4px_0px_0px_rgba(0,0,0,0.8)]" placeholder="Ask AI Coach a question..." type="text"/>
+<button class="absolute right-3 text-neo-mint hover:text-neo-lavender transition-colors drop-shadow-[2px_2px_0_#000]">
+<span class="material-symbols-outlined text-3xl font-bold">send</span>
+</button>
+</div>
+</div>
+</div>
+</aside>
+</main>
+<!-- Footer (Shared Component) -->
+<footer class="mt-auto w-full flex justify-between items-center px-margin-desktop py-6 neu-border border-x-0 border-b-0 bg-surface-container-highest shadow-[0px_-8px_0px_0px_#000] relative z-10">
+<div class="font-label-mono text-label-mono text-neo-lavender font-black uppercase tracking-wider bg-neo-black px-3 py-1 neu-border">
+            © 2024 VIRAL SPIRAL AI - PREBUNKING PROTOCOL ACTIVE
+        </div>
+<div class="flex items-center gap-8 font-headline-lg text-lg">
+<button class="text-neo-mint bg-neo-black px-4 py-2 neu-border shadow-[4px_4px_0_#000] hover:bg-neo-mint hover:text-neo-black transition-colors active:translate-y-1 active:translate-x-1 active:shadow-none flex items-center gap-2">
+<span class="material-symbols-outlined text-xl font-bold">download</span> EXPORT PDF
+            </button>
+<a class="text-on-background hover:text-neo-coral transition-colors font-bold uppercase" href="#">GAME RULES</a>
+<a class="text-on-background hover:text-neo-coral transition-colors font-bold uppercase" href="#">PRIVACY POLICY</a>
+<a aria-label="GitHub" class="text-on-background hover:text-neo-lavender transition-colors flex items-center" href="#">
+<svg class="w-6 h-6 fill-current" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path></svg>
+</a>
+</div>
+</footer>
+</body></html>
