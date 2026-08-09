@@ -24,21 +24,21 @@
 
 ```mermaid
 graph TD
-    subgraph Frontend Client (Vercel)
-        UI[Next.js 14 React Web App] <-->|WebSockets / REST| WS_C[WS Connection Manager]
-        UI <--> LocalDeck[Extension Deck / LocalStorage]
+    subgraph Frontend_Client["Frontend Client (Vercel)"]
+        UI["Next.js 14 React Web App"] <-->|WebSockets / REST| WS_C["WS Connection Manager"]
+        UI <--> LocalDeck["Extension Deck / LocalStorage"]
     end
 
-    subgraph Backend Microservice (Render)
-        WS_C <-->|/ws/room/{code}| FastAPI[FastAPI Server main.py]
-        FastAPI <--> Engine[Python Game Engine]
-        FastAPI <--> SocEngine[Socratic AI Engine]
+    subgraph Backend_Microservice["Backend Microservice (Render)"]
+        WS_C <-->|/ws/room/{code}| FastAPI["FastAPI Server main.py"]
+        FastAPI <--> Engine["Python Game Engine"]
+        FastAPI <--> SocEngine["Socratic AI Engine"]
     end
 
-    subgraph External AI Services
-        SocEngine <-->|Primary LLM| Mistral[Mistral AI API mistral-small-2603]
-        SocEngine <-->|Fallback LLM| Gemini[Google Gemini 2.5 Flash]
-        SocEngine <-->|Fact Context| Tavily[Tavily Search API]
+    subgraph External_AI["External AI Services"]
+        SocEngine <-->|Primary LLM| Mistral["Mistral AI API mistral-small-2603"]
+        SocEngine <-->|Fallback LLM| Gemini["Google Gemini 2.5 Flash"]
+        SocEngine <-->|Fact Context| Tavily["Tavily Search API"]
     end
 ```
 
