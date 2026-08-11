@@ -14,8 +14,11 @@ import {
   processFlagMisinfo,
   processCascadePowerMove
 } from '../lib/game_engine';
+import { HowToPlayModal } from '../components/HowToPlayModal';
+import { soundFx } from '../lib/sound_effects';
 
 const AI_SERVICE_URL = process.env.NEXT_PUBLIC_AI_SERVICE_URL || 'http://localhost:8000';
+
 
 interface AuditResult {
   creator_analysis: string;
@@ -102,7 +105,19 @@ export default function Home() {
   const [isCreateModalOpen, setIsCreateModalOpen] = useState<boolean>(false);
   const [isJoinModalOpen, setIsJoinModalOpen] = useState<boolean>(false);
   const [isRulesModalOpen, setIsRulesModalOpen] = useState<boolean>(false);
+  const [isHowToPlayOpen, setIsHowToPlayOpen] = useState<boolean>(false);
   const [isExtensionInboxOpen, setIsExtensionInboxOpen] = useState<boolean>(false);
+  const [isMuted, setIsMuted] = useState<boolean>(soundFx.isMuted());
+
+  const handleToggleMute = () => {
+    const mutedState = soundFx.toggleMute();
+    setIsMuted(mutedState);
+    if (!mutedState) {
+      soundFx.playCardDraw();
+    }
+  };
+
+
 
   // Form Inputs
   const [hostNameInput, setHostNameInput] = useState<string>('Agent Alpha');
@@ -198,6 +213,7 @@ export default function Home() {
 
   // Action: Start Game Session
   const handleStartGame = () => {
+    soundFx.playVictoryFanfare();
     if (socketRef.current && socketRef.current.readyState === WebSocket.OPEN) {
       socketRef.current.send(JSON.stringify({ type: 'start_game' }));
     }
@@ -205,6 +221,7 @@ export default function Home() {
 
   // Action: Draw Card
   const handleDrawCard = () => {
+    soundFx.playCardDraw();
     if (socketRef.current && socketRef.current.readyState === WebSocket.OPEN) {
       socketRef.current.send(JSON.stringify({ type: 'draw_card' }));
       setAuditData(null);
@@ -214,6 +231,7 @@ export default function Home() {
   // Action: Socratic AI Audit
   const handleRunAudit = async () => {
     if (!room || !room.active_card) return;
+    soundFx.playAuditScan();
     setIsLoadingAudit(true);
     setAuditData(null);
     setOpenAccordion('content');
@@ -256,6 +274,7 @@ export default function Home() {
   // Action: Pass Card to Target Player
   const handlePassCard = () => {
     if (!room || !room.active_card || !selectedTargetPlayerId) return;
+    soundFx.playFlagSuccess();
     if (socketRef.current && socketRef.current.readyState === WebSocket.OPEN) {
       socketRef.current.send(JSON.stringify({
         type: 'pass_card',
@@ -267,6 +286,7 @@ export default function Home() {
   // Action: Keep Card in Hand
   const handleKeepCard = () => {
     if (!room || !room.active_card) return;
+    soundFx.playCardDraw();
     if (socketRef.current && socketRef.current.readyState === WebSocket.OPEN) {
       socketRef.current.send(JSON.stringify({ type: 'keep_card' }));
     }
@@ -275,6 +295,7 @@ export default function Home() {
   // Action: Discard/Mute Card
   const handleDiscardCard = () => {
     if (!room || !room.active_card) return;
+    soundFx.playChaosWarning();
     if (socketRef.current && socketRef.current.readyState === WebSocket.OPEN) {
       socketRef.current.send(JSON.stringify({ type: 'discard_card' }));
     }
@@ -283,6 +304,7 @@ export default function Home() {
   // Action: Flag Misinformation
   const handleFlagMisinformation = (card: ScenarioCard, senderId: string) => {
     if (!room) return;
+    soundFx.playFlagSuccess();
     const activePlayer = room.players[room.active_player_index];
     if (socketRef.current && socketRef.current.readyState === WebSocket.OPEN) {
       socketRef.current.send(JSON.stringify({
@@ -299,6 +321,7 @@ export default function Home() {
   // Action: Trigger Cascade Power Move
   const handleCascadePowerMove = (card: ScenarioCard) => {
     if (!room) return;
+    soundFx.playChaosWarning();
     if (socketRef.current && socketRef.current.readyState === WebSocket.OPEN) {
       socketRef.current.send(JSON.stringify({
         type: 'cascade_card',
@@ -306,6 +329,7 @@ export default function Home() {
       }));
     }
   };
+
 
   // Socratic Chat Input Submission
   const handleSendChat = async (e: React.FormEvent) => {
@@ -373,12 +397,30 @@ export default function Home() {
 
           <div className="flex items-center gap-4">
             <button
-              onClick={() => setIsRulesModalOpen(true)}
+              onClick={handleToggleMute}
+              className={`px-3 py-2 font-label-mono text-xs font-bold neu-btn flex items-center gap-2 ${
+                isMuted ? 'bg-neo-black text-neo-coral' : 'bg-neo-mint text-neo-black'
+              }`}
+              title={isMuted ? 'Unmute Audio Sound Effects' : 'Mute Audio Sound Effects'}
+            >
+              <span className="material-symbols-outlined text-base font-bold">
+                {isMuted ? 'volume_off' : 'volume_up'}
+              </span>
+              {isMuted ? 'MUTED' : 'SOUND FX'}
+            </button>
+
+            <button
+              onClick={() => {
+                soundFx.playCardDraw();
+                setIsHowToPlayOpen(true);
+              }}
               className="px-4 py-2 bg-neo-lavender text-neo-black font-label-mono text-xs font-bold neu-btn flex items-center gap-2"
             >
               <span className="material-symbols-outlined text-base font-bold">help_outline</span>
-              RULES &amp; AI GUIDE
+              HOW TO PLAY &amp; AI GUIDE
             </button>
+
+
             <button
               onClick={() => setIsExtensionInboxOpen(true)}
               className="hidden md:flex px-4 py-2 bg-neo-mint text-neo-black font-label-mono text-xs font-bold neu-btn items-center gap-2"
@@ -1052,7 +1094,14 @@ export default function Home() {
           </div>
         )}
 
+        {/* MODAL: HOW TO PLAY & GAME RULES */}
+        <HowToPlayModal
+          isOpen={isHowToPlayOpen}
+          onClose={() => setIsHowToPlayOpen(false)}
+        />
+
       </div>
     </>
+
   );
 }

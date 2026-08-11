@@ -15,12 +15,23 @@ export interface ScenarioCard {
   resilience_penalty: number;
   resilience_reward: number;
   media_url?: string;
+  media_type?: 'image' | 'audio' | 'video' | 'article';
+  audio_url?: string;
+  video_url?: string;
+  deepfake_signals?: string[];
+  forensic_data?: {
+    audio_pitch_anomaly?: number;
+    pixel_manipulation_score?: number;
+    metadata_timestamp_valid?: boolean;
+    ai_voice_confidence?: number;
+  };
   source?: string;
   community_target?: Community;
   cred_impact: number;
   chaos_impact: number;
   attached_prejudice_tag?: string;
 }
+
 
 export interface Player {
   id: string;

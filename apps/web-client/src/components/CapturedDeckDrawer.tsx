@@ -1,6 +1,7 @@
 import React from 'react';
 import { X, Chrome, Play, Trash2 } from 'lucide-react';
-import { ScenarioCard } from './CardArena';
+import { ScenarioCard } from '../types/game';
+
 
 interface CapturedDeckDrawerProps {
   isOpen: boolean;

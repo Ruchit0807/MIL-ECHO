@@ -1,12 +1,28 @@
-import React from 'react';
-import { ShieldCheck, Flame, Cpu, Chrome } from 'lucide-react';
+import React, { useState } from 'react';
+import { ShieldCheck, Cpu, Chrome, HelpCircle, Volume2, VolumeX } from 'lucide-react';
+import { soundFx } from '../lib/sound_effects';
 
 interface HeaderProps {
   onOpenExtensionDeck: () => void;
+  onOpenHowToPlay: () => void;
   extensionCardCount: number;
 }
 
-export const Header: React.FC<HeaderProps> = ({ onOpenExtensionDeck, extensionCardCount }) => {
+export const Header: React.FC<HeaderProps> = ({
+  onOpenExtensionDeck,
+  onOpenHowToPlay,
+  extensionCardCount,
+}) => {
+  const [isMuted, setIsMuted] = useState(soundFx.isMuted());
+
+  const handleToggleMute = () => {
+    const mutedState = soundFx.toggleMute();
+    setIsMuted(mutedState);
+    if (!mutedState) {
+      soundFx.playCardDraw();
+    }
+  };
+
   return (
     <header className="glass-panel" style={{ margin: '16px 24px 0 24px', padding: '16px 28px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '16px' }}>
       <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
@@ -23,9 +39,62 @@ export const Header: React.FC<HeaderProps> = ({ onOpenExtensionDeck, extensionCa
         </div>
       </div>
 
-      <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '12px', flexWrap: 'wrap' }}>
+        {/* Sound FX Toggle Button */}
         <button
-          onClick={onOpenExtensionDeck}
+          onClick={handleToggleMute}
+          title={isMuted ? 'Unmute Sound Effects' : 'Mute Sound Effects'}
+          style={{
+            background: isMuted ? 'rgba(255, 0, 127, 0.15)' : 'rgba(0, 242, 254, 0.12)',
+            border: isMuted ? '1px solid rgba(255, 0, 127, 0.3)' : '1px solid rgba(0, 242, 254, 0.3)',
+            color: isMuted ? '#ff4d94' : '#00f2fe',
+            padding: '8px 12px',
+            borderRadius: '10px',
+            cursor: 'pointer',
+            fontSize: '13px',
+            fontWeight: 700,
+            display: 'flex',
+            alignItems: 'center',
+            gap: '6px',
+            transition: 'all 0.2s ease'
+          }}
+        >
+          {isMuted ? <VolumeX size={16} /> : <Volume2 size={16} />}
+          {isMuted ? 'Muted' : 'Sound FX'}
+        </button>
+
+        {/* How to Play Guide Button */}
+        <button
+          onClick={() => {
+            soundFx.playCardDraw();
+            onOpenHowToPlay();
+          }}
+          style={{
+            background: 'linear-gradient(135deg, rgba(0, 242, 254, 0.2) 0%, rgba(79, 172, 254, 0.2) 100%)',
+            border: '1px solid #00f2fe',
+            color: '#fff',
+            padding: '8px 16px',
+            borderRadius: '10px',
+            cursor: 'pointer',
+            fontSize: '13px',
+            fontWeight: 700,
+            display: 'flex',
+            alignItems: 'center',
+            gap: '8px',
+            boxShadow: '0 0 12px rgba(0, 242, 254, 0.25)',
+            transition: 'all 0.2s ease'
+          }}
+        >
+          <HelpCircle size={16} color="#00f2fe" />
+          🎮 How to Play (Guide)
+        </button>
+
+        {/* Extension Inbox Button */}
+        <button
+          onClick={() => {
+            soundFx.playCardDraw();
+            onOpenExtensionDeck();
+          }}
           style={{
             background: 'rgba(255, 255, 255, 0.05)',
             border: '1px solid rgba(255, 255, 255, 0.1)',
