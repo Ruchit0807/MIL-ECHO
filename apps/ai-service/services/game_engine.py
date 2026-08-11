@@ -341,18 +341,20 @@ def process_flag_misinfo(room: Dict[str, Any], card_id: str, accuser_player_id: 
     
     return room
 
-def process_cascade_power_move(room: Dict[str, Any], card_id: str) -> Dict[str, Any]:
-    active_player = room["players"][room["active_player_index"]]
-    
-    # Find card in active player's hand
-    card = next((c for c in active_player["hand"] if c["id"] == card_id), None)
+def process_cascade_power_move(room: Dict[str, Any], player_id: str, card_id: str) -> Dict[str, Any]:
+    player = next((p for p in room["players"] if p["id"] == player_id), None)
+    if not player:
+        return room
+        
+    # Find card in player's hand
+    card = next((c for c in player["hand"] if c["id"] == card_id), None)
     if not card:
         return room
         
     timestamp_ms = int(time.time() * 1000)
     
     for p in room["players"]:
-        if p["id"] != active_player["id"]:
+        if p["id"] != player["id"]:
             p["hand"].insert(0, card)
         else:
             p["hand"] = [c for c in p["hand"] if c["id"] != card_id]
@@ -361,9 +363,59 @@ def process_cascade_power_move(room: Dict[str, Any], card_id: str) -> Dict[str, 
         {
             "id": f"log-{timestamp_ms}-cascade",
             "time": "Just now",
-            "text": f"⚡ VIRAL SPIRAL CASCADE! {active_player['name']} broadcasted card to ALL players simultaneously!",
+            "text": f"⚡ VIRAL SPIRAL CASCADE! {player['name']} broadcasted card to ALL players simultaneously!",
             "type": "PREJUDICE"
         }
     ] + room["action_logs"]
     
+    return room
+
+def auto_play_bot_turn(room: Dict[str, Any]) -> Dict[str, Any]:
+    active_player = room["players"][room["active_player_index"]]
+    if not active_player.get("is_ai"):
+        return room
+
+    timestamp_ms = int(time.time() * 1000)
+
+    # 1. DRAW Phase
+    if room["turn_phase"] == "DRAW":
+        room = draw_card_for_active_player(room)
+        return room
+
+    # 2. INSPECT Phase
+    elif room["turn_phase"] == "INSPECT":
+        room["turn_phase"] = "ACTION"
+        return room
+
+    # 3. ACTION Phase
+    elif room["turn_phase"] == "ACTION":
+        card = room.get("active_card")
+        if not card:
+            room["turn_phase"] = "DRAW"
+            return room
+            
+        r = random.random()
+        other_players = [p for p in room["players"] if p["id"] != active_player["id"]]
+        target_player = random.choice(other_players) if other_players else None
+
+        if card["card_type"] == "FACTUAL":
+            if r < 0.8 and target_player:
+                room = process_pass_action(room, target_player["id"])
+            else:
+                room = process_keep_action(room)
+        elif card["card_type"] == "OPINION":
+            if r < 0.5 and target_player:
+                room = process_pass_action(room, target_player["id"])
+            else:
+                room = process_keep_action(room)
+        else: # PREJUDICE
+            if r < 0.7:
+                room = process_discard_action(room)
+            elif target_player:
+                room = process_pass_action(room, target_player["id"])
+            else:
+                room = process_discard_action(room)
+                
+        return room
+
     return room

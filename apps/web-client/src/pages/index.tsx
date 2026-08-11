@@ -85,6 +85,9 @@ export default function Home() {
         const data = JSON.parse(event.data);
         if (data.type === 'state_update') {
           setRoom(data.room);
+        } else if (data.type === 'join_success') {
+          setMyPlayerId(data.player_id);
+          setMyUsername(data.username);
         } else if (data.type === 'error') {
           alert(`Game Error: ${data.message}`);
         }
@@ -146,6 +149,10 @@ export default function Home() {
   // Pass Action Target Selection
   const [selectedTargetPlayerId, setSelectedTargetPlayerId] = useState<string>('');
 
+  // Local Session Player States
+  const [myPlayerId, setMyPlayerId] = useState<string | null>(null);
+  const [myUsername, setMyUsername] = useState<string>('');
+
   // Accordion Checklist & AI Audit State
   const [openAccordion, setOpenAccordion] = useState<'content' | 'creator' | 'bias' | null>('content');
   const [auditData, setAuditData] = useState<AuditResult | null>(null);
@@ -174,6 +181,33 @@ export default function Home() {
       console.warn('Could not read extension deck:', e);
     }
   }, []);
+
+  // Load Local Player Session from sessionStorage
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const savedId = sessionStorage.getItem('mil_echo_player_id');
+      const savedName = sessionStorage.getItem('mil_echo_username');
+      if (savedId) setMyPlayerId(savedId);
+      if (savedName) setMyUsername(savedName);
+    }
+  }, []);
+
+  // Save Local Player Session on change
+  useEffect(() => {
+    if (myPlayerId) {
+      sessionStorage.setItem('mil_echo_player_id', myPlayerId);
+    } else {
+      sessionStorage.removeItem('mil_echo_player_id');
+    }
+  }, [myPlayerId]);
+
+  useEffect(() => {
+    if (myUsername) {
+      sessionStorage.setItem('mil_echo_username', myUsername);
+    } else {
+      sessionStorage.removeItem('mil_echo_username');
+    }
+  }, [myUsername]);
 
   // Update target player selector when room players change
   useEffect(() => {
@@ -212,6 +246,11 @@ export default function Home() {
       const data = await resp.json();
       const code = data.room_code;
       setRoom(data.room);
+      if (data.room && data.room.players && data.room.players.length > 0) {
+        const hostPlayer = data.room.players[0];
+        setMyPlayerId(hostPlayer.id);
+        setMyUsername(hostPlayer.name);
+      }
       setIsCreateModalOpen(false);
       connectWebSocket(code);
     } catch (err) {
@@ -247,7 +286,10 @@ export default function Home() {
   const handleDrawCard = () => {
     soundFx.playCardDraw();
     if (socketRef.current && socketRef.current.readyState === WebSocket.OPEN) {
-      socketRef.current.send(JSON.stringify({ type: 'draw_card' }));
+      socketRef.current.send(JSON.stringify({
+        type: 'draw_card',
+        payload: { player_id: myPlayerId }
+      }));
       setAuditData(null);
     }
   };
@@ -302,7 +344,10 @@ export default function Home() {
     if (socketRef.current && socketRef.current.readyState === WebSocket.OPEN) {
       socketRef.current.send(JSON.stringify({
         type: 'pass_card',
-        payload: { target_player_id: selectedTargetPlayerId }
+        payload: {
+          target_player_id: selectedTargetPlayerId,
+          player_id: myPlayerId
+        }
       }));
     }
   };
@@ -312,7 +357,10 @@ export default function Home() {
     if (!room || !room.active_card) return;
     soundFx.playCardDraw();
     if (socketRef.current && socketRef.current.readyState === WebSocket.OPEN) {
-      socketRef.current.send(JSON.stringify({ type: 'keep_card' }));
+      socketRef.current.send(JSON.stringify({
+        type: 'keep_card',
+        payload: { player_id: myPlayerId }
+      }));
     }
   };
 
@@ -321,21 +369,23 @@ export default function Home() {
     if (!room || !room.active_card) return;
     soundFx.playChaosWarning();
     if (socketRef.current && socketRef.current.readyState === WebSocket.OPEN) {
-      socketRef.current.send(JSON.stringify({ type: 'discard_card' }));
+      socketRef.current.send(JSON.stringify({
+        type: 'discard_card',
+        payload: { player_id: myPlayerId }
+      }));
     }
   };
 
   // Action: Flag Misinformation
   const handleFlagMisinformation = (card: ScenarioCard, senderId: string) => {
-    if (!room) return;
+    if (!room || !myPlayerId) return;
     soundFx.playFlagSuccess();
-    const activePlayer = room.players[room.active_player_index];
     if (socketRef.current && socketRef.current.readyState === WebSocket.OPEN) {
       socketRef.current.send(JSON.stringify({
         type: 'flag_card',
         payload: {
           card_id: card.id,
-          accuser_id: activePlayer.id,
+          accuser_id: myPlayerId,
           sender_id: senderId
         }
       }));
@@ -344,12 +394,15 @@ export default function Home() {
 
   // Action: Trigger Cascade Power Move
   const handleCascadePowerMove = (card: ScenarioCard) => {
-    if (!room) return;
+    if (!room || !myPlayerId) return;
     soundFx.playChaosWarning();
     if (socketRef.current && socketRef.current.readyState === WebSocket.OPEN) {
       socketRef.current.send(JSON.stringify({
         type: 'cascade_card',
-        payload: { card_id: card.id }
+        payload: {
+          card_id: card.id,
+          player_id: myPlayerId
+        }
       }));
     }
   };
@@ -397,6 +450,7 @@ export default function Home() {
   };
 
   const activePlayer = room ? room.players[room.active_player_index] : null;
+  const myPlayer = room && myPlayerId ? room.players.find(p => p.id === myPlayerId) : null;
 
   return (
     <>
@@ -835,61 +889,71 @@ export default function Home() {
                   </div>
 
                   {/* ACTION PHASE BUTTONS */}
-                  {room.turn_phase === 'INSPECT' && (
-                    <div className="p-4 bg-surface-container-lowest border-t-4 border-neo-black flex gap-4">
-                      <button
-                        onClick={handleRunAudit}
-                        className="flex-1 bg-neo-mint text-neo-black py-3 font-headline-lg font-black neu-btn flex items-center justify-center gap-2"
-                      >
-                        <span className="material-symbols-outlined text-xl">manage_search</span>
-                        RUN SOCRATIC AI INSPECTOR
-                      </button>
-                      <button
-                        onClick={() => setRoom({ ...room, turn_phase: 'ACTION' })}
-                        className="bg-neo-lavender text-neo-black py-3 px-6 font-headline-lg font-black neu-btn"
-                      >
-                        PROCEED TO ACTION →
-                      </button>
+                  {myPlayerId !== activePlayer?.id ? (
+                    <div className="p-4 bg-surface-container-lowest border-t-4 border-neo-black flex items-center justify-center text-center">
+                      <span className="font-headline-lg text-sm text-neo-mint font-black animate-pulse">
+                        ⏳ WAITING FOR {activePlayer?.name.toUpperCase()} TO MAKE A MOVE...
+                      </span>
                     </div>
-                  )}
+                  ) : (
+                    <>
+                      {room.turn_phase === 'INSPECT' && (
+                        <div className="p-4 bg-surface-container-lowest border-t-4 border-neo-black flex gap-4">
+                          <button
+                            onClick={handleRunAudit}
+                            className="flex-1 bg-neo-mint text-neo-black py-3 font-headline-lg font-black neu-btn flex items-center justify-center gap-2"
+                          >
+                            <span className="material-symbols-outlined text-xl">manage_search</span>
+                            RUN SOCRATIC AI INSPECTOR
+                          </button>
+                          <button
+                            onClick={() => setRoom({ ...room, turn_phase: 'ACTION' })}
+                            className="bg-neo-lavender text-neo-black py-3 px-6 font-headline-lg font-black neu-btn"
+                          >
+                            PROCEED TO ACTION →
+                          </button>
+                        </div>
+                      )}
 
-                  {room.turn_phase === 'ACTION' && (
-                    <div className="p-4 bg-surface-container-lowest border-t-4 border-neo-black flex flex-col gap-4">
-                      <div className="flex items-center gap-3">
-                        <label className="text-xs font-bold font-label-mono text-neo-mint">Select Target Player to Pass:</label>
-                        <select
-                          value={selectedTargetPlayerId}
-                          onChange={(e) => setSelectedTargetPlayerId(e.target.value)}
-                          className="bg-surface-container neu-border p-2 font-label-mono text-xs text-on-background font-bold"
-                        >
-                          {room.players.filter(p => p.id !== activePlayer?.id).map(p => (
-                            <option key={p.id} value={p.id}>{p.name} ({p.community})</option>
-                          ))}
-                        </select>
-                      </div>
+                      {room.turn_phase === 'ACTION' && (
+                        <div className="p-4 bg-surface-container-lowest border-t-4 border-neo-black flex flex-col gap-4">
+                          <div className="flex items-center gap-3">
+                            <label className="text-xs font-bold font-label-mono text-neo-mint">Select Target Player to Pass:</label>
+                            <select
+                              value={selectedTargetPlayerId}
+                              onChange={(e) => setSelectedTargetPlayerId(e.target.value)}
+                              className="bg-surface-container neu-border p-2 font-label-mono text-xs text-on-background font-bold"
+                            >
+                              {room.players.filter(p => p.id !== activePlayer?.id).map(p => (
+                                <option key={p.id} value={p.id}>{p.name} ({p.community})</option>
+                              ))}
+                            </select>
+                          </div>
 
-                      <div className="flex flex-wrap gap-4 justify-between items-center">
-                        <button
-                          onClick={handlePassCard}
-                          className="flex-1 min-w-[140px] flex items-center justify-center gap-2 bg-neo-mint text-neo-black py-3 px-4 font-headline-lg text-base neu-btn hover:bg-[#a3e635] font-black"
-                        >
-                          <span className="material-symbols-outlined text-xl font-bold">send</span> PASS (+1 CRED)
-                        </button>
-                        <button
-                          onClick={handleKeepCard}
-                          className="flex-1 min-w-[140px] flex items-center justify-center gap-2 bg-neo-lavender text-neo-black py-3 px-4 font-headline-lg text-base neu-btn hover:bg-[#c084fc] font-black"
-                        >
-                          <span className="material-symbols-outlined text-xl font-bold">inventory_2</span> KEEP IN HAND
-                        </button>
-                        <button
-                          onClick={handleDiscardCard}
-                          className="flex-none flex items-center justify-center p-3 bg-neo-coral text-neo-black neu-btn hover:bg-[#fb7185]"
-                          title="Discard / Mute Card"
-                        >
-                          <span className="material-symbols-outlined text-xl font-bold">delete_sweep</span>
-                        </button>
-                      </div>
-                    </div>
+                          <div className="flex flex-wrap gap-4 justify-between items-center">
+                            <button
+                              onClick={handlePassCard}
+                              className="flex-1 min-w-[140px] flex items-center justify-center gap-2 bg-neo-mint text-neo-black py-3 px-4 font-headline-lg text-base neu-btn hover:bg-[#a3e635] font-black"
+                            >
+                              <span className="material-symbols-outlined text-xl font-bold">send</span> PASS (+1 CRED)
+                            </button>
+                            <button
+                              onClick={handleKeepCard}
+                              className="flex-1 min-w-[140px] flex items-center justify-center gap-2 bg-neo-lavender text-neo-black py-3 px-4 font-headline-lg text-base neu-btn hover:bg-[#c084fc] font-black"
+                            >
+                              <span className="material-symbols-outlined text-xl font-bold">inventory_2</span> KEEP IN HAND
+                            </button>
+                            <button
+                              onClick={handleDiscardCard}
+                              className="flex-none flex items-center justify-center p-3 bg-neo-coral text-neo-black neu-btn hover:bg-[#fb7185]"
+                              title="Discard / Mute Card"
+                            >
+                              <span className="material-symbols-outlined text-xl font-bold">delete_sweep</span>
+                            </button>
+                          </div>
+                        </div>
+                      )}
+                    </>
                   )}
 
                 </div>
@@ -902,28 +966,36 @@ export default function Home() {
                       {activePlayer?.name}'s Turn
                     </h3>
                     <p className="font-body-md text-xs text-on-surface-variant max-w-md">
-                      Draw a card from the public news stream deck to evaluate its authenticity and circulate it across the network.
+                      {myPlayerId === activePlayer?.id
+                        ? 'Draw a card from the public news stream deck to evaluate its authenticity and circulate it across the network.'
+                        : `Waiting for ${activePlayer?.name} to draw a news card from the stream deck.`}
                     </p>
                   </div>
-                  <button
-                    onClick={handleDrawCard}
-                    className="bg-neo-mint text-neo-black py-4 px-8 font-headline-lg text-lg font-black neu-btn flex items-center gap-2 hover:bg-[#a3e635]"
-                  >
-                    <span className="material-symbols-outlined text-2xl">download</span>
-                    DRAW NEWS CARD FROM DECK
-                  </button>
+                  {myPlayerId === activePlayer?.id ? (
+                    <button
+                      onClick={handleDrawCard}
+                      className="bg-neo-mint text-neo-black py-4 px-8 font-headline-lg text-lg font-black neu-btn flex items-center gap-2 hover:bg-[#a3e635]"
+                    >
+                      <span className="material-symbols-outlined text-2xl">download</span>
+                      DRAW NEWS CARD FROM DECK
+                    </button>
+                  ) : (
+                    <div className="bg-neo-black text-neo-mint py-3 px-6 font-label-mono text-xs font-bold neu-border uppercase animate-pulse">
+                      ⏳ WAITING FOR {activePlayer?.name.toUpperCase()}'S MOVE
+                    </div>
+                  )}
                 </div>
               )}
 
               {/* PLAYER HAND & SPECIAL POWER MOVES PANEL */}
-              {activePlayer && activePlayer.hand.length > 0 && (
+              {myPlayer && myPlayer.hand.length > 0 && (
                 <div className="bg-surface-container border-4 border-neo-black p-4 shadow-[6px_6px_0_#000] flex flex-col gap-3">
                   <h4 className="font-headline-lg text-sm text-neo-mint uppercase font-black flex justify-between items-center">
-                    <span>YOUR CARDS IN HAND ({activePlayer.hand.length})</span>
+                    <span>YOUR CARDS IN HAND ({myPlayer.hand.length})</span>
                     <span className="text-[10px] font-label-mono text-neo-coral">SPECIAL POWER MOVES UNLOCKED</span>
                   </h4>
                   <div className="flex flex-col gap-2 max-h-[200px] overflow-y-auto">
-                    {activePlayer.hand.map((c, i) => (
+                    {myPlayer.hand.map((c, i) => (
                       <div key={i} className="bg-surface-container-lowest neu-border p-3 flex justify-between items-center gap-2">
                         <div className="flex flex-col">
                           <span className="text-xs font-bold text-on-background">"{c.headline.slice(0, 36)}..."</span>

@@ -60,6 +60,43 @@ class ConnectionManager:
 
 manager = ConnectionManager()
 
+async def trigger_bot_play_loop(room_code: str):
+    await asyncio.sleep(1.5)  # Natural delay to simulate bot thinking
+    async with ROOMS_LOCK:
+        if room_code not in ROOMS_REGISTRY:
+            return
+        room = ROOMS_REGISTRY[room_code]
+        if room["status"] not in ["PLAYING"]:
+            return
+            
+        active_player = room["players"][room["active_player_index"]]
+        if not active_player.get("is_ai"):
+            return
+            
+        # Play bot turn
+        room = services.game_engine.auto_play_bot_turn(room)
+        ROOMS_REGISTRY[room_code] = room
+        
+    # Broadcast update
+    await manager.broadcast_to_room(room_code, {
+        "type": "state_update",
+        "room": room
+    })
+    
+    # Check if the next turn is also a bot
+    active_player = room["players"][room["active_player_index"]]
+    if active_player.get("is_ai") and room["status"] == "PLAYING":
+        asyncio.create_task(trigger_bot_play_loop(room_code))
+
+def check_and_trigger_bot(room_code: str):
+    if room_code not in ROOMS_REGISTRY:
+        return
+    room = ROOMS_REGISTRY[room_code]
+    if room["status"] == "PLAYING":
+        active_player = room["players"][room["active_player_index"]]
+        if active_player.get("is_ai") and room["turn_phase"] == "DRAW":
+            asyncio.create_task(trigger_bot_play_loop(room_code))
+
 class CreateRoomRequest(BaseModel):
     host_name: str
     max_players: int = 4
@@ -119,11 +156,26 @@ async def websocket_endpoint(websocket: WebSocket, room_code: str):
                     
                 room = ROOMS_REGISTRY[room_code]
                 
+                # Active player turn validation for state-modifying actions
+                if msg_type in ["draw_card", "pass_card", "keep_card", "discard_card"]:
+                    active_player = room["players"][room["active_player_index"]]
+                    if payload.get("player_id") != active_player["id"]:
+                        await websocket.send_json({
+                            "type": "error",
+                            "message": "It is not your turn to play!"
+                        })
+                        continue
+                
                 if msg_type == "join_lobby":
                     username = payload.get("username", "Anonymous Player")
-                    # Check if player name exists
-                    exists = any(p["name"].lower() == username.strip().lower() for p in room["players"])
-                    if not exists:
+                    exists_player = next((p for p in room["players"] if p["name"].lower() == username.strip().lower()), None)
+                    if exists_player:
+                        await websocket.send_json({
+                            "type": "join_success",
+                            "player_id": exists_player["id"],
+                            "username": exists_player["name"]
+                        })
+                    else:
                         if len(room["players"]) >= room["config"]["max_players"]:
                             await websocket.send_json({
                                 "type": "error",
@@ -150,6 +202,11 @@ async def websocket_endpoint(websocket: WebSocket, room_code: str):
                             "text": f"Player {new_player['name']} joined the lobby.",
                             "type": "SYSTEM"
                         })
+                        await websocket.send_json({
+                            "type": "join_success",
+                            "player_id": new_player["id"],
+                            "username": new_player["name"]
+                        })
                         
                 elif msg_type == "start_game":
                     room = services.game_engine.start_game_session(room)
@@ -175,9 +232,11 @@ async def websocket_endpoint(websocket: WebSocket, room_code: str):
                     
                 elif msg_type == "cascade_card":
                     card_id = payload.get("card_id")
-                    room = services.game_engine.process_cascade_power_move(room, card_id)
+                    player_id = payload.get("player_id")
+                    room = services.game_engine.process_cascade_power_move(room, player_id, card_id)
                     
                 ROOMS_REGISTRY[room_code] = room
+                check_and_trigger_bot(room_code)
                 
             await manager.broadcast_to_room(room_code, {
                 "type": "state_update",
