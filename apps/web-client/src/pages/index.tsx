@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Head from 'next/head';
 import defaultCardsData from '../lib/cards_database.json';
-import { Room, Player, ScenarioCard, AICopilotMode, LogEntry } from '../types/game';
+import { Room, Player, ScenarioCard, AICopilotMode, LogEntry, CardType } from '../types/game';
 import {
   generateRoomCode,
   createInitialRoom,
@@ -27,6 +27,22 @@ interface AuditResult {
   resilience_score_impact: number;
   clout_score_risk: string;
 }
+
+const getCardHint = (card: ScenarioCard): string => {
+  if (card.card_type === 'FACTUAL') {
+    return `Hint: Check the source: "${card.source}". It represents a verified registry or official bureau. The information style is neutral and direct, and there are no deepfake neural signals.`;
+  } else if (card.card_type === 'OPINION') {
+    return `Hint: This card is categorized under "${card.category}". It expresses a personal commentary or subjective belief, which has a neutral impact on the Chaos meter.`;
+  } else { // PREJUDICE
+    if (card.deepfake_signals && card.deepfake_signals.length > 0) {
+      return `Hint: Under the hood, this card contains synthetic artifacts: "${card.deepfake_signals[0]}".`;
+    }
+    if (card.fake_headline) {
+      return `Hint: This post has a viral polarization variant targeting the "${card.community_target}". It will drain Chaos if passed.`;
+    }
+    return `Hint: The source is "${card.source}". It features highly sensationalized hooks intended to bait clickthroughs.`;
+  }
+};
 
 export default function Home() {
   // Room & Game Engine State
@@ -134,6 +150,8 @@ export default function Home() {
   const [openAccordion, setOpenAccordion] = useState<'content' | 'creator' | 'bias' | null>('content');
   const [auditData, setAuditData] = useState<AuditResult | null>(null);
   const [isLoadingAudit, setIsLoadingAudit] = useState<boolean>(false);
+  const [playerGuess, setPlayerGuess] = useState<CardType | null>(null);
+  const [showHint, setShowHint] = useState<boolean>(false);
 
   // Socratic Chat & Extension Inbox State
   const [capturedCards, setCapturedCards] = useState<ScenarioCard[]>([]);
@@ -167,6 +185,12 @@ export default function Home() {
       }
     }
   }, [room?.active_player_index, room?.players.length]);
+
+  // Reset guess states when active card changes
+  useEffect(() => {
+    setPlayerGuess(null);
+    setShowHint(false);
+  }, [room?.active_card?.id]);
 
   // Action: Create Room
   const handleCreateRoom = async (e: React.FormEvent) => {
@@ -677,16 +701,19 @@ export default function Home() {
                   
                   {/* Card Category Header */}
                   <div className={`p-3 border-b-4 border-neo-black flex justify-between items-center font-black font-label-mono text-xs ${
-                    room.active_card.card_type === 'PREJUDICE'
+                    !playerGuess
+                      ? 'bg-neo-black text-neo-lavender'
+                      : room.active_card.card_type === 'PREJUDICE'
                       ? 'bg-neo-coral text-neo-black'
                       : room.active_card.card_type === 'FACTUAL'
                       ? 'bg-neo-mint text-neo-black'
                       : 'bg-neo-lavender text-neo-black'
                   }`}>
                     <span>
-                      {room.active_card.card_type === 'PREJUDICE' && '🔴 PREJUDICE / MISINFO (-1 CHAOS)'}
-                      {room.active_card.card_type === 'FACTUAL' && '🟢 FACTUAL VERIFIED NEWS (+1 CHAOS)'}
-                      {room.active_card.card_type === 'OPINION' && '🟡 OPINION / BAIT (NEUTRAL)'}
+                      {!playerGuess && '❓ UNSPECIFIED NEWS CARD (Guess the type!)'}
+                      {playerGuess && room.active_card.card_type === 'PREJUDICE' && '🔴 PREJUDICE / MISINFO (-1 CHAOS)'}
+                      {playerGuess && room.active_card.card_type === 'FACTUAL' && '🟢 FACTUAL VERIFIED NEWS (+1 CHAOS)'}
+                      {playerGuess && room.active_card.card_type === 'OPINION' && '🟡 OPINION / BAIT (NEUTRAL)'}
                     </span>
                     <span className="bg-neo-black text-on-background px-2 py-0.5 neu-border text-[10px]">
                       {room.active_card.category.toUpperCase()}
@@ -716,6 +743,95 @@ export default function Home() {
                     <div className="font-body-md text-on-background text-xs leading-relaxed bg-surface-container-highest p-4 neu-border">
                       Source Attribution: <strong>{room.active_card.source || 'Social Media Feed'}</strong>
                     </div>
+
+                    {/* Guessing Widget */}
+                    {!playerGuess ? (
+                      <div className="p-4 bg-surface-container-lowest border-4 border-neo-black shadow-[4px_4px_0_#000] flex flex-col gap-3 my-2">
+                        <div className="flex justify-between items-center">
+                          <span className="font-label-mono text-xs text-neo-lavender font-bold">🕵️ GUESS THE CONTENT TYPE:</span>
+                          <button
+                            onClick={() => {
+                              soundFx.playAuditScan();
+                              setShowHint(!showHint);
+                            }}
+                            className="text-[10px] font-label-mono bg-neo-lavender text-neo-black px-2 py-0.5 neu-btn font-bold"
+                          >
+                            {showHint ? '❌ HIDE HINT' : '💡 SHOW HINT'}
+                          </button>
+                        </div>
+
+                        {showHint && (
+                          <div className="font-label-mono text-xs p-3 bg-neo-black text-neo-mint border-l-4 border-neo-mint leading-relaxed">
+                            {getCardHint(room.active_card)}
+                          </div>
+                        )}
+
+                        <div className="flex gap-2">
+                          <button
+                            onClick={() => {
+                              setPlayerGuess('FACTUAL');
+                              if (room.active_card?.card_type === 'FACTUAL') {
+                                soundFx.playFlagSuccess();
+                              } else {
+                                soundFx.playChaosWarning();
+                              }
+                            }}
+                            className="flex-1 bg-neo-mint text-neo-black py-2 text-xs font-headline-lg font-black neu-btn"
+                          >
+                            🟢 FACTUAL
+                          </button>
+                          <button
+                            onClick={() => {
+                              setPlayerGuess('OPINION');
+                              if (room.active_card?.card_type === 'OPINION') {
+                                soundFx.playFlagSuccess();
+                              } else {
+                                soundFx.playChaosWarning();
+                              }
+                            }}
+                            className="flex-1 bg-neo-lavender text-neo-black py-2 text-xs font-headline-lg font-black neu-btn"
+                          >
+                            🟡 OPINION
+                          </button>
+                          <button
+                            onClick={() => {
+                              setPlayerGuess('PREJUDICE');
+                              if (room.active_card?.card_type === 'PREJUDICE') {
+                                soundFx.playFlagSuccess();
+                              } else {
+                                soundFx.playChaosWarning();
+                              }
+                            }}
+                            className="flex-1 bg-neo-coral text-neo-black py-2 text-xs font-headline-lg font-black neu-btn"
+                          >
+                            🔴 PREJUDICE
+                          </button>
+                        </div>
+                      </div>
+                    ) : (
+                      <div className="p-4 bg-surface-container-lowest border-4 border-neo-black shadow-[4px_4px_0_#000] flex flex-col gap-2 my-2">
+                        <div className="flex justify-between items-center">
+                          <span className="font-label-mono text-xs text-on-surface-variant font-bold">YOUR GUESS RESULT:</span>
+                          <button
+                            onClick={() => setPlayerGuess(null)}
+                            className="text-[9px] font-label-mono text-neo-coral hover:underline"
+                          >
+                            RESET GUESS
+                          </button>
+                        </div>
+                        <div className={`p-3 neu-border font-label-mono text-xs font-bold ${
+                          playerGuess === room.active_card?.card_type 
+                            ? 'bg-neo-mint/20 border-neo-mint text-neo-mint' 
+                            : 'bg-neo-coral/20 border-neo-coral text-neo-coral'
+                        }`}>
+                          {playerGuess === room.active_card?.card_type ? (
+                            <span>🎉 CORRECT! This card is indeed {room.active_card?.card_type}. (+1 CRED/CHAOS logic applies on pass/flag)</span>
+                          ) : (
+                            <span>❌ INCORRECT. You guessed {playerGuess}, but this card is actually {room.active_card?.card_type}.</span>
+                          )}
+                        </div>
+                      </div>
+                    )}
                   </div>
 
                   {/* ACTION PHASE BUTTONS */}
