@@ -13,6 +13,7 @@ load_dotenv()
 
 from services.socratic_engine import audit_card_logic, chat_socratic_logic
 import services.game_engine
+from services.db import init_db, save_room, load_room, delete_room
 
 app = FastAPI(
     title="MIL ECHO AI Socratic Engine Microservice",
@@ -29,8 +30,36 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+@app.on_event("startup")
+async def startup_event():
+    init_db()
+
 # Room Game States & WebSockets Coordination
-ROOMS_REGISTRY: Dict[str, Dict[str, Any]] = {}
+class SQLiteRoomsRegistry:
+    def __getitem__(self, key: str) -> Dict[str, Any]:
+        room = load_room(key)
+        if room is None:
+            raise KeyError(key)
+        return room
+
+    def __setitem__(self, key: str, value: Dict[str, Any]):
+        save_room(key, value)
+
+    def __contains__(self, key: str) -> bool:
+        return load_room(key) is not None
+
+    def get(self, key: str, default=None) -> Any:
+        room = load_room(key)
+        return room if room is not None else default
+
+    def pop(self, key: str, default=None) -> Any:
+        room = load_room(key)
+        if room is not None:
+            delete_room(key)
+            return room
+        return default
+
+ROOMS_REGISTRY = SQLiteRoomsRegistry()
 ROOMS_LOCK = asyncio.Lock()
 
 class ConnectionManager:
