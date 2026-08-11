@@ -48,6 +48,10 @@ export default function Home() {
   // Room & Game Engine State
   const [room, setRoom] = useState<Room | null>(null);
   const socketRef = useRef<WebSocket | null>(null);
+  const [wsStatus, setWsStatus] = useState<'CONNECTED' | 'RECONNECTING' | 'DISCONNECTED'>('DISCONNECTED');
+  const reconnectTimerRef = useRef<NodeJS.Timeout | null>(null);
+  const pingIntervalRef = useRef<NodeJS.Timeout | null>(null);
+  const intentionalCloseRef = useRef<boolean>(false);
 
   const getWsUrl = (httpUrl: string) => {
     let url;
@@ -69,17 +73,39 @@ export default function Home() {
   };
 
   const connectWebSocket = (roomCode: string, onConnect?: (ws: WebSocket) => void) => {
+    intentionalCloseRef.current = false;
+    if (reconnectTimerRef.current) {
+      clearTimeout(reconnectTimerRef.current);
+      reconnectTimerRef.current = null;
+    }
+    if (pingIntervalRef.current) {
+      clearInterval(pingIntervalRef.current);
+      pingIntervalRef.current = null;
+    }
+
     if (socketRef.current) {
       socketRef.current.close();
     }
+
     const wsUrl = getWsUrl(AI_SERVICE_URL) + `/ws/room/${roomCode}`;
     const ws = new WebSocket(wsUrl);
+
     ws.onopen = () => {
       console.log(`Connected to WebSocket room: ${roomCode}`);
+      setWsStatus('CONNECTED');
+
+      // Heartbeat ping interval (every 5 seconds)
+      pingIntervalRef.current = setInterval(() => {
+        if (ws.readyState === WebSocket.OPEN) {
+          ws.send(JSON.stringify({ type: 'ping' }));
+        }
+      }, 5000);
+
       if (onConnect) {
         onConnect(ws);
       }
     };
+
     ws.onmessage = (event) => {
       try {
         const data = JSON.parse(event.data);
@@ -88,6 +114,8 @@ export default function Home() {
         } else if (data.type === 'join_success') {
           setMyPlayerId(data.player_id);
           setMyUsername(data.username);
+        } else if (data.type === 'pong') {
+          // Heartbeat response
         } else if (data.type === 'error') {
           alert(`Game Error: ${data.message}`);
         }
@@ -95,25 +123,69 @@ export default function Home() {
         console.error('Error parsing WebSocket message:', err);
       }
     };
+
     ws.onclose = () => {
       console.log('Room WebSocket closed.');
+      if (pingIntervalRef.current) {
+        clearInterval(pingIntervalRef.current);
+        pingIntervalRef.current = null;
+      }
+      if (!intentionalCloseRef.current) {
+        setWsStatus('RECONNECTING');
+        reconnectTimerRef.current = setTimeout(() => {
+          console.log(`Attempting automatic WebSocket reconnection to room: ${roomCode}...`);
+          connectWebSocket(roomCode);
+        }, 1500);
+      } else {
+        setWsStatus('DISCONNECTED');
+      }
     };
+
     ws.onerror = (err) => {
       console.error('Room WebSocket error:', err);
     };
+
     socketRef.current = ws;
   };
 
   const handleExitRoom = () => {
+    intentionalCloseRef.current = true;
+    if (reconnectTimerRef.current) {
+      clearTimeout(reconnectTimerRef.current);
+      reconnectTimerRef.current = null;
+    }
+    if (pingIntervalRef.current) {
+      clearInterval(pingIntervalRef.current);
+      pingIntervalRef.current = null;
+    }
     if (socketRef.current) {
       socketRef.current.close();
       socketRef.current = null;
     }
     setRoom(null);
+    setWsStatus('DISCONNECTED');
+  };
+
+  const sendWsMessage = (msgObj: any) => {
+    if (socketRef.current && socketRef.current.readyState === WebSocket.OPEN) {
+      socketRef.current.send(JSON.stringify(msgObj));
+      return true;
+    } else {
+      console.warn('WebSocket not open. Attempting automatic reconnection...');
+      setWsStatus('RECONNECTING');
+      if (room) {
+        connectWebSocket(room.config.room_code, (ws) => {
+          ws.send(JSON.stringify(msgObj));
+        });
+      }
+      return false;
+    }
   };
 
   useEffect(() => {
     return () => {
+      if (reconnectTimerRef.current) clearTimeout(reconnectTimerRef.current);
+      if (pingIntervalRef.current) clearInterval(pingIntervalRef.current);
       if (socketRef.current) {
         socketRef.current.close();
       }
@@ -279,21 +351,17 @@ export default function Home() {
   // Action: Start Game Session
   const handleStartGame = () => {
     soundFx.playVictoryFanfare();
-    if (socketRef.current && socketRef.current.readyState === WebSocket.OPEN) {
-      socketRef.current.send(JSON.stringify({ type: 'start_game' }));
-    }
+    sendWsMessage({ type: 'start_game' });
   };
 
   // Action: Draw Card
   const handleDrawCard = () => {
     soundFx.playCardDraw();
-    if (socketRef.current && socketRef.current.readyState === WebSocket.OPEN) {
-      socketRef.current.send(JSON.stringify({
-        type: 'draw_card',
-        payload: { player_id: myPlayerId }
-      }));
-      setAuditData(null);
-    }
+    sendWsMessage({
+      type: 'draw_card',
+      payload: { player_id: myPlayerId }
+    });
+    setAuditData(null);
   };
 
   // Action: Socratic AI Audit
@@ -343,70 +411,60 @@ export default function Home() {
   const handlePassCard = () => {
     if (!room || !room.active_card || !selectedTargetPlayerId) return;
     soundFx.playFlagSuccess();
-    if (socketRef.current && socketRef.current.readyState === WebSocket.OPEN) {
-      socketRef.current.send(JSON.stringify({
-        type: 'pass_card',
-        payload: {
-          target_player_id: selectedTargetPlayerId,
-          player_id: myPlayerId
-        }
-      }));
-    }
+    sendWsMessage({
+      type: 'pass_card',
+      payload: {
+        target_player_id: selectedTargetPlayerId,
+        player_id: myPlayerId
+      }
+    });
   };
 
   // Action: Keep Card in Hand
   const handleKeepCard = () => {
     if (!room || !room.active_card) return;
     soundFx.playCardDraw();
-    if (socketRef.current && socketRef.current.readyState === WebSocket.OPEN) {
-      socketRef.current.send(JSON.stringify({
-        type: 'keep_card',
-        payload: { player_id: myPlayerId }
-      }));
-    }
+    sendWsMessage({
+      type: 'keep_card',
+      payload: { player_id: myPlayerId }
+    });
   };
 
   // Action: Discard/Mute Card
   const handleDiscardCard = () => {
     if (!room || !room.active_card) return;
     soundFx.playChaosWarning();
-    if (socketRef.current && socketRef.current.readyState === WebSocket.OPEN) {
-      socketRef.current.send(JSON.stringify({
-        type: 'discard_card',
-        payload: { player_id: myPlayerId }
-      }));
-    }
+    sendWsMessage({
+      type: 'discard_card',
+      payload: { player_id: myPlayerId }
+    });
   };
 
   // Action: Flag Misinformation
   const handleFlagMisinformation = (card: ScenarioCard, senderId: string) => {
     if (!room || !myPlayerId) return;
     soundFx.playFlagSuccess();
-    if (socketRef.current && socketRef.current.readyState === WebSocket.OPEN) {
-      socketRef.current.send(JSON.stringify({
-        type: 'flag_card',
-        payload: {
-          card_id: card.id,
-          accuser_id: myPlayerId,
-          sender_id: senderId
-        }
-      }));
-    }
+    sendWsMessage({
+      type: 'flag_card',
+      payload: {
+        card_id: card.id,
+        accuser_id: myPlayerId,
+        sender_id: senderId
+      }
+    });
   };
 
   // Action: Trigger Cascade Power Move
   const handleCascadePowerMove = (card: ScenarioCard) => {
     if (!room || !myPlayerId) return;
     soundFx.playChaosWarning();
-    if (socketRef.current && socketRef.current.readyState === WebSocket.OPEN) {
-      socketRef.current.send(JSON.stringify({
-        type: 'cascade_card',
-        payload: {
-          card_id: card.id,
-          player_id: myPlayerId
-        }
-      }));
-    }
+    sendWsMessage({
+      type: 'cascade_card',
+      payload: {
+        card_id: card.id,
+        player_id: myPlayerId
+      }
+    });
   };
 
 
@@ -615,9 +673,18 @@ export default function Home() {
                   <span className="font-label-mono text-xs text-neo-mint font-black bg-neo-black px-2 py-0.5 neu-border">
                     ROOM #{room.config.room_code}
                   </span>
-                  <span className="font-label-mono text-[10px] text-neo-coral font-bold">
-                    {room.status === 'LOBBY' ? 'LOBBY' : 'LIVE ARENA'}
-                  </span>
+                  <div className="flex items-center gap-2">
+                    <span className={`font-label-mono text-[9px] px-1.5 py-0.5 font-black neu-border ${
+                      wsStatus === 'CONNECTED' ? 'bg-neo-mint text-neo-black' : wsStatus === 'RECONNECTING' ? 'bg-neo-lavender text-neo-black animate-pulse' : 'bg-neo-coral text-neo-black'
+                    }`}>
+                      {wsStatus === 'CONNECTED' && '🟢 LIVE'}
+                      {wsStatus === 'RECONNECTING' && '🟡 RECONNECTING...'}
+                      {wsStatus === 'DISCONNECTED' && '🔴 DISCONNECTED'}
+                    </span>
+                    <span className="font-label-mono text-[10px] text-neo-coral font-bold">
+                      {room.status === 'LOBBY' ? 'LOBBY' : 'LIVE ARENA'}
+                    </span>
+                  </div>
                 </div>
                 <div className="flex justify-between items-center">
                   <span className="text-xs font-bold text-on-surface-variant">Capacity: {room.players.length}/{room.config.max_players} Players</span>

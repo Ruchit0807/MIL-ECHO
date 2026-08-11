@@ -175,6 +175,10 @@ async def websocket_endpoint(websocket: WebSocket, room_code: str):
             msg_type = data.get("type")
             payload = data.get("payload", {})
             
+            if msg_type == "ping":
+                await websocket.send_json({"type": "pong"})
+                continue
+            
             async with ROOMS_LOCK:
                 if room_code not in ROOMS_REGISTRY:
                     await websocket.send_json({
