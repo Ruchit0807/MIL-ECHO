@@ -27,6 +27,7 @@ packages/pdf-generator/output/
 
 # Logs & System Files
 *.log
+*.db
 *.tsbuildinfo
 .DS_Store
 Thumbs.db

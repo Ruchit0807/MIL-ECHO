@@ -1,4 +1,5 @@
 import { Room, RoomConfig, Player, ScenarioCard, Community, LogEntry } from '../types/game';
+import defaultCardsData from './cards_database.json';
 
 export function generateRoomCode(): string {
   return Math.floor(100000 + Math.random() * 900000).toString();
@@ -105,19 +106,25 @@ export function startGameSession(room: Room): Room {
 }
 
 export function drawCardForActivePlayer(room: Room): Room {
-  if (room.deck.length === 0) {
-    if (room.discard_pile.length === 0) return room;
-    // Reshuffle discard into deck
-    room.deck = shuffleDeck([...room.discard_pile]);
-    room.discard_pile = [];
+  let deck = [...room.deck];
+  let discardPile = [...room.discard_pile];
+
+  if (deck.length === 0) {
+    if (discardPile.length > 0) {
+      deck = shuffleDeck([...discardPile]);
+      discardPile = [];
+    } else {
+      deck = shuffleDeck([...(defaultCardsData as ScenarioCard[])]);
+    }
   }
 
-  const [drawnCard, ...remainingDeck] = room.deck;
+  const [drawnCard, ...remainingDeck] = deck;
   const activePlayer = room.players[room.active_player_index];
 
   return {
     ...room,
     deck: remainingDeck,
+    discard_pile: discardPile,
     active_card: drawnCard,
     turn_phase: 'INSPECT',
     action_logs: [

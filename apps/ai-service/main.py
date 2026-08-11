@@ -245,7 +245,8 @@ async def websocket_endpoint(websocket: WebSocket, room_code: str):
                     room = services.game_engine.start_game_session(room)
                     
                 elif msg_type == "draw_card":
-                    room = services.game_engine.draw_card_for_active_player(room)
+                    if room.get("active_card") is None:
+                        room = services.game_engine.draw_card_for_active_player(room)
                     
                 elif msg_type == "pass_card":
                     target_id = payload.get("target_player_id")

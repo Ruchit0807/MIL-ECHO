@@ -163,11 +163,15 @@ def start_game_session(room: Dict[str, Any]) -> Dict[str, Any]:
 
 def draw_card_for_active_player(room: Dict[str, Any]) -> Dict[str, Any]:
     if len(room["deck"]) == 0:
-        if len(room["discard_pile"]) == 0:
-            return room
-        # Reshuffle discard into deck
-        room["deck"] = shuffle_deck(room["discard_pile"])
-        room["discard_pile"] = []
+        if len(room["discard_pile"]) > 0:
+            # Reshuffle discard into deck
+            room["deck"] = shuffle_deck(room["discard_pile"])
+            room["discard_pile"] = []
+        
+        # If deck is still empty (cards are in player hands), reload default cards
+        if len(room["deck"]) == 0:
+            cards = load_default_cards()
+            room["deck"] = shuffle_deck(cards)
         
     drawn_card = room["deck"].pop(0)
     active_player = room["players"][room["active_player_index"]]

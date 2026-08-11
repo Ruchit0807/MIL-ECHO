@@ -283,6 +283,18 @@ export default function Home() {
     }
   }, [myUsername]);
 
+  // Auto-recover myPlayerId from room state if lost on reconnect or tab sync
+  useEffect(() => {
+    if (room && !myPlayerId && room.players && room.players.length > 0) {
+      const match = room.players.find(p => p.name.toLowerCase() === myUsername.trim().toLowerCase());
+      if (match) {
+        setMyPlayerId(match.id);
+      } else if (room.players[0].is_host) {
+        setMyPlayerId(room.players[0].id);
+      }
+    }
+  }, [room, myPlayerId, myUsername]);
+
   // Update target player selector when room players change
   useEffect(() => {
     if (room && room.players.length > 1) {
