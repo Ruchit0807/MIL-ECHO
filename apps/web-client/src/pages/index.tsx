@@ -150,8 +150,18 @@ export default function Home() {
   const [selectedTargetPlayerId, setSelectedTargetPlayerId] = useState<string>('');
 
   // Local Session Player States
-  const [myPlayerId, setMyPlayerId] = useState<string | null>(null);
-  const [myUsername, setMyUsername] = useState<string>('');
+  const [myPlayerId, setMyPlayerId] = useState<string | null>(() => {
+    if (typeof window !== 'undefined') {
+      return sessionStorage.getItem('mil_echo_player_id');
+    }
+    return null;
+  });
+  const [myUsername, setMyUsername] = useState<string>(() => {
+    if (typeof window !== 'undefined') {
+      return sessionStorage.getItem('mil_echo_username') || '';
+    }
+    return '';
+  });
 
   // Accordion Checklist & AI Audit State
   const [openAccordion, setOpenAccordion] = useState<'content' | 'creator' | 'bias' | null>('content');
@@ -182,15 +192,7 @@ export default function Home() {
     }
   }, []);
 
-  // Load Local Player Session from sessionStorage
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const savedId = sessionStorage.getItem('mil_echo_player_id');
-      const savedName = sessionStorage.getItem('mil_echo_username');
-      if (savedId) setMyPlayerId(savedId);
-      if (savedName) setMyUsername(savedName);
-    }
-  }, []);
+
 
   // Save Local Player Session on change
   useEffect(() => {
