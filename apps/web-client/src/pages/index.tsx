@@ -29,6 +29,9 @@ interface AuditResult {
 }
 
 const getCardHint = (card: ScenarioCard): string => {
+  if (card.trigger) {
+    return `Hint: Psychological trigger is "${card.trigger}". Creator motivation: "${card.ai_analysis?.creator || 'Conspiracy/Scam Ring'}". Source: "${card.source || 'Social Media'}".`;
+  }
   if (card.card_type === 'FACTUAL') {
     return `Hint: Check the source: "${card.source}". It represents a verified registry or official bureau. The information style is neutral and direct, and there are no deepfake neural signals.`;
   } else if (card.card_type === 'OPINION') {
@@ -198,6 +201,7 @@ export default function Home() {
   const [isRulesModalOpen, setIsRulesModalOpen] = useState<boolean>(false);
   const [isHowToPlayOpen, setIsHowToPlayOpen] = useState<boolean>(false);
   const [isExtensionInboxOpen, setIsExtensionInboxOpen] = useState<boolean>(false);
+  const [isPassConfirmOpen, setIsPassConfirmOpen] = useState<boolean>(false);
   const [isMuted, setIsMuted] = useState<boolean>(soundFx.isMuted());
 
   const handleToggleMute = () => {
@@ -386,7 +390,19 @@ export default function Home() {
 
     const card = room.active_card;
     const headline = card.fake_headline || card.headline;
-    const content = card.attached_prejudice_tag || "";
+    const content = card.attached_prejudice_tag || card.consequence || "";
+
+    if (card.ai_analysis) {
+      setAuditData({
+        creator_analysis: `Creator: ${card.ai_analysis.creator}. Context: ${card.ai_analysis.context}. Bias: ${card.ai_analysis.bias}. Monetization/Business: ${card.ai_analysis.business}.`,
+        emotional_triggers: card.trigger ? card.trigger.split('+').map(t => t.trim()) : ['Outrage', 'Urgency'],
+        socratic_question: `Reflective Question: How does this claim leverage '${card.trigger || 'fear'}' to trigger behavior (${card.expected_behavior || 'sharing'})? What primary source proves or disproves this?`,
+        resilience_score_impact: 15,
+        clout_score_risk: 'High'
+      });
+      setIsLoadingAudit(false);
+      return;
+    }
 
     try {
       const resp = await fetch(`${AI_SERVICE_URL}/api/v1/audit-card`, {
@@ -394,7 +410,7 @@ export default function Home() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           headline,
-          media_url: card.media_url || "",
+          media_url: card.media_url || card.image || "",
           content
         })
       });
@@ -419,8 +435,15 @@ export default function Home() {
     }
   };
 
-  // Action: Pass Card to Target Player
+  // Action: Pass Card Trigger (Opens Confirmation Modal)
   const handlePassCard = () => {
+    if (!room || !room.active_card || !selectedTargetPlayerId) return;
+    setIsPassConfirmOpen(true);
+  };
+
+  // Action: Confirm Pass Execution
+  const handleConfirmPassCard = () => {
+    setIsPassConfirmOpen(false);
     if (!room || !room.active_card || !selectedTargetPlayerId) return;
     soundFx.playFlagSuccess();
     sendWsMessage({
@@ -856,17 +879,25 @@ export default function Home() {
                   </div>
 
                   {/* Media Preview */}
-                  {room.active_card.media_url && (
+                  {(room.active_card.image || room.active_card.media_url) && (
                     <div className="relative w-full aspect-video border-b-4 border-neo-black overflow-hidden bg-surface-dim">
                       <img
                         className="w-full h-full object-cover grayscale contrast-125 brightness-75 group-hover:grayscale-0 transition-all duration-500 hover:scale-105"
-                        src={room.active_card.media_url}
+                        src={room.active_card.image || room.active_card.media_url}
                         alt={room.active_card.headline}
+                        onError={(e) => {
+                          (e.target as HTMLImageElement).src = 'https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=600&auto=format&fit=crop&q=80';
+                        }}
                       />
                       <div className="absolute top-4 left-4 w-4 h-4 border-t-4 border-l-4 border-neo-mint"></div>
                       <div className="absolute top-4 right-4 w-4 h-4 border-t-4 border-r-4 border-neo-mint"></div>
                       <div className="absolute bottom-4 left-4 w-4 h-4 border-b-4 border-l-4 border-neo-mint"></div>
                       <div className="absolute bottom-4 right-4 w-4 h-4 border-b-4 border-r-4 border-neo-mint"></div>
+                      {room.active_card.year && (
+                        <span className="absolute bottom-3 right-3 bg-neo-black text-neo-mint font-label-mono text-[10px] font-bold px-2 py-0.5 neu-border">
+                          {room.active_card.year} CASE
+                        </span>
+                      )}
                     </div>
                   )}
 
@@ -875,8 +906,20 @@ export default function Home() {
                     <h3 className="font-display-xl text-xl lg:text-2xl text-on-background leading-tight font-black">
                       "{room.active_card.fake_headline || room.active_card.headline}"
                     </h3>
-                    <div className="font-body-md text-on-background text-xs leading-relaxed bg-surface-container-highest p-4 neu-border">
-                      Source Attribution: <strong>{room.active_card.source || 'Social Media Feed'}</strong>
+                    <div className="font-body-md text-on-background text-xs leading-relaxed bg-surface-container-highest p-4 neu-border flex flex-col gap-2">
+                      <div className="flex justify-between items-center flex-wrap gap-2">
+                        <span>Source Attribution: <strong>{room.active_card.source || 'Social Media Feed'}</strong></span>
+                        {room.active_card.type && (
+                          <span className="bg-neo-coral text-neo-black font-label-mono font-black text-[10px] uppercase px-2 py-0.5 neu-border">
+                            {room.active_card.type}
+                          </span>
+                        )}
+                      </div>
+                      {room.active_card.real_impact && (
+                        <div className="mt-1 font-label-mono text-[11px] text-neo-mint bg-neo-black p-2 neu-border border-l-4 border-l-neo-mint leading-relaxed">
+                          <strong>💥 Real-World Impact:</strong> {room.active_card.real_impact}
+                        </div>
+                      )}
                     </div>
 
                     {/* Guessing Widget */}
@@ -1143,9 +1186,34 @@ export default function Home() {
                                 ))}
                               </div>
                             </div>
+
                             <p className="text-xs font-label-mono p-3 bg-[#0f172a] neu-border border-l-8 border-l-neo-coral text-neo-coral leading-relaxed">
                               <strong>Coach Question:</strong> "{auditData.socratic_question}"
                             </p>
+
+                            {room.active_card?.trigger && (
+                              <div className="flex flex-col gap-2 p-3 bg-surface-container neu-border font-label-mono text-[11px]">
+                                <div className="font-black text-neo-mint border-b border-neo-mint/30 pb-1 uppercase">
+                                  ⚡ ABC Model (Behavioral Chain):
+                                </div>
+                                <div><strong>Trigger:</strong> {room.active_card.trigger}</div>
+                                <div><strong>Target Behavior:</strong> {room.active_card.expected_behavior}</div>
+                                <div><strong>Consequence:</strong> {room.active_card.consequence}</div>
+                              </div>
+                            )}
+
+                            {room.active_card?.ai_analysis && (
+                              <div className="flex flex-col gap-1.5 p-3 bg-surface-container neu-border font-label-mono text-[11px]">
+                                <div className="font-black text-neo-lavender border-b border-neo-lavender/30 pb-1 uppercase">
+                                  🤖 3C2B Framework Analysis:
+                                </div>
+                                <div><strong>Creator:</strong> {room.active_card.ai_analysis.creator}</div>
+                                <div><strong>Content:</strong> {room.active_card.ai_analysis.content}</div>
+                                <div><strong>Context:</strong> {room.active_card.ai_analysis.context}</div>
+                                <div><strong>Bias:</strong> {room.active_card.ai_analysis.bias}</div>
+                                <div><strong>Business:</strong> {room.active_card.ai_analysis.business}</div>
+                              </div>
+                            )}
                           </>
                         ) : (
                           <p className="text-xs font-label-mono text-on-surface-variant font-bold">
@@ -1358,6 +1426,42 @@ export default function Home() {
                     <li><strong>Viral Spiral Cascade (±4..5 Prejudice):</strong> Broadcast 1 card to ALL players simultaneously!</li>
                   </ul>
                 </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* MODAL: PASS CONFIRMATION */}
+        {isPassConfirmOpen && (
+          <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+            <div className="bg-surface-container border-4 border-neo-black shadow-[10px_10px_0_#000] p-6 max-w-md w-full flex flex-col gap-4 text-center">
+              <div className="flex justify-between items-center pb-2 border-b-4 border-neo-black">
+                <h3 className="text-xl font-black uppercase text-neo-coral font-headline-lg flex items-center gap-2">
+                  <span className="material-symbols-outlined text-2xl">help_outline</span>
+                  Think again. Are you sure?
+                </h3>
+                <button onClick={() => setIsPassConfirmOpen(false)} className="text-on-surface hover:text-neo-coral font-bold">[CLOSE]</button>
+              </div>
+
+              <p className="font-body-md text-xs text-on-surface-variant leading-relaxed text-left">
+                Before circulating this news card across the network, pause to verify if creator motives or sensationalized hooks might drain the global <strong>CHAOS</strong> meter!
+              </p>
+
+              <div className="flex gap-3 mt-2">
+                <button
+                  onClick={handleConfirmPassCard}
+                  className="flex-1 bg-neo-mint text-neo-black py-3 px-4 font-headline-lg text-sm font-black neu-btn hover:bg-[#a3e635] flex items-center justify-center gap-1"
+                >
+                  <span className="material-symbols-outlined text-lg font-bold">send</span>
+                  Yes, Share
+                </button>
+                <button
+                  onClick={() => setIsPassConfirmOpen(false)}
+                  className="flex-1 bg-neo-coral text-neo-black py-3 px-4 font-headline-lg text-sm font-black neu-btn hover:bg-[#fb7185] flex items-center justify-center gap-1"
+                >
+                  <span className="material-symbols-outlined text-lg font-bold">manage_search</span>
+                  Hmm, Let me check
+                </button>
               </div>
             </div>
           </div>

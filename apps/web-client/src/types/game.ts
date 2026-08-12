@@ -4,6 +4,14 @@ export type AICopilotMode = 'Socratic Guidance' | 'Auto-Audit Mode';
 export type TurnPhase = 'DRAW' | 'INSPECT' | 'ACTION';
 export type GameStatus = 'LOBBY' | 'PLAYING' | 'INDIVIDUAL_VICTORY' | 'GLOBAL_DEFEAT';
 
+export interface AIAnalysis {
+  creator: string;
+  content: string;
+  context: string;
+  bias: string;
+  business: string;
+}
+
 export interface ScenarioCard {
   id: string;
   headline: string;
@@ -30,6 +38,17 @@ export interface ScenarioCard {
   cred_impact: number;
   chaos_impact: number;
   attached_prejudice_tag?: string;
+
+  // Real-world card metadata
+  domain?: string;
+  image?: string;
+  year?: number | string;
+  type?: string;
+  trigger?: string;
+  expected_behavior?: string;
+  consequence?: string;
+  real_impact?: string;
+  ai_analysis?: AIAnalysis;
 }
 
 
