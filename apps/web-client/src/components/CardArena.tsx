@@ -145,11 +145,14 @@ export const CardArena: React.FC<CardArenaProps> = ({
         {/* MEDIA DISPLAY WRAPPERS */}
 
         {/* 1. IMAGE MEDIA */}
-        {mediaType === 'image' && currentCard.media_url && (
+        {(mediaType === 'image' || (!currentCard.audio_url && !currentCard.video_url)) && (currentCard.media_url || currentCard.image) && (
           <div style={{ borderRadius: '14px', overflow: 'hidden', maxHeight: '240px', border: '1px solid rgba(255, 255, 255, 0.1)', position: 'relative' }}>
             <img
-              src={currentCard.media_url}
+              src={currentCard.media_url || currentCard.image}
               alt={currentCard.headline}
+              onError={(e) => {
+                (e.target as HTMLImageElement).src = 'https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800&auto=format&fit=crop&q=80';
+              }}
               style={{ width: '100%', height: '240px', objectFit: 'cover', display: 'block' }}
             />
             {showFakeVariant && (

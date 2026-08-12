@@ -4,17 +4,19 @@ import random
 import time
 from typing import Dict, List, Any, Optional
 
-CARDS_DB_PATH = os.path.join(
+CARDS_DB_PATH_LOCAL = os.path.join(os.path.dirname(__file__), "cards_database.json")
+CARDS_DB_PATH_WEB = os.path.join(
     os.path.dirname(__file__), "..", "..", "web-client", "src", "lib", "cards_database.json"
 )
 
 def load_default_cards() -> List[Dict[str, Any]]:
-    try:
-        if os.path.exists(CARDS_DB_PATH):
-            with open(CARDS_DB_PATH, "r", encoding="utf-8") as f:
-                return json.load(f)
-    except Exception as e:
-        print(f"Error loading cards database: {e}")
+    for path in [CARDS_DB_PATH_LOCAL, CARDS_DB_PATH_WEB]:
+        try:
+            if os.path.exists(path):
+                with open(path, "r", encoding="utf-8") as f:
+                    return json.load(f)
+        except Exception as e:
+            print(f"Error loading cards database from {path}: {e}")
     
     # Fallback cards in case paths fail
     return [

@@ -344,8 +344,22 @@ export default function Home() {
       setIsCreateModalOpen(false);
       connectWebSocket(code);
     } catch (err) {
-      console.error(err);
-      alert('Could not create room. Make sure backend is running.');
+      console.warn('Backend server unavailable, initializing client-side game room session:', err);
+      const code = generateRoomCode();
+      const config = {
+        room_code: code,
+        max_players: maxPlayersInput,
+        starting_chaos: startingChaosInput,
+        ai_copilot_mode: aiCopilotModeInput
+      };
+      const initialRoom = createInitialRoom(hostNameInput, config, defaultCardsData as ScenarioCard[]);
+      const roomWithBots = fillBotPlayers(initialRoom);
+      setRoom(roomWithBots);
+      if (roomWithBots.players && roomWithBots.players.length > 0) {
+        setMyPlayerId(roomWithBots.players[0].id);
+        setMyUsername(roomWithBots.players[0].name);
+      }
+      setIsCreateModalOpen(false);
     }
   };
 
@@ -367,16 +381,22 @@ export default function Home() {
   // Action: Start Game Session
   const handleStartGame = () => {
     soundFx.playVictoryFanfare();
-    sendWsMessage({ type: 'start_game' });
+    const sent = sendWsMessage({ type: 'start_game' });
+    if (!sent) {
+      setRoom(prev => prev ? startGameSession(prev) : null);
+    }
   };
 
   // Action: Draw Card
   const handleDrawCard = () => {
     soundFx.playCardDraw();
-    sendWsMessage({
+    const sent = sendWsMessage({
       type: 'draw_card',
       payload: { player_id: myPlayerId }
     });
+    if (!sent) {
+      setRoom(prev => prev ? drawCardForActivePlayer(prev) : null);
+    }
     setAuditData(null);
   };
 
@@ -446,40 +466,49 @@ export default function Home() {
     setIsPassConfirmOpen(false);
     if (!room || !room.active_card || !selectedTargetPlayerId) return;
     soundFx.playFlagSuccess();
-    sendWsMessage({
+    const sent = sendWsMessage({
       type: 'pass_card',
       payload: {
         target_player_id: selectedTargetPlayerId,
         player_id: myPlayerId
       }
     });
+    if (!sent && selectedTargetPlayerId) {
+      setRoom(prev => prev ? processPassAction(prev, selectedTargetPlayerId) : null);
+    }
   };
 
   // Action: Keep Card in Hand
   const handleKeepCard = () => {
     if (!room || !room.active_card) return;
     soundFx.playCardDraw();
-    sendWsMessage({
+    const sent = sendWsMessage({
       type: 'keep_card',
       payload: { player_id: myPlayerId }
     });
+    if (!sent) {
+      setRoom(prev => prev ? processKeepAction(prev) : null);
+    }
   };
 
   // Action: Discard/Mute Card
   const handleDiscardCard = () => {
     if (!room || !room.active_card) return;
     soundFx.playChaosWarning();
-    sendWsMessage({
+    const sent = sendWsMessage({
       type: 'discard_card',
       payload: { player_id: myPlayerId }
     });
+    if (!sent) {
+      setRoom(prev => prev ? processDiscardAction(prev) : null);
+    }
   };
 
   // Action: Flag Misinformation
   const handleFlagMisinformation = (card: ScenarioCard, senderId: string) => {
     if (!room || !myPlayerId) return;
     soundFx.playFlagSuccess();
-    sendWsMessage({
+    const sent = sendWsMessage({
       type: 'flag_card',
       payload: {
         card_id: card.id,
@@ -487,19 +516,25 @@ export default function Home() {
         sender_id: senderId
       }
     });
+    if (!sent) {
+      setRoom(prev => prev ? processFlagMisinfo(prev, card, myPlayerId, senderId) : null);
+    }
   };
 
   // Action: Trigger Cascade Power Move
   const handleCascadePowerMove = (card: ScenarioCard) => {
     if (!room || !myPlayerId) return;
     soundFx.playChaosWarning();
-    sendWsMessage({
+    const sent = sendWsMessage({
       type: 'cascade_card',
       payload: {
         card_id: card.id,
         player_id: myPlayerId
       }
     });
+    if (!sent) {
+      setRoom(prev => prev ? processCascadePowerMove(prev, card) : null);
+    }
   };
 
 
