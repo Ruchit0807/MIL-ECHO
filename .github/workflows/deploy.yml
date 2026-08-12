@@ -1,0 +1,55 @@
+name: CI Build & Deploy Check
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  build-web-client:
+    name: Build Next.js Web Client
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+          cache: 'npm'
+          cache-dependency-path: apps/web-client/package-lock.json
+
+      - name: Install Web Client Dependencies
+        run: |
+          cd apps/web-client
+          npm ci || npm install
+
+      - name: Build Web Client
+        run: |
+          cd apps/web-client
+          npm run build
+
+  verify-ai-service:
+    name: Verify Python AI Service
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install AI Service Dependencies
+        run: |
+          cd apps/ai-service
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Check Python Syntax
+        run: |
+          cd apps/ai-service
+          python -m py_compile main.py
+          python -m py_compile services/game_engine.py
+          python -m py_compile services/socratic_engine.py
