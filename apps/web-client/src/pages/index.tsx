@@ -245,6 +245,33 @@ export default function Home() {
   const [isLoadingAudit, setIsLoadingAudit] = useState<boolean>(false);
   const [playerGuess, setPlayerGuess] = useState<CardType | null>(null);
   const [showHint, setShowHint] = useState<boolean>(false);
+  const [lastTurnFeedback, setLastTurnFeedback] = useState<{
+    guessed: CardType;
+    actual: CardType;
+    isCorrect: boolean;
+    actionTaken: string;
+    cardHeadline: string;
+  } | null>(null);
+
+  const evaluateGuessOnAction = (actionName: string) => {
+    if (playerGuess && room?.active_card) {
+      const actualType = room.active_card.card_type;
+      const isCorrect = (playerGuess === actualType);
+      if (isCorrect) {
+        soundFx.playVictoryFanfare();
+      } else {
+        soundFx.playChaosWarning();
+      }
+      setLastTurnFeedback({
+        guessed: playerGuess,
+        actual: actualType,
+        isCorrect,
+        actionTaken: actionName,
+        cardHeadline: room.active_card.fake_headline || room.active_card.headline
+      });
+      setPlayerGuess(null);
+    }
+  };
 
   // Socratic Chat & Extension Inbox State
   const [capturedCards, setCapturedCards] = useState<ScenarioCard[]>([]);
@@ -390,6 +417,7 @@ export default function Home() {
   // Action: Draw Card
   const handleDrawCard = () => {
     soundFx.playCardDraw();
+    setLastTurnFeedback(null);
     const sent = sendWsMessage({
       type: 'draw_card',
       payload: { player_id: myPlayerId }
@@ -465,6 +493,7 @@ export default function Home() {
   const handleConfirmPassCard = () => {
     setIsPassConfirmOpen(false);
     if (!room || !room.active_card || !selectedTargetPlayerId) return;
+    evaluateGuessOnAction('PASSED CARD');
     soundFx.playFlagSuccess();
     const sent = sendWsMessage({
       type: 'pass_card',
@@ -481,6 +510,7 @@ export default function Home() {
   // Action: Keep Card in Hand
   const handleKeepCard = () => {
     if (!room || !room.active_card) return;
+    evaluateGuessOnAction('KEPT CARD IN HAND');
     soundFx.playCardDraw();
     const sent = sendWsMessage({
       type: 'keep_card',
@@ -494,6 +524,7 @@ export default function Home() {
   // Action: Discard/Mute Card
   const handleDiscardCard = () => {
     if (!room || !room.active_card) return;
+    evaluateGuessOnAction('DISCARDED CARD');
     soundFx.playChaosWarning();
     const sent = sendWsMessage({
       type: 'discard_card',
@@ -870,6 +901,33 @@ export default function Home() {
                 </div>
               )}
 
+              {/* Turn Result Feedback Banner */}
+              {lastTurnFeedback && (
+                <div className={`p-4 border-4 border-neo-black shadow-[6px_6px_0_#000] mb-4 flex justify-between items-center neu-border ${
+                  lastTurnFeedback.isCorrect ? 'bg-neo-mint/20 border-neo-mint text-neo-mint' : 'bg-neo-coral/20 border-neo-coral text-neo-coral'
+                }`}>
+                  <div className="flex items-center gap-3">
+                    <span className="material-symbols-outlined text-3xl">
+                      {lastTurnFeedback.isCorrect ? 'task_alt' : 'warning'}
+                    </span>
+                    <div>
+                      <span className="font-label-mono text-xs font-bold uppercase block">
+                        {lastTurnFeedback.isCorrect ? '🎉 CRITICAL THINKING SUCCESS!' : '⚠️ HYPOTHESIS MISJUDGMENT'}
+                      </span>
+                      <p className="font-body-md text-xs font-bold text-on-background">
+                        You guessed <strong>{lastTurnFeedback.guessed}</strong>. The card was actually <strong>{lastTurnFeedback.actual}</strong> ({lastTurnFeedback.actionTaken}).
+                      </p>
+                    </div>
+                  </div>
+                  <button
+                    onClick={() => setLastTurnFeedback(null)}
+                    className="text-xs font-label-mono font-black text-on-background bg-neo-black text-neo-lavender px-3 py-1 neu-btn"
+                  >
+                    DISMISS ✕
+                  </button>
+                </div>
+              )}
+
               {/* Turn Control Header Banner */}
               <div className="bg-surface-container border-4 border-neo-black p-4 shadow-[6px_6px_0_#000] flex justify-between items-center">
                 <div className="flex items-center gap-3">
@@ -893,23 +951,23 @@ export default function Home() {
                 <div className="bg-surface-container-low border-4 border-neo-black shadow-[10px_10px_0px_0px_#000] p-0 flex flex-col relative group">
                   
                   {/* Card Category Header */}
-                  <div className={`p-3 border-b-4 border-neo-black flex justify-between items-center font-black font-label-mono text-xs ${
-                    !playerGuess
-                      ? 'bg-neo-black text-neo-lavender'
-                      : room.active_card.card_type === 'PREJUDICE'
-                      ? 'bg-neo-coral text-neo-black'
-                      : room.active_card.card_type === 'FACTUAL'
-                      ? 'bg-neo-mint text-neo-black'
-                      : 'bg-neo-lavender text-neo-black'
-                  }`}>
-                    <span>
-                      {!playerGuess && '❓ UNSPECIFIED NEWS CARD (Guess the type!)'}
-                      {playerGuess && room.active_card.card_type === 'PREJUDICE' && '🔴 PREJUDICE / MISINFO (-1 CHAOS)'}
-                      {playerGuess && room.active_card.card_type === 'FACTUAL' && '🟢 FACTUAL VERIFIED NEWS (+1 CHAOS)'}
-                      {playerGuess && room.active_card.card_type === 'OPINION' && '🟡 OPINION / BAIT (NEUTRAL)'}
+                  <div className="p-3 border-b-4 border-neo-black flex justify-between items-center font-black font-label-mono text-xs bg-neo-black text-neo-lavender">
+                    <span className="flex items-center gap-2">
+                      {!playerGuess ? (
+                        <>
+                          <span>❓ UNSPECIFIED NEWS CARD</span>
+                          <span className="text-[10px] text-neo-mint font-normal hidden sm:inline">(Form your hypothesis below)</span>
+                        </>
+                      ) : (
+                        <>
+                          <span>🔒 HYPOTHESIS RECORDED:</span>
+                          <span className="bg-neo-lavender text-neo-black px-2 py-0.5 neu-border font-bold uppercase text-[11px]">{playerGuess}</span>
+                          <span className="text-[10px] text-neo-mint font-normal hidden sm:inline">(Evaluation revealed upon turn action)</span>
+                        </>
+                      )}
                     </span>
-                    <span className="bg-neo-black text-on-background px-2 py-0.5 neu-border text-[10px]">
-                      {room.active_card.category.toUpperCase()}
+                    <span className="bg-surface-container text-on-background px-2 py-0.5 neu-border text-[10px]">
+                      {room.active_card.domain?.toUpperCase() || 'GENERAL NEWS'}
                     </span>
                   </div>
 
@@ -944,11 +1002,9 @@ export default function Home() {
                     <div className="font-body-md text-on-background text-xs leading-relaxed bg-surface-container-highest p-4 neu-border flex flex-col gap-2">
                       <div className="flex justify-between items-center flex-wrap gap-2">
                         <span>Source Attribution: <strong>{room.active_card.source || 'Social Media Feed'}</strong></span>
-                        {room.active_card.type && (
-                          <span className="bg-neo-coral text-neo-black font-label-mono font-black text-[10px] uppercase px-2 py-0.5 neu-border">
-                            {room.active_card.type}
-                          </span>
-                        )}
+                        <span className="bg-neo-black text-neo-mint font-label-mono font-bold text-[10px] uppercase px-2 py-0.5 neu-border border-neo-mint flex items-center gap-1">
+                          <span>🕵️ TYPE HIDDEN</span> — USE AI INSPECTOR
+                        </span>
                       </div>
                       {room.active_card.real_impact && (
                         <div className="mt-1 font-label-mono text-[11px] text-neo-mint bg-neo-black p-2 neu-border border-l-4 border-l-neo-mint leading-relaxed">
@@ -961,7 +1017,7 @@ export default function Home() {
                     {!playerGuess ? (
                       <div className="p-4 bg-surface-container-lowest border-4 border-neo-black shadow-[4px_4px_0_#000] flex flex-col gap-3 my-2">
                         <div className="flex justify-between items-center">
-                          <span className="font-label-mono text-xs text-neo-lavender font-bold">🕵️ GUESS THE CONTENT TYPE:</span>
+                          <span className="font-label-mono text-xs text-neo-lavender font-bold">🕵️ FORM YOUR HYPOTHESIS:</span>
                           <button
                             onClick={() => {
                               soundFx.playAuditScan();
@@ -983,11 +1039,7 @@ export default function Home() {
                           <button
                             onClick={() => {
                               setPlayerGuess('FACTUAL');
-                              if (room.active_card?.card_type === 'FACTUAL') {
-                                soundFx.playFlagSuccess();
-                              } else {
-                                soundFx.playChaosWarning();
-                              }
+                              soundFx.playCardDraw();
                             }}
                             className="flex-1 bg-neo-mint text-neo-black py-2 text-xs font-headline-lg font-black neu-btn"
                           >
@@ -996,11 +1048,7 @@ export default function Home() {
                           <button
                             onClick={() => {
                               setPlayerGuess('OPINION');
-                              if (room.active_card?.card_type === 'OPINION') {
-                                soundFx.playFlagSuccess();
-                              } else {
-                                soundFx.playChaosWarning();
-                              }
+                              soundFx.playCardDraw();
                             }}
                             className="flex-1 bg-neo-lavender text-neo-black py-2 text-xs font-headline-lg font-black neu-btn"
                           >
@@ -1009,11 +1057,7 @@ export default function Home() {
                           <button
                             onClick={() => {
                               setPlayerGuess('PREJUDICE');
-                              if (room.active_card?.card_type === 'PREJUDICE') {
-                                soundFx.playFlagSuccess();
-                              } else {
-                                soundFx.playChaosWarning();
-                              }
+                              soundFx.playCardDraw();
                             }}
                             className="flex-1 bg-neo-coral text-neo-black py-2 text-xs font-headline-lg font-black neu-btn"
                           >
@@ -1022,26 +1066,24 @@ export default function Home() {
                         </div>
                       </div>
                     ) : (
-                      <div className="p-4 bg-surface-container-lowest border-4 border-neo-black shadow-[4px_4px_0_#000] flex flex-col gap-2 my-2">
-                        <div className="flex justify-between items-center">
-                          <span className="font-label-mono text-xs text-on-surface-variant font-bold">YOUR GUESS RESULT:</span>
+                      <div className="p-4 bg-surface-container-lowest border-4 border-neo-black shadow-[4px_4px_0_#000] flex flex-col gap-3 my-2">
+                        <div className="flex justify-between items-center flex-wrap gap-2">
+                          <div className="flex items-center gap-2">
+                            <span className="font-label-mono text-xs text-neo-mint font-bold">🔒 HYPOTHESIS RECORDED:</span>
+                            <span className="bg-neo-mint text-neo-black px-2.5 py-0.5 font-label-mono text-xs font-black uppercase neu-border">
+                              {playerGuess}
+                            </span>
+                          </div>
                           <button
                             onClick={() => setPlayerGuess(null)}
-                            className="text-[9px] font-label-mono text-neo-coral hover:underline"
+                            className="text-[10px] font-label-mono bg-neo-lavender text-neo-black px-2 py-1 neu-btn font-bold"
                           >
-                            RESET GUESS
+                            ✏️ CHANGE HYPOTHESIS
                           </button>
                         </div>
-                        <div className={`p-3 neu-border font-label-mono text-xs font-bold ${
-                          playerGuess === room.active_card?.card_type 
-                            ? 'bg-neo-mint/20 border-neo-mint text-neo-mint' 
-                            : 'bg-neo-coral/20 border-neo-coral text-neo-coral'
-                        }`}>
-                          {playerGuess === room.active_card?.card_type ? (
-                            <span>🎉 CORRECT! This card is indeed {room.active_card?.card_type}. (+1 CRED/CHAOS logic applies on pass/flag)</span>
-                          ) : (
-                            <span>❌ INCORRECT. You guessed {playerGuess}, but this card is actually {room.active_card?.card_type}.</span>
-                          )}
+                        <div className="p-2.5 bg-surface-container neu-border font-label-mono text-[11px] text-on-background flex items-center gap-2">
+                          <span className="material-symbols-outlined text-base text-neo-mint">verified_user</span>
+                          <span>Hypothesis locked. Execute your action (Pass, Keep, or Discard) below — your critical thinking score bonus will be evaluated after your decision.</span>
                         </div>
                       </div>
                     )}
@@ -1211,43 +1253,75 @@ export default function Home() {
                           </div>
                         ) : auditData ? (
                           <>
-                            <div className="flex items-center justify-between border-b-4 border-neo-black pb-2 border-dashed">
-                              <span className="font-bold">Emotional Triggers:</span>
+                            <div className="flex items-center justify-between border-b-2 border-neo-black pb-2 border-dashed">
+                              <span className="font-bold text-neo-mint font-label-mono text-xs">🔥 EMOTIONAL TRIGGERS:</span>
                               <div className="flex gap-1 flex-wrap justify-end">
                                 {auditData.emotional_triggers.map((t, idx) => (
-                                  <span key={idx} className="text-neo-coral font-black font-label-mono bg-neo-black px-2 py-0.5 text-[10px] neu-border">
-                                    {t.toUpperCase()}
+                                  <span key={idx} className="text-neo-coral font-black font-label-mono bg-neo-black px-2 py-0.5 text-[10px] neu-border uppercase">
+                                    ⚠️ {t}
                                   </span>
                                 ))}
                               </div>
                             </div>
 
                             <p className="text-xs font-label-mono p-3 bg-[#0f172a] neu-border border-l-8 border-l-neo-coral text-neo-coral leading-relaxed">
-                              <strong>Coach Question:</strong> "{auditData.socratic_question}"
+                              <strong>💡 Socratic Question:</strong> "{auditData.socratic_question}"
                             </p>
 
-                            {room.active_card?.trigger && (
-                              <div className="flex flex-col gap-2 p-3 bg-surface-container neu-border font-label-mono text-[11px]">
-                                <div className="font-black text-neo-mint border-b border-neo-mint/30 pb-1 uppercase">
-                                  ⚡ ABC Model (Behavioral Chain):
+                            {room.active_card && (
+                              <>
+                                {/* 3C2B Framework Bite-Sized Cards */}
+                                <div className="flex flex-col gap-2 p-3 bg-surface-container neu-border border-l-4 border-l-neo-lavender">
+                                  <div className="font-headline-lg text-xs font-black text-neo-lavender uppercase flex items-center justify-between">
+                                    <span>🏛️ 3C2B FRAMEWORK ANALYSIS</span>
+                                    <span className="text-[9px] bg-neo-black text-neo-lavender px-1.5 py-0.5 neu-border">5 DIMS</span>
+                                  </div>
+                                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-[11px] font-label-mono">
+                                    <div className="p-2 bg-neo-black text-on-background neu-border border-l-2 border-l-neo-mint">
+                                      <strong className="text-neo-mint block text-[10px]">👤 CREATOR</strong>
+                                      <span className="text-[11px]">{room.active_card.ai_analysis?.creator || room.active_card.source}</span>
+                                    </div>
+                                    <div className="p-2 bg-neo-black text-on-background neu-border border-l-2 border-l-neo-lavender">
+                                      <strong className="text-neo-lavender block text-[10px]">📝 CONTENT</strong>
+                                      <span className="text-[11px]">{room.active_card.ai_analysis?.content || room.active_card.headline}</span>
+                                    </div>
+                                    <div className="p-2 bg-neo-black text-on-background neu-border border-l-2 border-l-neo-yellow">
+                                      <strong className="text-neo-yellow block text-[10px]">🌐 CONTEXT</strong>
+                                      <span className="text-[11px]">{room.active_card.ai_analysis?.context || `${room.active_card.year} Context`}</span>
+                                    </div>
+                                    <div className="p-2 bg-neo-black text-on-background neu-border border-l-2 border-l-neo-coral">
+                                      <strong className="text-neo-coral block text-[10px]">👁️ BIAS</strong>
+                                      <span className="text-[11px]">{room.active_card.ai_analysis?.bias || 'Emotional bias framing'}</span>
+                                    </div>
+                                    <div className="p-2 bg-neo-black text-on-background neu-border border-l-2 border-l-neo-mint sm:col-span-2">
+                                      <strong className="text-neo-mint block text-[10px]">💼 BUSINESS / BEHAVIOR</strong>
+                                      <span className="text-[11px]">{room.active_card.ai_analysis?.business || 'Click monetization & engagement'}</span>
+                                    </div>
+                                  </div>
                                 </div>
-                                <div><strong>Trigger:</strong> {room.active_card.trigger}</div>
-                                <div><strong>Target Behavior:</strong> {room.active_card.expected_behavior}</div>
-                                <div><strong>Consequence:</strong> {room.active_card.consequence}</div>
-                              </div>
-                            )}
 
-                            {room.active_card?.ai_analysis && (
-                              <div className="flex flex-col gap-1.5 p-3 bg-surface-container neu-border font-label-mono text-[11px]">
-                                <div className="font-black text-neo-lavender border-b border-neo-lavender/30 pb-1 uppercase">
-                                  🤖 3C2B Framework Analysis:
+                                {/* ABC Psychological Model */}
+                                <div className="flex flex-col gap-2 p-3 bg-surface-container neu-border border-l-4 border-l-neo-coral">
+                                  <div className="font-headline-lg text-xs font-black text-neo-coral uppercase flex items-center justify-between">
+                                    <span>🧠 ABC PSYCHOLOGICAL MODEL</span>
+                                    <span className="text-[9px] bg-neo-black text-neo-coral px-1.5 py-0.5 neu-border">CHAIN</span>
+                                  </div>
+                                  <div className="flex flex-col gap-1.5 text-[11px] font-label-mono">
+                                    <div className="p-2 bg-neo-coral/10 border border-neo-coral/40 neu-border">
+                                      <strong className="text-neo-coral block text-[10px]">❤️ AFFECTIVE (EMOTION)</strong>
+                                      <span>{room.active_card.trigger || 'Fear + Need for control'}</span>
+                                    </div>
+                                    <div className="p-2 bg-neo-mint/10 border border-neo-mint/40 neu-border">
+                                      <strong className="text-neo-mint block text-[10px]">🏃 BEHAVIORAL (ACTION)</strong>
+                                      <span>{room.active_card.expected_behavior || 'Circulate urgently across feeds'}</span>
+                                    </div>
+                                    <div className="p-2 bg-neo-lavender/10 border border-neo-lavender/40 neu-border">
+                                      <strong className="text-neo-lavender block text-[10px]">💥 CONSEQUENCE</strong>
+                                      <span>{room.active_card.consequence || 'Amplifies societal chaos'}</span>
+                                    </div>
+                                  </div>
                                 </div>
-                                <div><strong>Creator:</strong> {room.active_card.ai_analysis.creator}</div>
-                                <div><strong>Content:</strong> {room.active_card.ai_analysis.content}</div>
-                                <div><strong>Context:</strong> {room.active_card.ai_analysis.context}</div>
-                                <div><strong>Bias:</strong> {room.active_card.ai_analysis.bias}</div>
-                                <div><strong>Business:</strong> {room.active_card.ai_analysis.business}</div>
-                              </div>
+                              </>
                             )}
                           </>
                         ) : (

@@ -58,29 +58,29 @@ export const SocraticCoachDrawer: React.FC<SocraticCoachDrawerProps> = ({
           <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
             {/* Card Headline Banner */}
             <div style={{ background: 'rgba(255, 255, 255, 0.04)', border: '1px solid rgba(255, 255, 255, 0.08)', borderRadius: '12px', padding: '14px' }}>
-              <span style={{ fontSize: '11px', fontWeight: 700, color: 'var(--accent-cyan)', textTransform: 'uppercase', letterSpacing: '0.5px' }}>Audited Scenario</span>
+              <span style={{ fontSize: '11px', fontWeight: 700, color: 'var(--accent-cyan)', textTransform: 'uppercase', letterSpacing: '0.5px' }}>Audited News Scenario</span>
               <p style={{ fontSize: '14px', fontWeight: 600, color: '#fff', marginTop: '4px' }}>"{cardHeadline}"</p>
             </div>
 
-            {/* Creator & Intent Analysis */}
+            {/* Creator & Intent Analysis (3C2B) */}
             <div style={{ background: 'rgba(157, 78, 225, 0.08)', border: '1px solid rgba(157, 78, 225, 0.25)', borderRadius: '12px', padding: '16px' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px', color: '#9d4edd', fontWeight: 700, fontSize: '14px' }}>
-                <ShieldCheck size={18} /> 1. Creator & Intent (3C Framework)
+                <ShieldCheck size={18} /> 🏛️ 3C2B Framework & Motivation
               </div>
-              <p style={{ fontSize: '13px', color: 'var(--text-main)', lineHeight: '1.5' }}>
+              <p style={{ fontSize: '13px', color: 'var(--text-main)', lineHeight: '1.5', margin: 0 }}>
                 {auditData.creator_analysis}
               </p>
             </div>
 
-            {/* Emotional Manipulation Triggers */}
+            {/* Emotional Manipulation Triggers (ABC Affective) */}
             <div style={{ background: 'rgba(255, 0, 127, 0.08)', border: '1px solid rgba(255, 0, 127, 0.25)', borderRadius: '12px', padding: '16px' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '10px', color: '#ff007f', fontWeight: 700, fontSize: '14px' }}>
-                <AlertTriangle size={18} /> 2. Emotional Triggers Detected
+                <AlertTriangle size={18} /> 🧠 ABC Model: Affective Triggers Detected
               </div>
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
                 {auditData.emotional_triggers.map((trigger, i) => (
                   <span key={i} style={{ background: 'rgba(255, 0, 127, 0.2)', border: '1px solid rgba(255, 0, 127, 0.4)', color: '#ff75b5', padding: '4px 12px', borderRadius: '16px', fontSize: '12px', fontWeight: 600 }}>
-                    ⚠️ {trigger}
+                    🔥 {trigger}
                   </span>
                 ))}
               </div>
@@ -89,9 +89,9 @@ export const SocraticCoachDrawer: React.FC<SocraticCoachDrawerProps> = ({
             {/* Socratic Verification Question */}
             <div style={{ background: 'rgba(0, 242, 254, 0.08)', border: '1px solid rgba(0, 242, 254, 0.25)', borderRadius: '12px', padding: '16px' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px', color: '#00f2fe', fontWeight: 700, fontSize: '14px' }}>
-                <HelpCircle size={18} /> 3. Socratic Prompt Question
+                <HelpCircle size={18} /> 💡 Socratic Reflective Question
               </div>
-              <p style={{ fontSize: '14px', fontStyle: 'italic', color: '#fff', lineHeight: '1.5', background: 'rgba(0, 242, 254, 0.1)', padding: '12px', borderRadius: '8px', borderLeft: '3px solid #00f2fe' }}>
+              <p style={{ fontSize: '14px', fontStyle: 'italic', color: '#fff', lineHeight: '1.5', background: 'rgba(0, 242, 254, 0.1)', padding: '12px', borderRadius: '8px', borderLeft: '3px solid #00f2fe', margin: 0 }}>
                 "{auditData.socratic_question}"
               </p>
             </div>
@@ -99,7 +99,7 @@ export const SocraticCoachDrawer: React.FC<SocraticCoachDrawerProps> = ({
             {/* Score Impact & Risk Rating */}
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
               <div style={{ background: 'rgba(16, 185, 129, 0.1)', border: '1px solid rgba(16, 185, 129, 0.3)', borderRadius: '12px', padding: '14px', textAlign: 'center' }}>
-                <span style={{ fontSize: '11px', color: 'var(--text-muted)' }}>Resilience Reward</span>
+                <span style={{ fontSize: '11px', color: 'var(--text-muted)' }}>Resilience Bonus</span>
                 <div style={{ fontSize: '18px', fontWeight: 800, color: '#10b981', marginTop: '2px' }}>+{auditData.resilience_score_impact} pts</div>
               </div>
 
