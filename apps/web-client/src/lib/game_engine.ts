@@ -154,11 +154,9 @@ export function processPassAction(room: Room, targetPlayerId: string): Room {
   // CRED Impact: +1 CRED for circulating card across network
   const updatedCred = activePlayer.cred_score + 1;
 
-  // CHAOS Impact
+  // CHAOS Impact: Decreases on PREJUDICE/Misinformation, never increases/restores
   if (card.card_type === 'PREJUDICE' || card.is_misinformation) {
     newChaosLevel = Math.max(0, newChaosLevel - 1);
-  } else if (card.card_type === 'FACTUAL') {
-    newChaosLevel = Math.min(room.config.starting_chaos, newChaosLevel + 1);
   }
 
   // Update Players

@@ -15,6 +15,7 @@ import {
   processCascadePowerMove
 } from '../lib/game_engine';
 import { HowToPlayModal } from '../components/HowToPlayModal';
+import { MilLawsModal } from '../components/MilLawsModal';
 import { soundFx } from '../lib/sound_effects';
 
 const AI_SERVICE_URL = process.env.NEXT_PUBLIC_AI_SERVICE_URL || 'http://localhost:8000';
@@ -222,6 +223,7 @@ export default function Home() {
   const [isJoinModalOpen, setIsJoinModalOpen] = useState<boolean>(false);
   const [isRulesModalOpen, setIsRulesModalOpen] = useState<boolean>(false);
   const [isHowToPlayOpen, setIsHowToPlayOpen] = useState<boolean>(false);
+  const [isMilLawsOpen, setIsMilLawsOpen] = useState<boolean>(false);
   const [isExtensionInboxOpen, setIsExtensionInboxOpen] = useState<boolean>(false);
   const [isPassConfirmOpen, setIsPassConfirmOpen] = useState<boolean>(false);
   const [isMuted, setIsMuted] = useState<boolean>(soundFx.isMuted());
@@ -682,6 +684,17 @@ export default function Home() {
               HOW TO PLAY &amp; AI GUIDE
             </button>
 
+            <button
+              onClick={() => {
+                soundFx.playCardDraw();
+                setIsMilLawsOpen(true);
+              }}
+              className="px-4 py-2 bg-neo-yellow text-neo-black font-label-mono text-xs font-bold neu-btn flex items-center gap-2"
+            >
+              <span className="material-symbols-outlined text-base font-bold">gavel</span>
+              UNESCO MIL LAWS
+            </button>
+
 
             <button
               onClick={() => setIsExtensionInboxOpen(true)}
@@ -717,6 +730,18 @@ export default function Home() {
               <p className="font-body-md text-on-surface-variant text-base lg:text-lg leading-relaxed">
                 Welcome to <strong>MIL ECHO</strong>. Inspect online news cards, pass authentic content to build your <strong>CRED</strong> score (+1), and stop unverified prejudice from driving the global <strong>CHAOS</strong> meter to zero!
               </p>
+              <div className="flex flex-wrap gap-3 justify-center items-center mt-1">
+                <button
+                  onClick={() => {
+                    soundFx.playCardDraw();
+                    setIsMilLawsOpen(true);
+                  }}
+                  className="bg-neo-yellow text-neo-black font-label-mono text-xs font-black uppercase px-4 py-2 neu-btn flex items-center gap-2"
+                >
+                  <span className="material-symbols-outlined text-base font-bold">gavel</span>
+                  LEARN THE 5 UNESCO MIL LAWS
+                </button>
+              </div>
             </div>
 
             {/* Main Action Grid Cards */}
@@ -1651,6 +1676,12 @@ export default function Home() {
         <HowToPlayModal
           isOpen={isHowToPlayOpen}
           onClose={() => setIsHowToPlayOpen(false)}
+        />
+
+        {/* MODAL: UNESCO MIL LAWS */}
+        <MilLawsModal
+          isOpen={isMilLawsOpen}
+          onClose={() => setIsMilLawsOpen(false)}
         />
 
       </div>

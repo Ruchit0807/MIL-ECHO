@@ -212,11 +212,9 @@ def process_pass_action(room: Dict[str, Any], target_player_id: str) -> Dict[str
     # CRED Impact
     updated_cred = active_player["cred_score"] + 1
     
-    # CHAOS Impact
+    # CHAOS Impact: Decreases on PREJUDICE/Misinformation, never increases/restores
     if card["card_type"] == "PREJUDICE" or card.get("is_misinformation", False):
         new_chaos_level = max(0, new_chaos_level - 1)
-    elif card["card_type"] == "FACTUAL":
-        new_chaos_level = min(room["config"]["starting_chaos"], new_chaos_level + 1)
         
     # Update players
     for p in room["players"]:
