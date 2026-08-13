@@ -1,6 +1,6 @@
 # 🛡️ MIL ECHO — AI-Powered Multiplayer Media & Information Literacy Game
 
-[![Live App](https://img.shields.io/badge/Live%20App-mil--echo--app.vercel.app-00F5D4?style=for-the-badge&logo=vercel&logoColor=black)](https://mil-echo-app.vercel.app)
+[![Live App](https://img.shields.io/badge/Live%20App-mil--echo--app.vercel.app-00F5D4?style=for-the-badge&logo=vercel&logoColor=black)](https://mil-echo.vercel.app/)
 [![API Health](https://img.shields.io/badge/API%20Status-Online%20(Render)-0070F3?style=for-the-badge&logo=render&logoColor=white)](https://mil-echo.onrender.com/health)
 [![License](https://img.shields.io/badge/License-MIT-FF007A?style=for-the-badge)](LICENSE)
 [![Hackathon](https://img.shields.io/badge/UNESCO-Youth%20Hackathon%202026-7B2CBF?style=for-the-badge)](https://github.com/Ruchit0807/MIL-ECHO)
