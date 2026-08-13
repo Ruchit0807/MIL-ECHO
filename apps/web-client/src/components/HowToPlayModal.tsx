@@ -7,7 +7,7 @@ interface HowToPlayModalProps {
 }
 
 export const HowToPlayModal: React.FC<HowToPlayModalProps> = ({ isOpen, onClose }) => {
-  const [activeTab, setActiveTab] = useState<'goal' | 'cards' | 'actions' | 'forensics' | 'multiplayer'>('goal');
+  const [activeTab, setActiveTab] = useState<'quickstart' | 'cards' | 'forensics' | 'multiplayer'>('quickstart');
 
   if (!isOpen) return null;
 
@@ -27,108 +27,97 @@ export const HowToPlayModal: React.FC<HowToPlayModalProps> = ({ isOpen, onClose 
       }}
     >
       <div
-        className="glass-panel glow-border"
+        className="glass-panel border-4 border-neo-black shadow-[10px_10px_0px_0px_#000]"
         style={{
           width: '100%',
-          maxWidth: '780px',
+          maxWidth: '820px',
           maxHeight: '90vh',
           display: 'flex',
           flexDirection: 'column',
-          borderRadius: '24px',
+          borderRadius: '0px',
           overflow: 'hidden',
-          background: 'linear-gradient(180deg, rgba(16, 23, 42, 0.98) 0%, rgba(10, 15, 30, 0.99) 100%)',
-          boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.7), 0 0 30px rgba(0, 242, 254, 0.25)'
+          background: '#1e293b',
         }}
       >
         {/* Modal Header */}
         <div
+          className="border-b-4 border-neo-black"
           style={{
             padding: '20px 24px',
-            borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-between',
-            background: 'rgba(255, 255, 255, 0.02)'
+            background: '#0f172a'
           }}
         >
-          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
             <div
+              className="border-2 border-neo-black shadow-[3px_3px_0_#000]"
               style={{
-                width: '40px',
-                height: '40px',
-                borderRadius: '12px',
-                background: 'linear-gradient(135deg, #00f2fe 0%, #4facfe 100%)',
+                width: '44px',
+                height: '44px',
+                background: '#bef264',
                 display: 'flex',
                 alignItems: 'center',
-                justifyContent: 'center',
-                boxShadow: '0 0 15px rgba(0, 242, 254, 0.5)'
+                justifyContent: 'center'
               }}
             >
-              <HelpCircle size={22} color="#000" />
+              <HelpCircle size={24} color="#000" />
             </div>
             <div>
-              <h2 style={{ fontSize: '20px', fontWeight: 800, color: '#fff', margin: 0, letterSpacing: '-0.3px' }}>
-                How to Play MIL ECHO
+              <h2 className="font-headline-lg text-2xl text-on-background uppercase tracking-wide font-black" style={{ margin: 0 }}>
+                Playbook &amp; AI Guide
               </h2>
-              <p style={{ fontSize: '12px', color: 'var(--text-muted)', margin: 0 }}>
-                1-Minute Quick Guide to Media & Information Literacy Multiplayer
+              <p style={{ fontSize: '12px', color: '#94a3b8', margin: 0, fontWeight: 700, fontFamily: 'monospace' }}>
+                MASTER THE VIRAL SPIRAL IN 60 SECONDS
               </p>
             </div>
           </div>
 
           <button
             onClick={onClose}
+            className="neu-btn"
             style={{
-              background: 'rgba(255, 255, 255, 0.08)',
-              border: '1px solid rgba(255, 255, 255, 0.15)',
-              color: '#fff',
+              background: '#fda4af',
+              color: '#000',
               width: '36px',
               height: '36px',
-              borderRadius: '50%',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
               cursor: 'pointer',
-              transition: 'all 0.2s'
+              fontWeight: 800
             }}
           >
-            <X size={18} />
+            <X size={18} strokeWidth={3} />
           </button>
         </div>
 
         {/* Tab Navigation Bar */}
         <div
+          className="border-b-4 border-neo-black"
           style={{
             display: 'flex',
             overflowX: 'auto',
-            borderBottom: '1px solid rgba(255, 255, 255, 0.08)',
-            padding: '8px 16px',
-            gap: '8px',
-            background: 'rgba(0, 0, 0, 0.2)'
+            padding: '10px 16px',
+            gap: '10px',
+            background: '#0f172a'
           }}
         >
           {[
-            { id: 'goal', label: '🎯 Objective & Scores' },
-            { id: 'cards', label: '🃏 Cards & Deepfakes' },
-            { id: 'actions', label: '⚡ Turn Actions' },
+            { id: 'quickstart', label: '🎮 Quick Start Guide' },
+            { id: 'cards', label: '🃏 Cards & Scoring' },
             { id: 'forensics', label: '🔬 Forensic Scanner' },
-            { id: 'multiplayer', label: '👥 Co-op & Power Moves' },
+            { id: 'multiplayer', label: '👥 Multiplayer & Co-op' },
           ].map((tab) => (
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id as typeof activeTab)}
+              className={`px-4 py-2 font-label-mono text-xs font-bold neu-btn`}
               style={{
-                padding: '8px 14px',
-                borderRadius: '12px',
-                fontSize: '13px',
-                fontWeight: 700,
-                border: 'none',
-                cursor: 'pointer',
                 whiteSpace: 'nowrap',
-                background: activeTab === tab.id ? 'linear-gradient(90deg, #00f2fe 0%, #4facfe 100%)' : 'transparent',
-                color: activeTab === tab.id ? '#000' : 'var(--text-muted)',
-                transition: 'all 0.2s ease',
-                boxShadow: activeTab === tab.id ? '0 0 12px rgba(0, 242, 254, 0.4)' : 'none'
+                background: activeTab === tab.id ? '#bef264' : '#334155',
+                color: activeTab === tab.id ? '#000' : '#fff',
               }}
             >
               {tab.label}
@@ -137,193 +126,261 @@ export const HowToPlayModal: React.FC<HowToPlayModalProps> = ({ isOpen, onClose 
         </div>
 
         {/* Modal Body Content */}
-        <div style={{ padding: '24px', overflowY: 'auto', flex: 1, display: 'flex', flexDirection: 'column', gap: '20px' }}>
+        <div style={{ padding: '24px', overflowY: 'auto', flex: 1, display: 'flex', flexDirection: 'column', gap: '20px', background: '#0f172a' }}>
           
-          {/* TAB 1: OBJECTIVE & SCORES */}
-          {activeTab === 'goal' && (
+          {/* TAB 1: QUICK START GUIDE */}
+          {activeTab === 'quickstart' && (
             <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-              <div style={{ background: 'rgba(0, 242, 254, 0.06)', border: '1px solid rgba(0, 242, 254, 0.2)', padding: '16px', borderRadius: '16px' }}>
-                <h3 style={{ fontSize: '16px', fontWeight: 800, color: '#00f2fe', margin: '0 0 8px 0', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                  <Award size={20} /> Win Individually vs Survive Co-operatively!
+              <div className="border-4 border-neo-black p-4 shadow-[4px_4px_0_#000] bg-slate-800">
+                <h3 className="font-headline-lg text-lg text-neo-mint font-black flex items-center gap-2">
+                  <Award size={20} /> THE OBJECTIVE
                 </h3>
-                <p style={{ fontSize: '14px', color: '#e2e8f0', lineHeight: 1.6, margin: 0 }}>
-                  MIL ECHO is a high-stakes multiplayer card game. Every round, players draw trending media cards, analyze them with Socratic AI tools, and decide whether to pass, keep, or flag them.
+                <p className="font-body-md text-sm text-slate-300 leading-relaxed mt-1">
+                  Survive together while trying to win individually! Work with Socratic AI to inspect incoming news, share real truths, flag toxic deepfakes, and prevent the community from descending into absolute chaos.
                 </p>
               </div>
 
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '14px' }}>
-                <div style={{ background: 'rgba(0, 255, 170, 0.08)', border: '1px solid rgba(0, 255, 170, 0.25)', padding: '16px', borderRadius: '14px' }}>
-                  <div style={{ fontSize: '24px', marginBottom: '6px' }}>💎</div>
-                  <h4 style={{ fontSize: '15px', fontWeight: 800, color: '#00ffaa', margin: '0 0 6px 0' }}>
-                    CRED Score (+1)
-                  </h4>
-                  <p style={{ fontSize: '12px', color: '#cbd5e1', lineHeight: 1.5, margin: 0 }}>
-                    Earn <strong>CRED</strong> by sharing verified authentic news or accurately flagging misinformation. First player to reach <strong>10 CRED</strong> wins an Individual Victory!
-                  </p>
-                </div>
-
-                <div style={{ background: 'rgba(255, 0, 127, 0.08)', border: '1px solid rgba(255, 0, 127, 0.25)', padding: '16px', borderRadius: '14px' }}>
-                  <div style={{ fontSize: '24px', marginBottom: '6px' }}>🔥</div>
-                  <h4 style={{ fontSize: '15px', fontWeight: 800, color: '#ff4d94', margin: '0 0 6px 0' }}>
-                    Global CHAOS Meter
-                  </h4>
-                  <p style={{ fontSize: '12px', color: '#cbd5e1', lineHeight: 1.5, margin: 0 }}>
-                    The <strong>CHAOS meter</strong> represents community truth resilience. If fake news & unverified prejudice are shared unchecked, CHAOS drops. If CHAOS hits <strong>0</strong>, <strong>EVERYBODY LOSES!</strong>
-                  </p>
-                </div>
-              </div>
-            </div>
-          )}
-
-          {/* TAB 2: CARDS & DEEPFAKES */}
-          {activeTab === 'cards' && (
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-              <h3 style={{ fontSize: '16px', fontWeight: 800, color: '#fff', margin: 0 }}>
-                Recognize Card Types & AI Deepfakes
-              </h3>
-
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '12px' }}>
-                <div style={{ background: 'rgba(0, 255, 170, 0.06)', border: '1px solid rgba(0, 255, 170, 0.2)', padding: '12px', borderRadius: '12px' }}>
-                  <span style={{ background: '#00ffaa', color: '#000', fontSize: '11px', fontWeight: 800, padding: '2px 8px', borderRadius: '6px' }}>FACTUAL</span>
-                  <p style={{ fontSize: '12px', color: '#e2e8f0', marginTop: '8px', marginBottom: 0 }}>
-                    Verified authentic report from trusted news bureaus. Safe to pass (+1 CRED, +1 CHAOS).
-                  </p>
-                </div>
-
-                <div style={{ background: 'rgba(255, 180, 0, 0.06)', border: '1px solid rgba(255, 180, 0, 0.2)', padding: '12px', borderRadius: '12px' }}>
-                  <span style={{ background: '#ffb400', color: '#000', fontSize: '11px', fontWeight: 800, padding: '2px 8px', borderRadius: '6px' }}>OPINION</span>
-                  <p style={{ fontSize: '12px', color: '#e2e8f0', marginTop: '8px', marginBottom: 0 }}>
-                    Subjective commentary or blog post. Neutral impact on CHAOS meter.
-                  </p>
-                </div>
-
-                <div style={{ background: 'rgba(255, 0, 127, 0.06)', border: '1px solid rgba(255, 0, 127, 0.2)', padding: '12px', borderRadius: '12px' }}>
-                  <span style={{ background: '#ff007f', color: '#fff', fontSize: '11px', fontWeight: 800, padding: '2px 8px', borderRadius: '6px' }}>PREJUDICE & FAKE</span>
-                  <p style={{ fontSize: '12px', color: '#e2e8f0', marginTop: '8px', marginBottom: 0 }}>
-                    Sensationalized bait targeting specific communities. Sharing drops CHAOS (-1).
-                  </p>
-                </div>
-              </div>
-
-              {/* Deepfake Types */}
-              <div style={{ background: 'rgba(123, 44, 191, 0.12)', border: '1px solid rgba(123, 44, 191, 0.3)', padding: '16px', borderRadius: '16px', marginTop: '4px' }}>
-                <h4 style={{ fontSize: '14px', fontWeight: 800, color: '#c77dff', margin: '0 0 10px 0', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                  🤖 Special AI Deepfake Cards
-                </h4>
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '10px' }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '12px', color: '#e2e8f0' }}>
-                    <Radio size={16} color="#00f2fe" /> <strong>Audio Deepfake</strong> (Cloned Voice)
-                  </div>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '12px', color: '#e2e8f0' }}>
-                    <Video size={16} color="#ff007f" /> <strong>Video Deepfake</strong> (AI Lip-Sync)
-                  </div>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '12px', color: '#e2e8f0' }}>
-                    <FileText size={16} color="#ffb400" /> <strong>Synthetic Article</strong> (Fake Portal)
-                  </div>
-                </div>
-              </div>
-            </div>
-          )}
-
-          {/* TAB 3: TURN ACTIONS */}
-          {activeTab === 'actions' && (
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
-              <h3 style={{ fontSize: '16px', fontWeight: 800, color: '#fff', margin: 0 }}>
-                Your 3 Tactical Options on Every Turn
-              </h3>
-
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-                <div style={{ display: 'flex', gap: '12px', background: 'rgba(255, 255, 255, 0.03)', border: '1px solid rgba(255, 255, 255, 0.08)', padding: '12px 16px', borderRadius: '12px', alignItems: 'center' }}>
-                  <div style={{ background: 'rgba(0, 242, 254, 0.2)', color: '#00f2fe', width: '36px', height: '36px', borderRadius: '10px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 800, flexShrink: 0 }}>
+              {/* Steps timeline */}
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                
+                {/* Step 1 */}
+                <div className="border-4 border-neo-black p-4 shadow-[4px_4px_0_#000] bg-slate-800/80 flex gap-4 items-start">
+                  <div className="w-8 h-8 rounded-full border-2 border-neo-black bg-neo-mint text-neo-black flex items-center justify-center font-black flex-shrink-0">
                     1
                   </div>
                   <div>
-                    <strong style={{ color: '#00f2fe', fontSize: '14px' }}>🔍 Pause & Socratic Audit:</strong>
-                    <span style={{ fontSize: '12px', color: '#cbd5e1', display: 'block' }}>
-                      Ask your Socratic AI Copilot to analyze creator intent, emotional triggers, and source credibility using the 3C2B framework.
-                    </span>
+                    <h4 className="font-bold text-base text-white flex items-center gap-2">
+                      <Eye size={16} className="text-neo-mint" /> Inspect &amp; Audit
+                    </h4>
+                    <p className="text-xs text-slate-300 mt-1 leading-relaxed">
+                      On your turn, look at the media card. Click <strong>"Socratic Copilot"</strong> to analyze its creator, intent, emotional triggers, and core bias metrics.
+                    </p>
                   </div>
                 </div>
 
-                <div style={{ display: 'flex', gap: '12px', background: 'rgba(255, 255, 255, 0.03)', border: '1px solid rgba(255, 255, 255, 0.08)', padding: '12px 16px', borderRadius: '12px', alignItems: 'center' }}>
-                  <div style={{ background: 'rgba(0, 255, 170, 0.2)', color: '#00ffaa', width: '36px', height: '36px', borderRadius: '10px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 800, flexShrink: 0 }}>
+                {/* Step 2 */}
+                <div className="border-4 border-neo-black p-4 shadow-[4px_4px_0_#000] bg-slate-800/80 flex gap-4 items-start">
+                  <div className="w-8 h-8 rounded-full border-2 border-neo-black bg-neo-coral text-neo-black flex items-center justify-center font-black flex-shrink-0">
                     2
                   </div>
                   <div>
-                    <strong style={{ color: '#00ffaa', fontSize: '14px' }}>🚀 Pass & Share to Teammate:</strong>
-                    <span style={{ fontSize: '12px', color: '#cbd5e1', display: 'block' }}>
-                      Forward card to another player's deck to earn +1 CRED score! But beware: passing fake cards drops global CHAOS.
-                    </span>
+                    <h4 className="font-bold text-base text-white flex items-center gap-2">
+                      <Zap size={16} className="text-neo-coral" /> Take Tactical Action
+                    </h4>
+                    <p className="text-xs text-slate-300 mt-1 leading-relaxed">
+                      You have three options depending on your assessment:
+                    </p>
+                    <ul className="text-xs text-slate-300 mt-1.5 list-disc pl-4 space-y-1">
+                      <li><strong>Share &amp; Pass:</strong> Send the card to a teammate's inbox. Earns CRED if it is true, but drops chaos if it is fake!</li>
+                      <li><strong>Flag &amp; Report:</strong> Call out fake news cards. Success gains you CRED and penalizes the sender.</li>
+                      <li><strong>Discard:</strong> Safely trash subjective opinion or toxic articles to prevent chaos drops.</li>
+                    </ul>
                   </div>
                 </div>
 
-                <div style={{ display: 'flex', gap: '12px', background: 'rgba(255, 255, 255, 0.03)', border: '1px solid rgba(255, 255, 255, 0.08)', padding: '12px 16px', borderRadius: '12px', alignItems: 'center' }}>
-                  <div style={{ background: 'rgba(255, 0, 127, 0.2)', color: '#ff007f', width: '36px', height: '36px', borderRadius: '10px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 800, flexShrink: 0 }}>
+                {/* Step 3 */}
+                <div className="border-4 border-neo-black p-4 shadow-[4px_4px_0_#000] bg-slate-800/80 flex gap-4 items-start">
+                  <div className="w-8 h-8 rounded-full border-2 border-neo-black bg-neo-lavender text-neo-black flex items-center justify-center font-black flex-shrink-0">
                     3
                   </div>
                   <div>
-                    <strong style={{ color: '#ff007f', fontSize: '14px' }}>🛡️ Flag Misinformation or Discard:</strong>
-                    <span style={{ fontSize: '12px', color: '#cbd5e1', display: 'block' }}>
-                      Call out fake news cards in your hand or received from others! Correct flags penalize the sender (-1 CRED). Discarding mutes toxic prejudice safely.
-                    </span>
+                    <h4 className="font-bold text-base text-white flex items-center gap-2">
+                      <CheckCircle2 size={16} className="text-neo-lavender" /> Watch the Scoreboards
+                    </h4>
+                    <p className="text-xs text-slate-300 mt-1 leading-relaxed">
+                      Two critical metrics govern the game arena:
+                    </p>
+                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px', marginTop: '8px' }}>
+                      <div className="p-2 border-2 border-neo-black bg-neo-mint/10 text-xs">
+                        <strong className="text-neo-mint">💎 CRED Score (+10 to Win):</strong> First player to reach 10 CRED through smart truth-sharing and accurate flagging wins an Individual Victory.
+                      </div>
+                      <div className="p-2 border-2 border-neo-black bg-neo-coral/10 text-xs">
+                        <strong className="text-neo-coral">🔥 CHAOS Meter (Survive):</strong> Community truth resilience. Sharing fake news drops CHAOS. If CHAOS hits 0, <strong>Everyone Loses!</strong>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          )}
+
+          {/* TAB 2: CARDS & SCORING */}
+          {activeTab === 'cards' && (
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+              <h3 className="font-headline-lg text-base text-white tracking-wide font-black">
+                Know Your Cards &amp; Scoring Impact
+              </h3>
+
+              {/* Cards Grid */}
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '14px' }}>
+                
+                {/* Factual Card */}
+                <div className="border-4 border-neo-black shadow-[4px_4px_0_#000] bg-slate-800 flex flex-col justify-between" style={{ minHeight: '220px' }}>
+                  <div className="p-3 border-b-4 border-neo-black bg-neo-mint text-neo-black font-black text-center text-xs font-label-mono">
+                    FACTUAL NEWS
+                  </div>
+                  <div className="p-4 flex-1 flex flex-col gap-2">
+                    <p className="text-xs text-slate-300 leading-relaxed">
+                      Verified authentic report from verified news registries. High credibility.
+                    </p>
+                  </div>
+                  <div className="p-3 border-t-2 border-dashed border-slate-700 bg-slate-900/60 text-[11px] text-slate-300 space-y-1">
+                    <div>📤 Share: <strong className="text-neo-mint">+1 CRED • +1 CHAOS</strong></div>
+                    <div>🛡️ Flag: <strong className="text-neo-coral">-1 CRED (False Flag)</strong></div>
+                  </div>
+                </div>
+
+                {/* Opinion Card */}
+                <div className="border-4 border-neo-black shadow-[4px_4px_0_#000] bg-slate-800 flex flex-col justify-between" style={{ minHeight: '220px' }}>
+                  <div className="p-3 border-b-4 border-neo-black bg-neo-lavender text-neo-black font-black text-center text-xs font-label-mono">
+                    OPINION &amp; BLOG
+                  </div>
+                  <div className="p-4 flex-1 flex flex-col gap-2">
+                    <p className="text-xs text-slate-300 leading-relaxed">
+                      Subjective commentary, editorials, or personal blogs. Contains personal bias.
+                    </p>
+                  </div>
+                  <div className="p-3 border-t-2 border-dashed border-slate-700 bg-slate-900/60 text-[11px] text-slate-300 space-y-1">
+                    <div>📤 Share: <strong className="text-slate-400">0 Impact</strong></div>
+                    <div>🛡️ Flag: <strong className="text-neo-coral">-1 CRED (False Flag)</strong></div>
+                  </div>
+                </div>
+
+                {/* Fake/Prejudice Card */}
+                <div className="border-4 border-neo-black shadow-[4px_4px_0_#000] bg-slate-800 flex flex-col justify-between" style={{ minHeight: '220px' }}>
+                  <div className="p-3 border-b-4 border-neo-black bg-neo-coral text-neo-black font-black text-center text-xs font-label-mono">
+                    FAKE / PREJUDICE
+                  </div>
+                  <div className="p-4 flex-1 flex flex-col gap-2">
+                    <p className="text-xs text-slate-300 leading-relaxed">
+                      Sensationalized falsehoods, rumors, or cloned toxic propaganda.
+                    </p>
+                  </div>
+                  <div className="p-3 border-t-2 border-dashed border-slate-700 bg-slate-900/60 text-[11px] text-slate-300 space-y-1">
+                    <div>📤 Share: <strong className="text-neo-coral">-1 CHAOS (Spreads Lies)</strong></div>
+                    <div>🛡️ Flag: <strong className="text-neo-mint">+1 CRED (Correct Flag)</strong></div>
+                  </div>
+                </div>
+
+              </div>
+
+              {/* Special Deepfakes section */}
+              <div className="border-4 border-neo-black p-4 bg-slate-800 shadow-[4px_4px_0_#000] mt-2">
+                <h4 className="font-bold text-sm text-neo-lavender flex items-center gap-2">
+                  🤖 SPECIAL AI DEEPFAKE CARDS
+                </h4>
+                <p className="text-xs text-slate-300 mt-1 leading-relaxed">
+                  These special cards contain forged media files that look extremely realistic but carry hidden artifacts:
+                </p>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '10px', marginTop: '10px' }}>
+                  <div className="flex items-center gap-2 text-xs text-slate-200">
+                    <Radio size={16} className="text-neo-mint" /> <strong>Audio Deepfake</strong> (Cloned Voice)
+                  </div>
+                  <div className="flex items-center gap-2 text-xs text-slate-200">
+                    <Video size={16} className="text-neo-coral" /> <strong>Video Deepfake</strong> (AI Lip-Sync)
+                  </div>
+                  <div className="flex items-center gap-2 text-xs text-slate-200">
+                    <FileText size={16} className="text-neo-lavender" /> <strong>Synthetic Article</strong> (Fake Portal)
                   </div>
                 </div>
               </div>
             </div>
           )}
 
-          {/* TAB 4: FORENSIC SCANNER */}
+          {/* TAB 3: FORENSIC SCANNER */}
           {activeTab === 'forensics' && (
             <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-              <div style={{ background: 'linear-gradient(135deg, rgba(0, 242, 254, 0.1) 0%, rgba(123, 44, 191, 0.1) 100%)', border: '1px solid rgba(0, 242, 254, 0.3)', padding: '16px', borderRadius: '16px' }}>
-                <h3 style={{ fontSize: '16px', fontWeight: 800, color: '#00f2fe', margin: '0 0 8px 0', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                  <Cpu size={20} /> Deepfake Forensic Inspector
+              <div className="border-4 border-neo-black p-4 bg-slate-800 shadow-[4px_4px_0_#000]">
+                <h3 className="font-headline-lg text-base text-neo-mint font-black flex items-center gap-2">
+                  <Cpu size={20} /> DEEPFAKE FORENSIC SCANNER
                 </h3>
-                <p style={{ fontSize: '13px', color: '#e2e8f0', lineHeight: 1.6, margin: 0 }}>
-                  Each deepfake card includes embedded forensic signals! Click <strong>"Run Deepfake Scanner"</strong> inside the Audit drawer to uncover:
+                <p className="text-xs text-slate-300 mt-1 leading-relaxed">
+                  When auditing deepfake cards, trigger the <strong>Forensic Scanner</strong> to inspect microscopic irregularities and get a confidence scan:
                 </p>
               </div>
 
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '12px' }}>
-                <div style={{ background: 'rgba(255, 255, 255, 0.04)', border: '1px solid rgba(255, 255, 255, 0.1)', padding: '12px', borderRadius: '12px' }}>
-                  <strong style={{ color: '#00f2fe', fontSize: '13px', display: 'block', marginBottom: '4px' }}>🎵 Voice Pitch Anomaly</strong>
-                  <span style={{ fontSize: '11px', color: 'var(--text-muted)' }}>Measures unnatural robotic cadence & missing breathing pauses in cloned audio.</span>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                
+                {/* Audio Signal */}
+                <div className="p-4 border-4 border-neo-black bg-slate-800 shadow-[4px_4px_0_#000] flex gap-4">
+                  <div className="w-10 h-10 border-2 border-neo-black bg-neo-mint text-neo-black flex items-center justify-center flex-shrink-0">
+                    <Radio size={20} />
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-sm text-white">Voice Pitch Cadence Check</h4>
+                    <p className="text-xs text-slate-300 mt-1 leading-relaxed">
+                      Scans voice recordings for missing breathing pauses, unnatural pitch harmonics, and robotic cadences typical of AI clones.
+                    </p>
+                  </div>
                 </div>
 
-                <div style={{ background: 'rgba(255, 255, 255, 0.04)', border: '1px solid rgba(255, 255, 255, 0.1)', padding: '12px', borderRadius: '12px' }}>
-                  <strong style={{ color: '#ff007f', fontSize: '13px', display: 'block', marginBottom: '4px' }}>🖼️ Pixel Manipulation Score</strong>
-                  <span style={{ fontSize: '11px', color: 'var(--text-muted)' }}>Detects lip-sync boundary blurring and facial warping artifacts in video clips.</span>
+                {/* Video Signal */}
+                <div className="p-4 border-4 border-neo-black bg-slate-800 shadow-[4px_4px_0_#000] flex gap-4">
+                  <div className="w-10 h-10 border-2 border-neo-black bg-neo-coral text-neo-black flex items-center justify-center flex-shrink-0">
+                    <Video size={20} />
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-sm text-white">Pixel Boundary Distortion</h4>
+                    <p className="text-xs text-slate-300 mt-1 leading-relaxed">
+                      Inspects video frames for double-mouth synchronization borders, eye blink anomalies, and blur halos around the jawline.
+                    </p>
+                  </div>
                 </div>
 
-                <div style={{ background: 'rgba(255, 255, 255, 0.04)', border: '1px solid rgba(255, 255, 255, 0.1)', padding: '12px', borderRadius: '12px' }}>
-                  <strong style={{ color: '#ffb400', fontSize: '13px', display: 'block', marginBottom: '4px' }}>🌐 Metadata Timestamp Check</strong>
-                  <span style={{ fontSize: '11px', color: 'var(--text-muted)' }}>Verifies if domain EXIF data and publish dates match official news registries.</span>
+                {/* Article Signal */}
+                <div className="p-4 border-4 border-neo-black bg-slate-800 shadow-[4px_4px_0_#000] flex gap-4">
+                  <div className="w-10 h-10 border-2 border-neo-black bg-neo-lavender text-neo-black flex items-center justify-center flex-shrink-0">
+                    <FileText size={20} />
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-sm text-white">Registry Metadata Match</h4>
+                    <p className="text-xs text-slate-300 mt-1 leading-relaxed">
+                      Cross-checks DNS publish records, author byline registries, and image reverse-search markers to detect fully fabricated news websites.
+                    </p>
+                  </div>
                 </div>
+
               </div>
             </div>
           )}
 
-          {/* TAB 5: MULTIPLAYER & POWER MOVES */}
+          {/* TAB 4: MULTIPLAYER & CO-OP */}
           {activeTab === 'multiplayer' && (
             <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-              <h3 style={{ fontSize: '16px', fontWeight: 800, color: '#fff', margin: 0 }}>
-                Real-Time Multiplayer & Cascade Power Moves
-              </h3>
+              <div className="border-4 border-neo-black p-4 bg-slate-800 shadow-[4px_4px_0_#000]">
+                <h3 className="font-headline-lg text-base text-white tracking-wide font-black">
+                  Multiplayer Mechanics &amp; Power Moves
+                </h3>
+                <p className="text-xs text-slate-300 mt-1 leading-relaxed">
+                  MIL ECHO is fully synchronized in real-time. Link with friends over WebSockets to experience chaotic newsroom streams.
+                </p>
+              </div>
 
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-                <div style={{ background: 'rgba(0, 242, 254, 0.06)', border: '1px solid rgba(0, 242, 254, 0.2)', padding: '14px', borderRadius: '14px' }}>
-                  <strong style={{ color: '#00f2fe', fontSize: '14px', display: 'block', marginBottom: '4px' }}>🌐 Multi-Device Synchronization</strong>
-                  <p style={{ fontSize: '12px', color: '#cbd5e1', margin: 0, lineHeight: 1.5 }}>
-                    Connect 2-6 players seamlessly across smartphones, tablets, or laptops over WebSocket. Turn phases, active card draws, and scoreboard updates sync in real time.
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '14px' }}>
+                
+                {/* Co-op survival */}
+                <div className="p-4 border-4 border-neo-black bg-slate-800 shadow-[4px_4px_0_#000] flex flex-col gap-2">
+                  <span className="bg-neo-mint border-2 border-neo-black text-neo-black text-[10px] font-black font-label-mono px-2 py-0.5 self-start">
+                    CO-OP COOPERATION
+                  </span>
+                  <h4 className="font-bold text-sm text-white mt-1">Multi-Device Synchronization</h4>
+                  <p className="text-xs text-slate-300 leading-relaxed">
+                    2 to 6 players play together on their own smartphones, laptops, or tablets. Room updates, active turns, and chat boards sync instantly. Protect each other by passing verified cards to help teammates score.
                   </p>
                 </div>
 
-                <div style={{ background: 'rgba(255, 0, 127, 0.08)', border: '1px solid rgba(255, 0, 127, 0.25)', padding: '14px', borderRadius: '14px' }}>
-                  <strong style={{ color: '#ff007f', fontSize: '14px', display: 'block', marginBottom: '4px' }}>⚡ VIRAL SPIRAL CASCADE POWER MOVE</strong>
-                  <p style={{ fontSize: '12px', color: '#cbd5e1', margin: 0, lineHeight: 1.5 }}>
-                    When holding high-impact prejudice cards in your hand, activate the <strong>"Viral Spiral Cascade"</strong> to broadcast card copies to ALL players simultaneously!
+                {/* Cascade Move */}
+                <div className="p-4 border-4 border-neo-black bg-slate-800 shadow-[4px_4px_0_#000] flex flex-col gap-2">
+                  <span className="bg-neo-coral border-2 border-neo-black text-neo-black text-[10px] font-black font-label-mono px-2 py-0.5 self-start">
+                    POWER MOVE
+                  </span>
+                  <h4 className="font-bold text-sm text-white mt-1">⚡ Viral Spiral Cascade</h4>
+                  <p className="text-xs text-slate-300 leading-relaxed">
+                    When holding a highly controversial or prejudiced card in your hand, activate the <strong>"Viral Spiral Cascade"</strong>! This replicates the card and sends copies to ALL active players simultaneously, forcing them to quickly react.
                   </p>
                 </div>
+
               </div>
             </div>
           )}
@@ -332,23 +389,23 @@ export const HowToPlayModal: React.FC<HowToPlayModalProps> = ({ isOpen, onClose 
 
         {/* Modal Footer */}
         <div
+          className="border-t-4 border-neo-black"
           style={{
             padding: '16px 24px',
-            borderTop: '1px solid rgba(255, 255, 255, 0.1)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-between',
-            background: 'rgba(0, 0, 0, 0.3)'
+            background: '#0f172a'
           }}
         >
-          <span style={{ fontSize: '12px', color: 'var(--text-muted)' }}>
-            UNESCO Youth Hackathon 2026 • MIL ECHO
+          <span style={{ fontSize: '11px', color: '#64748b', fontWeight: 'bold', fontFamily: 'monospace' }}>
+            MIL ECHO • SOCRATIC PREBUNKING ARENA
           </span>
 
           <button
             onClick={onClose}
-            className="btn-primary"
-            style={{ padding: '8px 24px', fontSize: '13px' }}
+            className="neu-btn px-6 py-2 text-xs font-black uppercase"
+            style={{ background: '#bef264', color: '#000' }}
           >
             Got It, Let's Play! 🚀
           </button>

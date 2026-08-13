@@ -629,9 +629,6 @@ export default function Home() {
             <h1 className="font-display-xl text-3xl lg:text-4xl text-neo-mint italic tracking-tighter cursor-pointer" onClick={handleExitRoom} style={{ textShadow: '3px 3px 0 #000' }}>
               MIL ECHO
             </h1>
-            <span className="hidden sm:inline-flex items-center px-3 py-1 bg-neo-coral text-neo-black font-label-mono text-xs font-black neu-border shadow-[2px_2px_0_#000]">
-              UNESCO YOUTH MIL 2026
-            </span>
           </div>
 
           <div className="flex items-center gap-4">
