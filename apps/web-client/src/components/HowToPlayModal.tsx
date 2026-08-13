@@ -7,7 +7,7 @@ interface HowToPlayModalProps {
 }
 
 export const HowToPlayModal: React.FC<HowToPlayModalProps> = ({ isOpen, onClose }) => {
-  const [activeTab, setActiveTab] = useState<'quickstart' | 'cards' | 'forensics' | 'multiplayer'>('quickstart');
+  const [activeTab, setActiveTab] = useState<'quickstart' | 'cards' | 'multiplayer'>('quickstart');
 
   if (!isOpen) return null;
 
@@ -107,7 +107,6 @@ export const HowToPlayModal: React.FC<HowToPlayModalProps> = ({ isOpen, onClose 
           {[
             { id: 'quickstart', label: '🎮 Quick Start Guide' },
             { id: 'cards', label: '🃏 Cards & Scoring' },
-            { id: 'forensics', label: '🔬 Forensic Scanner' },
             { id: 'multiplayer', label: '👥 Multiplayer & Co-op' },
           ].map((tab) => (
             <button
@@ -195,7 +194,7 @@ export const HowToPlayModal: React.FC<HowToPlayModalProps> = ({ isOpen, onClose 
                         <strong className="text-neo-mint">💎 CRED Score (+10 to Win):</strong> First player to reach 10 CRED through smart truth-sharing and accurate flagging wins an Individual Victory.
                       </div>
                       <div className="p-2 border-2 border-neo-black bg-neo-coral/10 text-xs">
-                        <strong className="text-neo-coral">🔥 CHAOS Meter (Survive):</strong> Community truth resilience. Sharing fake news drops CHAOS. If CHAOS hits 0, <strong>Everyone Loses!</strong>
+                        <strong className="text-neo-coral">🔥 CHAOS Meter (Irreversible):</strong> Community truth resilience. Sharing misinformation drops CHAOS. Once decreased, CHAOS cannot be increased or restored! If it hits 0, <strong>Everyone Loses!</strong>
                       </div>
                     </div>
                   </div>
@@ -222,11 +221,11 @@ export const HowToPlayModal: React.FC<HowToPlayModalProps> = ({ isOpen, onClose 
                   </div>
                   <div className="p-4 flex-1 flex flex-col gap-2">
                     <p className="text-xs text-slate-300 leading-relaxed">
-                      Verified authentic report from verified news registries. High credibility.
+                      Verified authentic report from verified news registries. High credibility. Shows player target MIL Laws on decision.
                     </p>
                   </div>
                   <div className="p-3 border-t-2 border-dashed border-slate-700 bg-slate-900/60 text-[11px] text-slate-300 space-y-1">
-                    <div>📤 Share: <strong className="text-neo-mint">+1 CRED • +1 CHAOS</strong></div>
+                    <div>📤 Share: <strong className="text-neo-mint">+1 CRED (Chaos never restores)</strong></div>
                     <div>🛡️ Flag: <strong className="text-neo-coral">-1 CRED (False Flag)</strong></div>
                   </div>
                 </div>
@@ -288,62 +287,7 @@ export const HowToPlayModal: React.FC<HowToPlayModalProps> = ({ isOpen, onClose 
             </div>
           )}
 
-          {/* TAB 3: FORENSIC SCANNER */}
-          {activeTab === 'forensics' && (
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-              <div className="border-4 border-neo-black p-4 bg-slate-800 shadow-[4px_4px_0_#000]">
-                <h3 className="font-headline-lg text-base text-neo-mint font-black flex items-center gap-2">
-                  <Cpu size={20} /> DEEPFAKE FORENSIC SCANNER
-                </h3>
-                <p className="text-xs text-slate-300 mt-1 leading-relaxed">
-                  When auditing deepfake cards, trigger the <strong>Forensic Scanner</strong> to inspect microscopic irregularities and get a confidence scan:
-                </p>
-              </div>
 
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-                
-                {/* Audio Signal */}
-                <div className="p-4 border-4 border-neo-black bg-slate-800 shadow-[4px_4px_0_#000] flex gap-4">
-                  <div className="w-10 h-10 border-2 border-neo-black bg-neo-mint text-neo-black flex items-center justify-center flex-shrink-0">
-                    <Radio size={20} />
-                  </div>
-                  <div>
-                    <h4 className="font-bold text-sm text-white">Voice Pitch Cadence Check</h4>
-                    <p className="text-xs text-slate-300 mt-1 leading-relaxed">
-                      Scans voice recordings for missing breathing pauses, unnatural pitch harmonics, and robotic cadences typical of AI clones.
-                    </p>
-                  </div>
-                </div>
-
-                {/* Video Signal */}
-                <div className="p-4 border-4 border-neo-black bg-slate-800 shadow-[4px_4px_0_#000] flex gap-4">
-                  <div className="w-10 h-10 border-2 border-neo-black bg-neo-coral text-neo-black flex items-center justify-center flex-shrink-0">
-                    <Video size={20} />
-                  </div>
-                  <div>
-                    <h4 className="font-bold text-sm text-white">Pixel Boundary Distortion</h4>
-                    <p className="text-xs text-slate-300 mt-1 leading-relaxed">
-                      Inspects video frames for double-mouth synchronization borders, eye blink anomalies, and blur halos around the jawline.
-                    </p>
-                  </div>
-                </div>
-
-                {/* Article Signal */}
-                <div className="p-4 border-4 border-neo-black bg-slate-800 shadow-[4px_4px_0_#000] flex gap-4">
-                  <div className="w-10 h-10 border-2 border-neo-black bg-neo-lavender text-neo-black flex items-center justify-center flex-shrink-0">
-                    <FileText size={20} />
-                  </div>
-                  <div>
-                    <h4 className="font-bold text-sm text-white">Registry Metadata Match</h4>
-                    <p className="text-xs text-slate-300 mt-1 leading-relaxed">
-                      Cross-checks DNS publish records, author byline registries, and image reverse-search markers to detect fully fabricated news websites.
-                    </p>
-                  </div>
-                </div>
-
-              </div>
-            </div>
-          )}
 
           {/* TAB 4: MULTIPLAYER & CO-OP */}
           {activeTab === 'multiplayer' && (
@@ -375,9 +319,9 @@ export const HowToPlayModal: React.FC<HowToPlayModalProps> = ({ isOpen, onClose 
                   <span className="bg-neo-coral border-2 border-neo-black text-neo-black text-[10px] font-black font-label-mono px-2 py-0.5 self-start">
                     POWER MOVE
                   </span>
-                  <h4 className="font-bold text-sm text-white mt-1">⚡ Viral Spiral Cascade</h4>
+                  <h4 className="font-bold text-sm text-white mt-1">⚡ Mega Cascade Move</h4>
                   <p className="text-xs text-slate-300 leading-relaxed">
-                    When holding a highly controversial or prejudiced card in your hand, activate the <strong>"Viral Spiral Cascade"</strong>! This replicates the card and sends copies to ALL active players simultaneously, forcing them to quickly react.
+                    When holding a highly controversial or prejudiced card in your hand, activate the <strong>"Mega Cascade Move"</strong>! This replicates the card and sends copies to ALL active players simultaneously, forcing them to quickly react.
                   </p>
                 </div>
 

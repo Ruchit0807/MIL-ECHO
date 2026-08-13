@@ -329,7 +329,7 @@ export function processCascadePowerMove(room: Room, card: ScenarioCard): Room {
       {
         id: `log-${Date.now()}-cascade`,
         time: 'Just now',
-        text: `⚡ VIRAL SPIRAL CASCADE! ${activePlayer.name} broadcasted card to ALL players simultaneously!`,
+        text: `⚡ MEGA CASCADE! ${activePlayer.name} broadcasted card to ALL players simultaneously!`,
         type: 'PREJUDICE'
       },
       ...room.action_logs

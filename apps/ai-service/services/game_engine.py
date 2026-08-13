@@ -367,7 +367,7 @@ def process_cascade_power_move(room: Dict[str, Any], player_id: str, card_id: st
         {
             "id": f"log-{timestamp_ms}-cascade",
             "time": "Just now",
-            "text": f"⚡ VIRAL SPIRAL CASCADE! {player['name']} broadcasted card to ALL players simultaneously!",
+            "text": f"⚡ MEGA CASCADE! {player['name']} broadcasted card to ALL players simultaneously!",
             "type": "PREJUDICE"
         }
     ] + room["action_logs"]

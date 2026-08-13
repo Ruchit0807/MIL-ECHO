@@ -689,7 +689,7 @@ export default function Home() {
                 soundFx.playCardDraw();
                 setIsMilLawsOpen(true);
               }}
-              className="px-4 py-2 bg-neo-yellow text-neo-black font-label-mono text-xs font-bold neu-btn flex items-center gap-2"
+              className="px-4 py-2 bg-neo-coral text-neo-black font-label-mono text-xs font-bold neu-btn flex items-center gap-2"
             >
               <span className="material-symbols-outlined text-base font-bold">gavel</span>
               UNESCO MIL LAWS
@@ -736,7 +736,7 @@ export default function Home() {
                     soundFx.playCardDraw();
                     setIsMilLawsOpen(true);
                   }}
-                  className="bg-neo-yellow text-neo-black font-label-mono text-xs font-black uppercase px-4 py-2 neu-btn flex items-center gap-2"
+                  className="bg-neo-coral text-neo-black font-label-mono text-xs font-black uppercase px-4 py-2 neu-btn flex items-center gap-2"
                 >
                   <span className="material-symbols-outlined text-base font-bold">gavel</span>
                   LEARN THE 5 UNESCO MIL LAWS
@@ -1302,9 +1302,9 @@ export default function Home() {
                           <button
                             onClick={() => handleCascadePowerMove(c)}
                             className="text-[10px] bg-neo-coral text-neo-black font-label-mono font-black px-2 py-1 neu-btn"
-                            title="Viral Spiral Cascade: Broadcast to ALL players simultaneously"
+                            title="Mega Cascade Move: Broadcast to ALL players simultaneously"
                           >
-                            CASCADE (ALL)
+                            MEGA CASCADE
                           </button>
                         </div>
                       </div>
@@ -1618,7 +1618,7 @@ export default function Home() {
                 <div className="bg-surface-container-lowest neu-border p-4">
                   <h4 className="font-headline-lg text-base text-neo-coral font-black mb-1">🎴 CARD TAXONOMY</h4>
                   <ul className="list-disc pl-4 space-y-1">
-                    <li>🟢 <strong>FACTUAL (Verified News):</strong> +1 CRED when passed to another player. Restores +1 CHAOS.</li>
+                    <li>🟢 <strong>FACTUAL (Verified News):</strong> +1 CRED when passed. Does not restore or increase CHAOS.</li>
                     <li>🟡 <strong>OPINION / BAIT:</strong> +1 CRED when passed. Neutral impact on CHAOS.</li>
                     <li>🔴 <strong>PREJUDICE / ECHO (Misinfo):</strong> +1 CRED when passed, but drains <strong>-1 CHAOS</strong> from the global meter!</li>
                   </ul>
@@ -1628,7 +1628,7 @@ export default function Home() {
                   <ul className="list-disc pl-4 space-y-1">
                     <li><strong>Cancel Move (±2 Opinion):</strong> Initiate player cancellation vote.</li>
                     <li><strong>Manufacture Fake News (±2..3 Prejudice):</strong> Attach prejudice tags to clean cards in hand.</li>
-                    <li><strong>Viral Spiral Cascade (±4..5 Prejudice):</strong> Broadcast 1 card to ALL players simultaneously!</li>
+                    <li><strong>Mega Cascade Move (±4..5 Prejudice):</strong> Broadcast 1 card to ALL players simultaneously!</li>
                   </ul>
                 </div>
               </div>
