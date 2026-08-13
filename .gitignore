@@ -31,3 +31,5 @@ packages/pdf-generator/output/
 *.tsbuildinfo
 .DS_Store
 Thumbs.db
+
+.vercel

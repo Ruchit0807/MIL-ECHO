@@ -19,6 +19,28 @@ import { soundFx } from '../lib/sound_effects';
 
 const AI_SERVICE_URL = process.env.NEXT_PUBLIC_AI_SERVICE_URL || 'http://localhost:8000';
 
+const UNESCO_MIL_LAWS: Record<number, { title: string; description: string }> = {
+  1: {
+    title: "Equal Status of Information Providers",
+    description: "All forms of information providers (libraries, media, technology, internet, etc.) are equal in importance for civic engagement. None should be treated as superior; they are all vital channels of learning."
+  },
+  2: {
+    title: "Citizen Empowerment as Creators",
+    description: "Every citizen is a creator of information and has a message. People must be empowered to access, understand, and express themselves through media and information as a fundamental right."
+  },
+  3: {
+    title: "Transparency of Bias & Intent",
+    description: "Information, media, and technology are not always neutral. Any use of media and information literacy must promote the recognition and transparent communication of these biases."
+  },
+  4: {
+    title: "Universal Right to Know",
+    description: "Every citizen has the right to access and understand information. This right to seek and receive information must be protected and never compromised."
+  },
+  5: {
+    title: "Lifelong Dynamic Process",
+    description: "Media and Information Literacy is a dynamic, lifelong process. It involves the continuous acquisition of skills to access, evaluate, produce, and communicate information ethically."
+  }
+};
 
 interface AuditResult {
   creator_analysis: string;
@@ -251,6 +273,8 @@ export default function Home() {
     isCorrect: boolean;
     actionTaken: string;
     cardHeadline: string;
+    mil_laws?: number[];
+    mil_law_explanation?: string;
   } | null>(null);
 
   const evaluateGuessOnAction = (actionName: string) => {
@@ -267,7 +291,9 @@ export default function Home() {
         actual: actualType,
         isCorrect,
         actionTaken: actionName,
-        cardHeadline: room.active_card.fake_headline || room.active_card.headline
+        cardHeadline: room.active_card.fake_headline || room.active_card.headline,
+        mil_laws: room.active_card.mil_laws,
+        mil_law_explanation: room.active_card.mil_law_explanation
       });
       setPlayerGuess(null);
     }
@@ -900,28 +926,76 @@ export default function Home() {
 
               {/* Turn Result Feedback Banner */}
               {lastTurnFeedback && (
-                <div className={`p-4 border-4 border-neo-black shadow-[6px_6px_0_#000] mb-4 flex justify-between items-center neu-border ${
-                  lastTurnFeedback.isCorrect ? 'bg-neo-mint/20 border-neo-mint text-neo-mint' : 'bg-neo-coral/20 border-neo-coral text-neo-coral'
+                <div className={`p-5 border-4 border-neo-black shadow-[6px_6px_0_#000] mb-6 flex flex-col gap-4 neu-border ${
+                  lastTurnFeedback.isCorrect ? 'bg-neo-mint/15 border-neo-mint text-on-background' : 'bg-neo-coral/15 border-neo-coral text-on-background'
                 }`}>
-                  <div className="flex items-center gap-3">
-                    <span className="material-symbols-outlined text-3xl">
-                      {lastTurnFeedback.isCorrect ? 'task_alt' : 'warning'}
-                    </span>
-                    <div>
-                      <span className="font-label-mono text-xs font-bold uppercase block">
-                        {lastTurnFeedback.isCorrect ? '🎉 CRITICAL THINKING SUCCESS!' : '⚠️ HYPOTHESIS MISJUDGMENT'}
+                  <div className="flex justify-between items-start gap-4">
+                    <div className="flex items-center gap-3">
+                      <span className={`material-symbols-outlined text-3xl font-black ${
+                        lastTurnFeedback.isCorrect ? 'text-neo-mint' : 'text-neo-coral'
+                      }`}>
+                        {lastTurnFeedback.isCorrect ? 'task_alt' : 'warning'}
                       </span>
-                      <p className="font-body-md text-xs font-bold text-on-background">
-                        You guessed <strong>{lastTurnFeedback.guessed}</strong>. The card was actually <strong>{lastTurnFeedback.actual}</strong> ({lastTurnFeedback.actionTaken}).
-                      </p>
+                      <div>
+                        <span className={`font-label-mono text-xs font-black uppercase block ${
+                          lastTurnFeedback.isCorrect ? 'text-neo-mint' : 'text-neo-coral'
+                        }`}>
+                          {lastTurnFeedback.isCorrect ? '🎉 CRITICAL THINKING SUCCESS!' : '⚠️ HYPOTHESIS MISJUDGMENT'}
+                        </span>
+                        <p className="font-body-md text-sm font-black leading-snug">
+                          You guessed <strong className="underline decoration-2">{lastTurnFeedback.guessed}</strong>. The card was actually <strong className="underline decoration-2">{lastTurnFeedback.actual}</strong> ({lastTurnFeedback.actionTaken}).
+                        </p>
+                      </div>
                     </div>
+                    <button
+                      onClick={() => setLastTurnFeedback(null)}
+                      className="text-xs font-label-mono font-black text-neo-black bg-neo-lavender hover:bg-white px-3 py-1.5 neu-btn flex-none"
+                    >
+                      DISMISS ✕
+                    </button>
                   </div>
-                  <button
-                    onClick={() => setLastTurnFeedback(null)}
-                    className="text-xs font-label-mono font-black text-on-background bg-neo-black text-neo-lavender px-3 py-1 neu-btn"
-                  >
-                    DISMISS ✕
-                  </button>
+
+                  {/* MIL Laws Learning Section */}
+                  {((lastTurnFeedback.mil_laws && lastTurnFeedback.mil_laws.length > 0) || lastTurnFeedback.mil_law_explanation) && (
+                    <div className="mt-2 bg-neo-black border-2 border-neo-black p-4 text-xs flex flex-col gap-3 font-label-mono shadow-[4px_4px_0_rgba(0,0,0,0.5)]">
+                      <div className="flex items-center gap-2 border-b border-dashed border-neo-lavender/40 pb-2">
+                        <span className="material-symbols-outlined text-neo-mint text-lg">menu_book</span>
+                        <span className="font-bold text-neo-mint text-xs uppercase tracking-wider">
+                          UNESCO MIL Laws Education Panel
+                        </span>
+                      </div>
+
+                      {/* Displaying target laws and descriptions */}
+                      {lastTurnFeedback.mil_laws && lastTurnFeedback.mil_laws.length > 0 && (
+                        <div className="flex flex-col gap-2">
+                          {lastTurnFeedback.mil_laws.map((lawNum) => {
+                            const lawDetail = UNESCO_MIL_LAWS[lawNum];
+                            if (!lawDetail) return null;
+                            return (
+                              <div key={lawNum} className="bg-surface-container/10 p-2.5 neu-border border-l-4 border-l-neo-mint flex flex-col gap-1">
+                                <span className="text-[11px] font-black text-neo-mint uppercase">
+                                  Law {lawNum}: {lawDetail.title}
+                                </span>
+                                <p className="text-[10px] text-on-surface-variant leading-relaxed">
+                                  {lawDetail.description}
+                                </p>
+                              </div>
+                            );
+                          })}
+                        </div>
+                      )}
+
+                      {/* Specific Card Law Explanation */}
+                      {lastTurnFeedback.mil_law_explanation && (
+                        <div className="bg-surface-container/20 p-3 neu-border border-l-4 border-l-neo-lavender text-[11px] leading-relaxed text-on-background">
+                          <strong className="text-neo-lavender block text-[10px] uppercase font-black mb-1">
+                            🎯 Scenario Application
+                          </strong>
+                          {lastTurnFeedback.mil_law_explanation}
+                        </div>
+                      )}
+                    </div>
+                  )}
                 </div>
               )}
 

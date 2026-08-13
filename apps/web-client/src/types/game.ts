@@ -49,6 +49,8 @@ export interface ScenarioCard {
   consequence?: string;
   real_impact?: string;
   ai_analysis?: AIAnalysis;
+  mil_laws?: number[];
+  mil_law_explanation?: string;
 }
 
 

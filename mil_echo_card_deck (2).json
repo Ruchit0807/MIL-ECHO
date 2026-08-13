@@ -1,0 +1,1356 @@
+{
+  "deck_name": "MIL ECHO \u2014 Real-World Misinformation Deck",
+  "description": "55 cards mixing REAL news and FAKE misinformation based on documented real-world cases. Players must discern truth from falsehood. Each card includes truth_status metadata, trigger, expected behavior, consequence, and AI analysis fields.",
+  "total_cards": 55,
+  "cards": [
+    {
+      "id": 1,
+      "domain": "Health",
+      "image": "https://files.manuscdn.com/user_upload_by_module/session_file/310519663073395149/MNkVLCQQPOYUwqtg.jpg",
+      "headline": "5G towers spread coronavirus \u2014 destroy them now",
+      "source": "WhatsApp Forward",
+      "year": 2020,
+      "type": "misinformation",
+      "trigger": "Fear + Need for control during uncertainty",
+      "expected_behavior": "Attack telecom infrastructure, share urgently",
+      "consequence": "77+ cell towers burned in UK, Netherlands, and other countries. Emergency services disrupted.",
+      "real_impact": "Towers destroyed, telecom workers attacked, 5G rollout delayed globally",
+      "ai_analysis": {
+        "creator": "Anonymous conspiracy theorists exploiting pandemic fear",
+        "content": "Scientifically impossible claim \u2014 viruses don't travel via radio waves",
+        "context": "Posted during peak COVID panic when people sought scapegoats",
+        "bias": "Fear-mongering, false causation, us-vs-technology framing",
+        "business": "Distraction from real public health measures"
+      },
+      "truth_status": "fake",
+      "educational_note": "This claim is fabricated. Verify the creator, check the source, and ask: what evidence supports it?",
+      "mil_laws": [
+        1,
+        2,
+        3
+      ],
+      "mil_law_explanation": "Law 1: Technology (5G) becomes misinformation target. Law 2: Anonymous citizens created this message. Law 3: Content exploits bias and fear."
+    },
+    {
+      "id": 2,
+      "domain": "Health",
+      "image": "https://files.manuscdn.com/user_upload_by_module/session_file/310519663073395149/YfZRSrVINFIcEEET.jpg",
+      "headline": "Vaccines contain microchips planted by Bill Gates to track you",
+      "source": "Facebook Post",
+      "year": 2020,
+      "type": "misinformation",
+      "trigger": "Loss of bodily autonomy + distrust of authority",
+      "expected_behavior": "Refuse vaccination, spread fear among peers",
+      "consequence": "Vaccine hesitancy surged 30%+ in multiple countries. Preventable disease outbreaks followed.",
+      "real_impact": "WHO declared an 'infodemic.' Estimated 2 million preventable deaths due to vaccine hesitancy (2020-2023)",
+      "ai_analysis": {
+        "creator": "Anti-vaccine networks amplifying Gates Foundation funding as 'evidence'",
+        "content": "Physically impossible \u2014 no microchip fits in a vaccine dose",
+        "context": "Rushed vaccine development created legitimate questions that conspiracies filled",
+        "bias": "Appeal to distrust, false authority subversion, hidden agenda framing",
+        "business": "Anti-vaccine content creators monetized fear through views and book sales"
+      },
+      "truth_status": "fake",
+      "educational_note": "This claim is fabricated. Verify the creator, check the source, and ask: what evidence supports it?",
+      "mil_laws": [
+        2,
+        3
+      ],
+      "mil_law_explanation": "Law 2: Citizen-created conspiracy content. Law 3: Information carries hidden agendas and bias."
+    },
+    {
+      "id": 3,
+      "domain": "Health",
+      "headline": "Drinking bleach and injecting disinfectant cures COVID-19",
+      "source": "Social Media + Misinterpreted Presidential Statement",
+      "year": 2020,
+      "type": "misinformation",
+      "trigger": "Desperation + false hope for a quick cure",
+      "expected_behavior": "Consume toxic substances, stop medical treatment",
+      "consequence": "Multiple poison control calls spiked 45% in US alone. Several deaths reported.",
+      "real_impact": "NYC poison control received 30+ calls in one day. People hospitalized after drinking bleach.",
+      "ai_analysis": {
+        "creator": "Misinformation spreaders amplifying a misinterpreted statement",
+        "content": "Deadly \u2014 disinfectants kill humans, not viruses, inside the body",
+        "context": "Desperation during early pandemic when no treatment existed",
+        "bias": "False hope, appeal to desperation, authority misquoting",
+        "business": "Engagement farming \u2014 extreme claims get maximum shares"
+      },
+      "image": "https://files.manuscdn.com/user_upload_by_module/session_file/310519663073395149/YqoDnLMOktwGJbgS.jpg",
+      "truth_status": "fake",
+      "educational_note": "This claim is fabricated. Verify the creator, check the source, and ask: what evidence supports it?",
+      "mil_laws": [
+        1,
+        3,
+        4
+      ],
+      "mil_law_explanation": "Law 1: Medical information must come from credible sources. Law 3: Misinterpreted statements carry dangerous bias. Law 4: Right to accurate health information."
+    },
+    {
+      "id": 4,
+      "domain": "Politics",
+      "image": "https://files.manuscdn.com/user_upload_by_module/session_file/310519663073395149/nLfVOoLJnHRErikB.png",
+      "headline": "Pope Francis endorses Donald Trump for president",
+      "source": "Fake News Website (WTOE5)",
+      "year": 2016,
+      "type": "misinformation",
+      "trigger": "Tribal identity + confirmation bias",
+      "expected_behavior": "Share within political networks to validate candidates",
+      "consequence": "Reached 960,000+ engagements on Facebook. Influenced voter perception.",
+      "real_impact": "Vatican issued official denial. Study showed it influenced ~1% of voters \u2014 enough to swing an election",
+      "ai_analysis": {
+        "creator": "Macedonian teen running fake news site for ad revenue",
+        "content": "Fabricated quote \u2014 Pope never made any political endorsement",
+        "context": "US election cycle when political tribes were hypersensitive",
+        "bias": "Appeal to authority, false endorsement, tribal validation",
+        "business": "Ad revenue \u2014 each viral share earned $0.01-0.05 per view"
+      },
+      "truth_status": "fake",
+      "educational_note": "This claim is fabricated. Verify the creator, check the source, and ask: what evidence supports it?",
+      "mil_laws": [
+        2,
+        3
+      ],
+      "mil_law_explanation": "Law 2: Fake content created to look authoritative. Law 3: Fake endorsement exploits political bias."
+    },
+    {
+      "id": 5,
+      "domain": "Politics",
+      "headline": "Smuggled migrants are voting illegally in the 2024 election",
+      "source": "X (Twitter) + Telegram",
+      "year": 2024,
+      "type": "misinformation",
+      "trigger": "Fear of invasion + erosion of democratic trust",
+      "expected_behavior": "Demand voting restrictions, attack immigrant communities",
+      "consequence": "Voter intimidation at polling stations. Harassment of Latino communities.",
+      "real_impact": "CISA issued emergency alerts. Multiple states deployed extra election security.",
+      "ai_analysis": {
+        "creator": "Political operatives seeding doubt about election integrity",
+        "content": "No evidence of systematic non-citizen voting \u2014 impossible at scale",
+        "context": "Close election + existing immigration debate made this believable",
+        "bias": "Scapegoating, manufactured crisis, democratic erosion framing",
+        "business": "Political gain \u2014 suppressing opponent voter turnout"
+      },
+      "image": "https://files.manuscdn.com/user_upload_by_module/session_file/310519663073395149/VXYsFjMDYOxwYOyd.jpg",
+      "truth_status": "fake",
+      "educational_note": "This claim is fabricated. Verify the creator, check the source, and ask: what evidence supports it?",
+      "mil_laws": [
+        1,
+        3,
+        4
+      ],
+      "mil_law_explanation": "Law 1: Political information requires verification. Law 3: Immigration claims carry ideological bias. Law 4: Voter rights depend on accurate information."
+    },
+    {
+      "id": 6,
+      "domain": "Technology",
+      "image": "https://files.manuscdn.com/user_upload_by_module/session_file/310519663073395149/xTtPXKMBEVLjAMRr.jpg",
+      "headline": "EXPLOSION at the Pentagon \u2014 multiple buildings damaged",
+      "source": "AI-Generated Image on X (Twitter)",
+      "year": 2023,
+      "type": "deepfake",
+      "trigger": "Shock + fear of war escalation",
+      "expected_behavior": "Panic-sell stocks, share emergency alerts",
+      "consequence": "S&P 500 dropped 500 points in minutes. $500 billion in market value wiped temporarily.",
+      "real_impact": "Markets recovered after Pentagon confirmed image was fake. But the speed of spread was unprecedented.",
+      "ai_analysis": {
+        "creator": "Unknown account with AI image generation tools",
+        "content": "AI-generated image \u2014 no actual explosion occurred",
+        "context": "Markets were already anxious about debt ceiling crisis",
+        "bias": "Shock value, false authority (appeared to be from real news outlet)",
+        "business": "Market manipulation \u2014 short sellers profited from the dip"
+      },
+      "truth_status": "fake",
+      "educational_note": "This claim is fabricated. Verify the creator, check the source, and ask: what evidence supports it?",
+      "mil_laws": [
+        1,
+        2,
+        4
+      ],
+      "mil_law_explanation": "Law 1: Financial information from AI sources needs verification. Law 2: Citizens can create and spread AI content. Law 4: Market stability depends on truthful information."
+    },
+    {
+      "id": 7,
+      "domain": "Technology",
+      "image": "https://files.manuscdn.com/user_upload_by_module/session_file/310519663073395149/UgiiQlfyHmIYUxKu.webp",
+      "headline": "Elon Musk is giving away 5000 Bitcoin \u2014 click to claim",
+      "source": "Fake Twitter Account + YouTube Deepfake",
+      "year": "2019-2024",
+      "type": "scam + deepfake",
+      "trigger": "Greed + FOMO (Fear of Missing Out)",
+      "expected_behavior": "Click link, send small 'verification' payment, lose money",
+      "consequence": "Millions scammed globally. Estimated $100M+ lost to crypto giveaway scams.",
+      "real_impact": "YouTube removed 30,000+ fake Elon Musk videos. Scam networks persist to this day.",
+      "ai_analysis": {
+        "creator": "Organized scam rings using deepfake voice cloning",
+        "content": "Fake \u2014 Elon Musk never gives away cryptocurrency",
+        "context": "Crypto boom created unrealistic profit expectations",
+        "bias": "Appeal to greed, urgency ('limited time'), false celebrity endorsement",
+        "business": "Direct theft \u2014 victims send crypto that is never returned"
+      },
+      "truth_status": "fake",
+      "educational_note": "This claim is fabricated. Verify the creator, check the source, and ask: what evidence supports it?",
+      "mil_laws": [
+        2,
+        3
+      ],
+      "mil_law_explanation": "Law 2: Scam content created by criminal networks. Law 3: Celebrity endorsement exploits greed bias."
+    },
+    {
+      "id": 8,
+      "domain": "Social/Community",
+      "headline": "HIV-positive blood found injected into school drinking water",
+      "source": "WhatsApp Forward",
+      "year": 2024,
+      "type": "misinformation",
+      "trigger": "Fear for children's safety + contamination panic",
+      "expected_behavior": "Pull children from school, protest, attack school staff",
+      "consequence": "Schools shut down in multiple Indian states. Parents attacked teachers.",
+      "real_impact": "Multiple states (Kerala, Maharashtra, UP) saw school closures. Police deployed at schools.",
+      "ai_analysis": {
+        "creator": "Unknown \u2014 chain-forwarded with no original source",
+        "content": "Scientifically impossible \u2014 HIV dies within minutes outside the body",
+        "context": "WhatsApp groups amplify parental fear rapidly",
+        "bias": "Fear for children, contamination disgust, no verifiable source",
+        "business": "Engagement through fear \u2014 forwards generate infinite reach"
+      },
+      "image": "https://files.manuscdn.com/user_upload_by_module/session_file/310519663073395149/rrIAnzicnZPeCgnn.jpg",
+      "truth_status": "fake",
+      "educational_note": "This claim is fabricated. Verify the creator, check the source, and ask: what evidence supports it?",
+      "mil_laws": [
+        1,
+        3,
+        4
+      ],
+      "mil_law_explanation": "Law 1: Community health information must be verified. Law 3: Fear-based content exploits social bias. Law 4: Children's safety requires accurate information."
+    },
+    {
+      "id": 9,
+      "domain": "Social/Community",
+      "image": "https://files.manuscdn.com/user_upload_by_module/session_file/310519663073395149/TTXJrwpEazWIkuPy.webp",
+      "headline": "Child kidnappers spotted near your area \u2014 share to warn everyone",
+      "source": "WhatsApp Forward",
+      "year": "2017-2018",
+      "type": "misinformation",
+      "trigger": "Protective instinct + immediate danger alert",
+      "expected_behavior": "Share widely, form vigilante groups, attack strangers",
+      "consequence": "33+ lynching deaths in India from WhatsApp mob violence.",
+      "real_impact": "Government had to limit WhatsApp forwards to 5 contacts at a time. Multiple murder cases registered.",
+      "ai_analysis": {
+        "creator": "Anonymous \u2014 designed to exploit parental panic",
+        "content": "No specific location, no photo, no police report \u2014 classic panic bait",
+        "context": "Rural areas with limited fact-checking infrastructure",
+        "bias": "Urgency without evidence, moral panic, share-to-protect framing",
+        "business": "Pure viral engineering \u2014 designed for maximum forward velocity"
+      },
+      "truth_status": "fake",
+      "educational_note": "This claim is fabricated. Verify the creator, check the source, and ask: what evidence supports it?",
+      "mil_laws": [
+        1,
+        2,
+        4
+      ],
+      "mil_law_explanation": "Law 1: Safety warnings must come from authorities. Law 2: Chain messages are citizen-created content. Law 4: Community safety depends on verified alerts."
+    },
+    {
+      "id": 10,
+      "domain": "Social/Community",
+      "headline": "Government offering free houses to minority communities",
+      "source": "Facebook + WhatsApp",
+      "year": 2018,
+      "type": "misinformation",
+      "trigger": "Economic anxiety + tribal resentment",
+      "expected_behavior": "Mobilize protests, attack minority neighborhoods",
+      "consequence": "Deadly riots in India. Multiple deaths, property destruction, curfew imposed.",
+      "real_impact": "Riots in Delhi and other cities. Dozens injured. National emergency response required.",
+      "ai_analysis": {
+        "creator": "Political actors fabricating policy to incite communal tension",
+        "content": "No such scheme exists \u2014 fabricated to create inter-community hostility",
+        "context": "Existing social tensions made fabricated inequality believable",
+        "bias": "Us-vs-them framing, economic injustice trigger, fabricated policy",
+        "business": "Political mobilization \u2014 riots serve electoral/communal agendas"
+      },
+      "image": "https://files.manuscdn.com/user_upload_by_module/session_file/310519663073395149/XBRaFZTLXZcSYyAv.jpg",
+      "truth_status": "fake",
+      "educational_note": "This claim is fabricated. Verify the creator, check the source, and ask: what evidence supports it?",
+      "mil_laws": [
+        1,
+        3
+      ],
+      "mil_law_explanation": "Law 1: Political promises require fact-checking. Law 3: Communal claims exploit identity bias."
+    },
+    {
+      "id": 11,
+      "domain": "Finance",
+      "headline": "RBI announces new demonetization \u2014 exchange old notes by Friday",
+      "source": "Fake Government Notice (PDF)",
+      "year": 2022,
+      "type": "fake official document",
+      "trigger": "Fear of losing money + urgency to act",
+      "expected_behavior": "Rush to banks, queue for hours, panic about savings",
+      "consequence": "People queued at banks unnecessarily. RBI had to issue emergency clarification.",
+      "real_impact": "Bank branches overwhelmed. RBI issued formal denial within hours.",
+      "ai_analysis": {
+        "creator": "Scammers using fake RBI letterhead to create panic",
+        "content": "No demonetization was announced \u2014 the PDF is fabricated",
+        "context": "2016 demonetization trauma made this immediately believable",
+        "bias": "False authority (RBI logo), urgency, fear of financial loss",
+        "business": "Distraction \u2014 while people panicked, other scams ran simultaneously"
+      },
+      "image": "https://files.manuscdn.com/user_upload_by_module/session_file/310519663073395149/vxxrrlrcioWzZUur.jpg",
+      "truth_status": "fake",
+      "educational_note": "This claim is fabricated. Verify the creator, check the source, and ask: what evidence supports it?",
+      "mil_laws": [
+        1,
+        2,
+        3
+      ],
+      "mil_law_explanation": "Law 1: Financial announcements come only from official sources. Law 2: Fake notices look official. Law 3: Financial panic is bias-driven."
+    },
+    {
+      "id": 12,
+      "domain": "Finance",
+      "headline": "PM Kisan Yojana \u2014 new registration open! Click here to get \u20b96000",
+      "source": "SMS + Fake Government Website",
+      "year": 2023,
+      "type": "phishing scam",
+      "trigger": "Financial desperation + government trust",
+      "expected_behavior": "Click link, enter bank details, lose money",
+      "consequence": "Millions of farmers and citizens scammed. Estimated \u20b9500+ crores lost in India.",
+      "real_impact": "Cyber crime cells registered 10,000+ cases. Government launched awareness campaigns.",
+      "ai_analysis": {
+        "creator": "Organized phishing rings targeting rural populations",
+        "content": "Not an official government link \u2014 designed to steal bank credentials",
+        "context": "Real scheme exists, making the fake version indistinguishable to non-tech users",
+        "bias": "False authority, free money trigger, urgency ('limited slots')",
+        "business": "Direct financial theft via credential harvesting"
+      },
+      "image": "https://files.manuscdn.com/user_upload_by_module/session_file/310519663073395149/gHvxUrevTfQurmoe.jpg",
+      "truth_status": "fake",
+      "educational_note": "This claim is fabricated. Verify the creator, check the source, and ask: what evidence supports it?",
+      "mil_laws": [
+        1,
+        2,
+        3
+      ],
+      "mil_law_explanation": "Law 1: Government schemes announced through official channels only. Law 2: Scam SMS is citizen-targeted content. Law 3: Urgency creates false trust bias."
+    },
+    {
+      "id": 13,
+      "domain": "Health",
+      "headline": "MMS video shows doctor prescribing medicine for \u20b9500 \u2014 government approved it for \u20b95000",
+      "source": "WhatsApp + YouTube",
+      "year": 2023,
+      "type": "half-truth manipulation",
+      "trigger": "Distrust of pharma companies + anger at corruption",
+      "expected_behavior": "Stop buying from pharmacies, distrust medical system",
+      "consequence": "Erosion of trust in healthcare. People avoided legitimate treatment.",
+      "real_impact": "Widespread distrust of pharmaceutical pricing. Legitimate doctors questioned.",
+      "ai_analysis": {
+        "creator": "Anti-pharma content farms mixing real price issues with fabrication",
+        "content": "Real drug pricing issues exist, but the specific claim is unverifiable and exaggerated",
+        "context": "Genuine anger about healthcare costs makes manipulation believable",
+        "bias": "Truth wrapped in exaggeration, corporate villain framing, conspiracy undertones",
+        "business": "Views from outrage content + alternative medicine promotion"
+      },
+      "image": "https://files.manuscdn.com/user_upload_by_module/session_file/310519663073395149/oNgYPAkzsyWehrsE.jpg",
+      "truth_status": "misleading",
+      "educational_note": "This mixes real facts with false context or exaggeration. The core facts may be true, but the framing distorts the truth.",
+      "mil_laws": [
+        3
+      ],
+      "mil_law_explanation": "Law 3: Real issue (drug pricing) exaggerated with misleading framing."
+    },
+    {
+      "id": 14,
+      "domain": "Politics",
+      "headline": "AI-generated image: Police Chief arrested for corruption \u2014 massive protest tomorrow",
+      "source": "X (Twitter) + Telegram",
+      "year": 2024,
+      "type": "deepfake",
+      "trigger": "Righteous anger + call to action",
+      "expected_behavior": "Join protest, share image, attack government",
+      "consequence": "Fake protest called in Slovakia. Thousands showed up based on fabricated arrest.",
+      "real_impact": "Slovakian Prime Minister Fico called it a threat to democracy. EU flagged AI disinformation as election threat.",
+      "ai_analysis": {
+        "creator": "Political disinformation actors testing AI-generated protest mobilization",
+        "content": "No arrest occurred \u2014 image is AI-generated",
+        "context": "Pre-election period when political tensions were already high",
+        "bias": "False authority arrest, manufactured outrage, mobilization framing",
+        "business": "Political destabilization before elections"
+      },
+      "image": "https://files.manuscdn.com/user_upload_by_module/session_file/310519663073395149/aHfELXobkdeUvqVG.webp",
+      "truth_status": "fake",
+      "educational_note": "This claim is fabricated. Verify the creator, check the source, and ask: what evidence supports it?",
+      "mil_laws": [
+        1,
+        2,
+        3
+      ],
+      "mil_law_explanation": "Law 1: Political images from AI need verification. Law 2: Deepfakes show citizens can create fake political content. Law 3: Political distrust is exploited through bias."
+    },
+    {
+      "id": 15,
+      "domain": "Social/Community",
+      "headline": "Dead voter found voting in US election \u2014 proof of massive fraud",
+      "source": "X (Twitter) + Conservative Media",
+      "year": 2024,
+      "type": "misinformation",
+      "trigger": "Distrust of democratic process + tribal anger",
+      "expected_behavior": "Demand investigation, question election legitimacy",
+      "consequence": "Election integrity questioned. Voter confidence dropped. Harassment of election workers.",
+      "real_impact": "Multiple states had to publicly verify records. Election workers received death threats.",
+      "ai_analysis": {
+        "creator": "Political accounts seeding election doubt",
+        "content": "Misleading \u2014 often refers to absentee ballots cast before death, which are legally counted",
+        "context": "Post-2020 election distrust made any fraud claim instantly viral",
+        "bias": "Selective truth manipulation, democratic erosion, tribal validation",
+        "business": "Political mobilization and media engagement revenue"
+      },
+      "image": "https://files.manuscdn.com/user_upload_by_module/session_file/310519663073395149/myuDOOFaCVecCwhC.webp",
+      "truth_status": "misleading",
+      "educational_note": "This mixes real facts with false context or exaggeration. The core facts may be true, but the framing distorts the truth.",
+      "mil_laws": [
+        3,
+        4
+      ],
+      "mil_law_explanation": "Law 3: Real event (dead voter) framed with false context of fraud. Law 4: Voter confidence requires accurate framing."
+    },
+    {
+      "id": 16,
+      "domain": "Health",
+      "headline": "Honey and cinnamon cure cancer \u2014 doctors don't want you to know",
+      "source": "Facebook + Email Chain",
+      "year": 2019,
+      "type": "health misinformation",
+      "trigger": "Desperation of cancer patients + distrust of medical industry",
+      "expected_behavior": "Stop chemotherapy, use alternative remedies",
+      "consequence": "Patients abandoned treatment. Preventable deaths from delayed care.",
+      "real_impact": "Multiple cancer patients died after stopping treatment for unproven remedies",
+      "ai_analysis": {
+        "creator": "Alternative medicine sellers and engagement farmers",
+        "content": "No scientific evidence \u2014 honey/cinnamon have zero anti-cancer properties",
+        "context": "Cancer patients are desperate and vulnerable to false hope",
+        "bias": "Conspiracy against 'Big Pharma,' false hope, natural vs artificial framing",
+        "business": "Selling alternative medicine products, books, and courses"
+      },
+      "image": "https://files.manuscdn.com/user_upload_by_module/session_file/310519663073395149/nbhIhKcIYLjMAyXy.jpeg",
+      "truth_status": "fake",
+      "educational_note": "This claim is fabricated. Verify the creator, check the source, and ask: what evidence supports it?",
+      "mil_laws": [
+        1,
+        3,
+        4
+      ],
+      "mil_law_explanation": "Law 1: Health claims need scientific verification. Law 3: 'Doctors don't want you to know' exploits distrust bias. Law 4: Health decisions require accurate information."
+    },
+    {
+      "id": 17,
+      "domain": "Technology",
+      "headline": "Your phone is listening to your conversations \u2014 delete this app now!",
+      "source": "YouTube Video + TikTok",
+      "year": 2023,
+      "type": "partial truth / fear-mongering",
+      "trigger": "Privacy paranoia + loss of control",
+      "expected_behavior": "Delete apps, distrust technology, share warning",
+      "consequence": "Mass app deletions. Unfounded distrust of legitimate apps.",
+      "real_impact": "Some legitimate apps removed. Confusion about actual data privacy practices.",
+      "ai_analysis": {
+        "creator": "Tech fear-mongering channels gaining views from privacy anxiety",
+        "content": "Partially true \u2014 targeted ads use data, but phones don't record conversations for ads",
+        "context": "Real data privacy concerns exist, making exaggeration believable",
+        "bias": "Paranoia amplification, truth-exaggeration mix, loss of agency framing",
+        "business": "YouTube/TikTok views from fear-based content"
+      },
+      "image": "https://files.manuscdn.com/user_upload_by_module/session_file/310519663073395149/focbDahxZitvHaAK.jpg",
+      "truth_status": "fake",
+      "educational_note": "This claim is fabricated. Verify the creator, check the source, and ask: what evidence supports it?",
+      "mil_laws": [
+        1,
+        2,
+        3
+      ],
+      "mil_law_explanation": "Law 1: Tech claims about privacy need fact-checking. Law 2: Fear content is citizen-spread. Law 3: Privacy anxiety is exploited as bias."
+    },
+    {
+      "id": 18,
+      "domain": "Finance",
+      "headline": "Stock market crash coming Monday \u2014 sell everything now!",
+      "source": "X (Twitter) + Financial Telegram Groups",
+      "year": 2024,
+      "type": "market manipulation",
+      "trigger": "Fear of financial loss + herd mentality",
+      "expected_behavior": "Panic sell stocks, cause actual market drop",
+      "consequence": "Self-fulfilling prophecy \u2014 panic selling creates the crash it predicted.",
+      "real_impact": "Multiple instances of tweet-induced market dips recovered within hours",
+      "ai_analysis": {
+        "creator": "Short sellers or influencers with vested positions",
+        "content": "No factual basis \u2014 prediction designed to create the outcome",
+        "context": "Market anxiety periods make crash predictions viral",
+        "bias": "Fear of loss, herd behavior exploitation, false certainty",
+        "business": "Short selling profits or influencer credibility building"
+      },
+      "image": "https://files.manuscdn.com/user_upload_by_module/session_file/310519663073395149/aVYJKjgqgEVjkxos.jpg",
+      "truth_status": "misleading",
+      "educational_note": "This mixes real facts with false context or exaggeration. The core facts may be true, but the framing distorts the truth.",
+      "mil_laws": [
+        3,
+        4
+      ],
+      "mil_law_explanation": "Law 3: Market predictions carry false certainty bias. Law 4: Financial decisions need verified information."
+    },
+    {
+      "id": 19,
+      "domain": "Health",
+      "headline": "WhatsApp message: Blood group O people are immune to COVID \u2014 don't worry",
+      "source": "WhatsApp Forward",
+      "year": 2020,
+      "type": "misinformation",
+      "trigger": "Relief + false sense of security",
+      "expected_behavior": "Stop following safety protocols, stop wearing masks",
+      "consequence": "Increased infections among people who believed they were immune.",
+      "real_impact": "WHO had to specifically address blood group misinformation",
+      "ai_analysis": {
+        "creator": "Misinterpreted early research study amplified through forwards",
+        "content": "No blood group provides immunity \u2014 all groups are susceptible",
+        "context": "Early pandemic when people desperately wanted to feel safe",
+        "bias": "False relief, selective science interpretation, in-group comfort",
+        "business": "Reduced compliance benefits those selling alternative solutions"
+      },
+      "image": "https://files.manuscdn.com/user_upload_by_module/session_file/310519663073395149/UgGAiMqRXJNHIQjD.png",
+      "truth_status": "fake",
+      "educational_note": "This claim is fabricated. Verify the creator, check the source, and ask: what evidence supports it?",
+      "mil_laws": [
+        1,
+        3
+      ],
+      "mil_law_explanation": "Law 1: Health information from WHO, not WhatsApp. Law 3: Misinterpreted science exploits false hope bias."
+    },
+    {
+      "id": 20,
+      "domain": "Social/Community",
+      "headline": "Video: Religious leader caught eating meat during fasting period",
+      "source": "Deepfake Video on WhatsApp",
+      "year": 2023,
+      "type": "deepfake",
+      "trigger": "Religious outrage + betrayal by trusted figure",
+      "expected_behavior": "Share in anger, demand leader's removal, communal tension",
+      "consequence": "Religious community divided. Protests against the leader. Trust destroyed.",
+      "real_impact": "Leader had to publicly prove innocence. Community trust permanently damaged.",
+      "ai_analysis": {
+        "creator": "Deepfake tools used to fabricate religious betrayal",
+        "content": "Fabricated \u2014 the video is AI-generated face swap",
+        "context": "Religious communities have strong trust in leaders \u2014 betrayal is devastating",
+        "bias": "Religious identity attack, authority betrayal, fabricated evidence",
+        "business": "Communal division serves political/religious rival agendas"
+      },
+      "image": "https://files.manuscdn.com/user_upload_by_module/session_file/310519663073395149/knibHhFRswFMRlLU.jpg",
+      "truth_status": "fake",
+      "educational_note": "This claim is fabricated. Verify the creator, check the source, and ask: what evidence supports it?",
+      "mil_laws": [
+        1,
+        2,
+        3
+      ],
+      "mil_law_explanation": "Law 1: Religious content must be verified. Law 2: Deepfakes of religious leaders are citizen-created harm. Law 3: Religious bias exploited to destroy trust."
+    },
+    {
+      "id": 21,
+      "domain": "Politics",
+      "headline": "Leaked audio: Government planning to cut pensions by 50%",
+      "source": "Telegram + WhatsApp Audio",
+      "year": 2024,
+      "type": "fabricated audio",
+      "trigger": "Fear of losing livelihood + anger at government",
+      "expected_behavior": "Protest, vote against government, share among elderly",
+      "consequence": "Elderly panic. Protests organized. Government credibility attacked.",
+      "real_impact": "Multiple countries faced fabricated policy leak protests in 2024",
+      "ai_analysis": {
+        "creator": "Political opposition or AI voice cloning tools",
+        "content": "No such policy exists \u2014 audio is AI-cloned or entirely fabricated",
+        "context": "Pre-election period targeting elderly voters' financial anxiety",
+        "bias": "Livelihood fear, authority betrayal, leaked document framing",
+        "business": "Electoral manipulation targeting senior citizens"
+      },
+      "image": "https://files.manuscdn.com/user_upload_by_module/session_file/310519663073395149/SVRyUySbNbiFSELx.jpg",
+      "truth_status": "fake",
+      "educational_note": "This claim is fabricated. Verify the creator, check the source, and ask: what evidence supports it?",
+      "mil_laws": [
+        1,
+        2,
+        4
+      ],
+      "mil_law_explanation": "Law 1: Audio leaks need authentication. Law 2: Voice cloning shows citizens can create fake audio. Law 4: Pension rights depend on accurate government information."
+    },
+    {
+      "id": 22,
+      "domain": "Health",
+      "headline": "New study proves mobile phones cause brain tumors in children",
+      "source": "Fake Science Website",
+      "year": 2022,
+      "type": "fabricated research",
+      "trigger": "Parental fear + protective instinct",
+      "expected_behavior": "Take phones from children, restrict technology access",
+      "consequence": "Parents panicked. Schools received demands to ban all devices.",
+      "real_impact": "WHO had to clarify that no conclusive evidence links phones to tumors",
+      "ai_analysis": {
+        "creator": "Anti-tech content farms citing fake 'studies'",
+        "content": "No such study exists \u2014 fabricated citation to sound authoritative",
+        "context": "Ongoing debate about screen time makes health claims believable",
+        "bias": "Parental protection instinct, fake scientific authority, fear appeal",
+        "business": "Selling parental control apps and anti-tech products"
+      },
+      "image": "https://files.manuscdn.com/user_upload_by_module/session_file/310519663073395149/GKDIbMbuPlBgElDc.png",
+      "truth_status": "fake",
+      "educational_note": "This claim is fabricated. Verify the creator, check the source, and ask: what evidence supports it?",
+      "mil_laws": [
+        1,
+        3
+      ],
+      "mil_law_explanation": "Law 1: Health studies need scientific peer review. Law 3: Parental fear exploited as bias."
+    },
+    {
+      "id": 23,
+      "domain": "Technology",
+      "headline": "Your data is being sold to China \u2014 this app is spying on you",
+      "source": "YouTube + TikTok",
+      "year": 2024,
+      "type": "fear-mongering / partial truth",
+      "trigger": "National security fear + privacy anxiety",
+      "expected_behavior": "Delete apps, spread fear about specific companies",
+      "consequence": "App bans without evidence. Companies lost millions of users unfairly.",
+      "real_impact": "Multiple apps banned in various countries based on unverified claims",
+      "ai_analysis": {
+        "creator": "Geopolitical content creators mixing real concerns with fabrication",
+        "content": "Some data practices exist, but 'selling to China' claims are unproven",
+        "context": "Real geopolitical tensions make surveillance claims credible",
+        "bias": "Nationalism trigger, surveillance paranoia, foreign enemy framing",
+        "business": "Views from geopolitical fear content"
+      },
+      "image": "https://files.manuscdn.com/user_upload_by_module/session_file/310519663073395149/aSgyKREptHHZlSAc.jpg",
+      "truth_status": "misleading",
+      "educational_note": "This mixes real facts with false context or exaggeration. The core facts may be true, but the framing distorts the truth.",
+      "mil_laws": [
+        1,
+        3,
+        4
+      ],
+      "mil_law_explanation": "Law 1: Data privacy claims need evidence. Law 3: National security fear used as bias. Law 4: Users deserve transparent data practices."
+    },
+    {
+      "id": 24,
+      "domain": "Finance",
+      "headline": "Free money scheme: Government sending \u20b910,000 to every citizen \u2014 register now",
+      "source": "Fake Government Website + SMS",
+      "year": 2024,
+      "type": "phishing scam",
+      "trigger": "Financial need + government trust",
+      "expected_behavior": "Enter personal details, bank info, OTP on fake site",
+      "consequence": "Bank accounts drained. Identity theft. Elderly especially targeted.",
+      "real_impact": "Thousands of citizens lost savings. Cyber crime cells overwhelmed.",
+      "ai_analysis": {
+        "creator": "Organized phishing operations targeting digital illiterates",
+        "content": "No such scheme exists \u2014 site is designed to harvest credentials",
+        "context": "Real welfare schemes exist, making fake versions believable",
+        "bias": "Free money trigger, government authority mimicry, urgency",
+        "business": "Direct financial theft and identity fraud"
+      },
+      "image": "https://files.manuscdn.com/user_upload_by_module/session_file/310519663073395149/qdgEyEGkKUzOIhFc.jpg",
+      "truth_status": "fake",
+      "educational_note": "This claim is fabricated. Verify the creator, check the source, and ask: what evidence supports it?",
+      "mil_laws": [
+        1,
+        2,
+        3
+      ],
+      "mil_law_explanation": "Law 1: Government money schemes only through official channels. Law 2: Fake websites mimic real government content. Law 3: Greed exploited through urgency bias."
+    },
+    {
+      "id": 25,
+      "domain": "Social/Community",
+      "headline": "AI-generated image: Celebrity found dead in accident \u2014 funeral tomorrow",
+      "source": "X (Twitter) + Facebook",
+      "year": 2024,
+      "type": "deepfake",
+      "trigger": "Shock + grief + urgency to pay respects",
+      "expected_behavior": "Share condolences, spread image, attack alleged cause",
+      "consequence": "Celebrity's family harassed. Fans grief-stricken unnecessarily.",
+      "real_impact": "Celebrity had to post alive video to disprove. Family received death threats.",
+      "ai_analysis": {
+        "creator": "Engagement farmers using AI to generate shock content",
+        "content": "Completely fabricated \u2014 celebrity is alive and well",
+        "context": "Celebrity death hoaxes have a long history, now amplified by AI",
+        "bias": "Shock value, grief exploitation, false urgency",
+        "business": "Viral engagement \u2014 death news gets maximum shares"
+      },
+      "image": "https://files.manuscdn.com/user_upload_by_module/session_file/310519663073395149/GSZgImMOSvLvsABP.jpg",
+      "truth_status": "fake",
+      "educational_note": "This claim is fabricated. Verify the creator, check the source, and ask: what evidence supports it?",
+      "mil_laws": [
+        2,
+        3
+      ],
+      "mil_law_explanation": "Law 2: AI-generated content of real people shows citizen creation power. Law 3: Shock value exploits emotional bias."
+    },
+    {
+      "id": 26,
+      "domain": "Politics",
+      "headline": "Video: Opposition leader caught taking bribe \u2014 watch before deleted!",
+      "source": "Telegram + WhatsApp",
+      "year": 2024,
+      "type": "deepfake video",
+      "trigger": "Schadenfreude + confirmation of political bias",
+      "expected_behavior": "Share to humiliate opponent, demand investigation",
+      "consequence": "Political reputation destroyed. Investigations launched based on fake evidence.",
+      "real_impact": "Multiple politicians globally had to prove innocence against deepfakes",
+      "ai_analysis": {
+        "creator": "Political operatives using AI face/voice cloning",
+        "content": "Fabricated \u2014 deepfake with AI-generated face and voice",
+        "context": "Political rivalry makes corruption accusations instantly believable",
+        "bias": "Confirmation bias, moral outrage, 'before deleted' urgency",
+        "business": "Electoral sabotage and opponent reputation destruction"
+      },
+      "image": "https://files.manuscdn.com/user_upload_by_module/session_file/310519663073395149/ydpNwgMeEPbVCQsc.jpg",
+      "truth_status": "fake",
+      "educational_note": "This claim is fabricated. Verify the creator, check the source, and ask: what evidence supports it?",
+      "mil_laws": [
+        1,
+        2,
+        3
+      ],
+      "mil_law_explanation": "Law 1: Political evidence needs verification. Law 2: Deepfakes show creation capability. Law 3: Political bias exploited to destroy reputation."
+    },
+    {
+      "id": 27,
+      "domain": "Health",
+      "headline": "This fruit cures diabetes in 7 days \u2014 doctor's secret revealed",
+      "source": "Facebook Ad + YouTube",
+      "year": 2023,
+      "type": "health scam",
+      "trigger": "Hope for cure + distrust of expensive medicine",
+      "expected_behavior": "Buy the product, stop insulin/medication",
+      "consequence": "Diabetics stopped medication. Hospitalizations increased. Money lost on fake products.",
+      "real_impact": "FDA issued warnings about dozens of fake diabetes cure products",
+      "ai_analysis": {
+        "creator": "Supplement companies selling worthless products",
+        "content": "No fruit cures diabetes \u2014 claim is designed to sell products",
+        "context": "Chronic disease patients are desperate for affordable solutions",
+        "bias": "False hope, secret knowledge framing, anti-establishment appeal",
+        "business": "Direct product sales to vulnerable patients"
+      },
+      "image": "https://files.manuscdn.com/user_upload_by_module/session_file/310519663073395149/KMEXMoWUPhpnmayf.jpg",
+      "truth_status": "fake",
+      "educational_note": "This claim is fabricated. Verify the creator, check the source, and ask: what evidence supports it?",
+      "mil_laws": [
+        1,
+        3,
+        4
+      ],
+      "mil_law_explanation": "Law 1: Medical claims need FDA/scientific backing. Law 3: 'Secret cure' exploits desperation bias. Law 4: Patients' right to evidence-based treatment."
+    },
+    {
+      "id": 28,
+      "domain": "Technology",
+      "headline": "WARNING: This link will hack your phone \u2014 forward to everyone you know!",
+      "source": "WhatsApp Chain Message",
+      "year": 2023,
+      "type": "chain letter / panic forward",
+      "trigger": "Fear of being hacked + urge to protect friends",
+      "expected_behavior": "Forward to all contacts, create mass panic",
+      "consequence": "Millions forwarded useless warnings. Real security threats ignored amid noise.",
+      "real_impact": "Desensitized people to real security warnings. Chain letters became normalized.",
+      "ai_analysis": {
+        "creator": "Unknown \u2014 classic chain letter designed for infinite forwarding",
+        "content": "No actual threat \u2014 forwarding a message cannot hack a phone",
+        "context": "Digital literacy gap makes technical threats seem real",
+        "bias": "Protection of loved ones, technical fear, chain obligation",
+        "business": "Pure viral engineering \u2014 no monetization, just spread"
+      },
+      "image": "https://files.manuscdn.com/user_upload_by_module/session_file/310519663073395149/CTArwZkzzPBWEiiE.jpg",
+      "truth_status": "fake",
+      "educational_note": "This claim is fabricated. Verify the creator, check the source, and ask: what evidence supports it?",
+      "mil_laws": [
+        1,
+        2,
+        4
+      ],
+      "mil_law_explanation": "Law 1: Security warnings from tech companies, not chain messages. Law 2: Chain letters are citizen-spread content. Law 4: Digital safety requires verified alerts."
+    },
+    {
+      "id": 29,
+      "domain": "Social/Community",
+      "headline": "Shocking video: Police brutality against innocent protester \u2014 justice needed!",
+      "source": "X (Twitter) + Instagram Reels",
+      "year": 2024,
+      "type": "misattributed video",
+      "trigger": "Righteous anger + desire for justice",
+      "expected_behavior": "Share outrage, organize protests, attack police",
+      "consequence": "Protests based on misattributed footage. Real incidents ignored amid fake ones.",
+      "real_impact": "Video was actually from a different country/year \u2014 real protests erupted anyway",
+      "ai_analysis": {
+        "creator": "Agitators repurposing old/foreign footage for local narratives",
+        "content": "Real video but wrong context \u2014 different location and time period",
+        "context": "Social justice movements make brutality footage instantly shareable",
+        "bias": "Moral outrage, injustice framing, misattribution exploitation",
+        "business": "Social movement manipulation and engagement farming"
+      },
+      "image": "https://files.manuscdn.com/user_upload_by_module/session_file/310519663073395149/lDhEtMMlTUSiIidV.png",
+      "truth_status": "misleading",
+      "educational_note": "This mixes real facts with false context or exaggeration. The core facts may be true, but the framing distorts the truth.",
+      "mil_laws": [
+        3,
+        4
+      ],
+      "mil_law_explanation": "Law 3: Real video with wrong context = misleading framing bias. Law 4: Justice requires accurate attribution."
+    },
+    {
+      "id": 30,
+      "domain": "Finance",
+      "headline": "New cryptocurrency will make you a millionaire \u2014 invest before it's too late!",
+      "source": "Instagram + Telegram",
+      "year": 2024,
+      "type": "investment scam / pump and dump",
+      "trigger": "Greed + FOMO + get-rich-quick desire",
+      "expected_behavior": "Invest life savings, recruit friends, panic when it crashes",
+      "consequence": "People lost entire savings. Pump-and-dump schemes destroyed trust in crypto.",
+      "real_impact": "SEC charged dozens of influencers for promoting scam tokens",
+      "ai_analysis": {
+        "creator": "Token creators who sell at peak and abandon the project",
+        "content": "No real technology \u2014 token exists only to be pumped and dumped",
+        "context": "Crypto hype cycles create unrealistic profit expectations",
+        "bias": "Extreme greed, scarcity urgency ('before it's too late'), social proof",
+        "business": "Pump and dump \u2014 creators sell at peak, retail investors lose everything"
+      },
+      "image": "https://files.manuscdn.com/user_upload_by_module/session_file/310519663073395149/GDkPwdWGyyxZtEOT.png",
+      "truth_status": "fake",
+      "educational_note": "This claim is fabricated. Verify the creator, check the source, and ask: what evidence supports it?",
+      "mil_laws": [
+        1,
+        2,
+        3
+      ],
+      "mil_law_explanation": "Law 1: Financial advice needs regulatory verification. Law 2: Influencers create pump content. Law 3: Greed and FOMO exploited as bias."
+    },
+    {
+      "id": 31,
+      "domain": "Health",
+      "headline": "Scientists confirm: Eating after 6 PM causes weight gain and disease",
+      "source": "Instagram + Health Blogs",
+      "year": 2023,
+      "type": "half-truth / myth",
+      "trigger": "Body image anxiety + desire for simple solutions",
+      "expected_behavior": "Restrict eating, develop unhealthy food relationships",
+      "consequence": "Unnecessary dietary anxiety. Eating disorders exacerbated.",
+      "real_impact": "Nutritionists had to repeatedly debunk timing myths",
+      "ai_analysis": {
+        "creator": "Diet influencers selling meal plans and supplements",
+        "content": "Total calories matter, not timing \u2014 the claim is oversimplified",
+        "context": "Weight loss culture makes simple rules appealing",
+        "bias": "Simplicity appeal, body anxiety, false scientific certainty",
+        "business": "Selling diet plans, courses, and supplement products"
+      },
+      "image": "https://files.manuscdn.com/user_upload_by_module/session_file/310519663073395149/hZFJFUolgKEFfWAz.jpg",
+      "truth_status": "misleading",
+      "educational_note": "This mixes real facts with false context or exaggeration. The core facts may be true, but the framing distorts the truth.",
+      "mil_laws": [
+        3
+      ],
+      "mil_law_explanation": "Law 3: Real health topic oversimplified with false certainty bias."
+    },
+    {
+      "id": 32,
+      "domain": "Politics",
+      "headline": "Leaked document: Election results already decided \u2014 your vote doesn't matter",
+      "source": "4chan + X (Twitter)",
+      "year": 2024,
+      "type": "voter suppression / fabricated document",
+      "trigger": "Cynicism + powerlessness + tribal resignation",
+      "expected_behavior": "Don't vote, discourage others from voting",
+      "consequence": "Voter turnout suppressed. Democracy undermined through manufactured apathy.",
+      "real_impact": "Election officials had to publicly debunk. Turnout dropped in targeted demographics.",
+      "ai_analysis": {
+        "creator": "Political operatives aiming to suppress specific voter groups",
+        "content": "No such document exists \u2014 fabricated to create voter apathy",
+        "context": "Pre-election period targeting demographics likely to vote against specific candidates",
+        "bias": "Learned helplessness, democratic cynicism, powerlessness framing",
+        "business": "Electoral advantage through voter suppression"
+      },
+      "image": "https://files.manuscdn.com/user_upload_by_module/session_file/310519663073395149/BZPSLcqnKZKPITSM.png",
+      "truth_status": "fake",
+      "educational_note": "This claim is fabricated. Verify the creator, check the source, and ask: what evidence supports it?",
+      "mil_laws": [
+        1,
+        3,
+        4
+      ],
+      "mil_law_explanation": "Law 1: Election information from official bodies only. Law 3: Cynicism exploited through powerlessness bias. Law 4: Democratic rights depend on accurate information."
+    },
+    {
+      "id": 33,
+      "domain": "Science/Technology",
+      "truth_status": "real",
+      "headline": "India's Chandrayaan-3 successfully lands on the Moon's south pole",
+      "source": "ISRO Official + Reuters + BBC",
+      "year": 2023,
+      "type": "verified news",
+      "trigger": "National pride + scientific achievement",
+      "expected_behavior": "Share celebrations, discuss space achievements",
+      "consequence": "India became the 4th country to soft-land on the Moon, and first on the south pole.",
+      "real_impact": "Global recognition for ISRO. Inspired millions of Indian students toward STEM careers.",
+      "educational_note": "This is a VERIFIED FACT. The challenge: even real news can be doubted when people are exposed to constant misinformation. Media literacy includes knowing when to trust credible sources.",
+      "why_hard_to_distinguish": "Headline sounds almost too good to be true \u2014 similar to fake 'India discovered something on Moon' clickbait. Players must check: Does ISRO confirm? Do multiple credible outlets report it?",
+      "mil_laws": [
+        1,
+        2
+      ],
+      "mil_law_explanation": "Law 1: Science news verified through ISRO. Law 2: Citizens celebrate and share achievements."
+    },
+    {
+      "id": 34,
+      "domain": "Health",
+      "truth_status": "real",
+      "headline": "WHO declares COVID-19 a Public Health Emergency of International Concern",
+      "source": "WHO Official Statement + Reuters",
+      "year": 2020,
+      "type": "verified news",
+      "trigger": "Public health urgency + global coordination need",
+      "expected_behavior": "Follow health guidelines, share official information",
+      "consequence": "Triggered global coordinated response \u2014 lockdowns, travel restrictions, vaccine development acceleration.",
+      "real_impact": "First PHEIC declaration since Zika (2016). Mobilized $2.6 billion in research funding within months.",
+      "educational_note": "This is a VERIFIED FACT. Official WHO declarations are primary sources. The lesson: check if the source is the actual organization, not a screenshot of one.",
+      "why_hard_to_distinguish": "The formal language sounds like official government notices that scammers copy. Players must verify: Is this on WHO's actual website?",
+      "mil_laws": [
+        1,
+        4
+      ],
+      "mil_law_explanation": "Law 1: Health emergencies declared by WHO officially. Law 4: Right to timely health information."
+    },
+    {
+      "id": 35,
+      "domain": "Politics",
+      "truth_status": "real",
+      "headline": "India's Supreme Court strikes down electoral bonds scheme as unconstitutional",
+      "source": "Supreme Court of India + The Hindu + Indian Express",
+      "year": 2024,
+      "type": "verified news",
+      "trigger": "Democratic accountability + transparency demand",
+      "expected_behavior": "Discuss political funding, demand accountability",
+      "consequence": "All electoral bonds data released publicly. Political parties' funding sources exposed for the first time.",
+      "real_impact": "\u20b916,000+ crore in bonds revealed. Sparked national debate on political transparency and corporate influence.",
+      "educational_note": "This is a VERIFIED FACT. Supreme Court judgments are public records. The lesson: real political news often seems too impactful to believe \u2014 verify through official court records.",
+      "why_hard_to_distinguish": "Political news about corruption/funding often sounds like fake claims designed to discredit parties. Players must check: Is the court judgment publicly available?",
+      "mil_laws": [
+        1,
+        3
+      ],
+      "mil_law_explanation": "Law 1: Court judgments are public records. Law 3: Political transparency exposes bias in funding."
+    },
+    {
+      "id": 36,
+      "domain": "Technology",
+      "truth_status": "real",
+      "headline": "Twitter officially rebrands to 'X' \u2014 the bird logo is dead",
+      "source": "Elon Musk on X + Reuters + BBC",
+      "year": 2023,
+      "type": "verified news",
+      "trigger": "Surprise + disbelief at a major brand change",
+      "expected_behavior": "Share the news, discuss the change, express nostalgia or criticism",
+      "consequence": "One of the most recognized brands in history replaced overnight. Users confused, advertisers uncertain.",
+      "real_impact": "Twitter's brand value dropped an estimated $4-7 billion post-rebrand. 'X' became the most-searched rebrand in history.",
+      "educational_note": "This is a VERIFIED FACT. The change happened on Elon Musk's own platform. The lesson: even absurd-sounding news from a CEO's own account can be real \u2014 verify through the platform itself.",
+      "why_hard_to_distinguish": "The change was so unexpected that many people initially thought it was a joke or hack. Players must check: Did the company itself announce this?",
+      "mil_laws": [
+        1,
+        2
+      ],
+      "mil_law_explanation": "Law 1: Corporate announcements verified through official channels. Law 2: CEO's own platform as source."
+    },
+    {
+      "id": 37,
+      "domain": "Finance",
+      "truth_status": "real",
+      "headline": "India's UPI processes over 100 crore (1 billion) transactions in a single month",
+      "source": "NPCI Official + RBI + Economic Times",
+      "year": 2024,
+      "type": "verified news",
+      "trigger": "National achievement + digital transformation pride",
+      "expected_behavior": "Share as achievement, discuss digital India progress",
+      "consequence": "India became the world's largest real-time payment system. Inspired other countries to adopt similar systems.",
+      "real_impact": "UPI crossed 12 billion transactions in 2024. Multiple countries (France, UAE, Singapore) now accept UPI payments.",
+      "educational_note": "This is a VERIFIED FACT. NPCI publishes monthly transaction data publicly. The lesson: big numbers sound fake but are verifiable through official data sources.",
+      "why_hard_to_distinguish": "Huge numbers like '1 billion transactions' sound exaggerated \u2014 like fake viral stats. Players must check: Does the official NPCI website confirm this?",
+      "mil_laws": [
+        1,
+        4
+      ],
+      "mil_law_explanation": "Law 1: Financial data from NPCI/RBI official sources. Law 4: Digital economy information is a public right."
+    },
+    {
+      "id": 38,
+      "domain": "Disaster/Weather",
+      "truth_status": "real",
+      "headline": "Cyclone Biparjoy forces mass evacuation of 100,000+ people on Gujarat coast",
+      "source": "IMD + Gujarat Government + NDTV",
+      "year": 2023,
+      "type": "verified news",
+      "trigger": "Fear + concern for safety of others",
+      "expected_behavior": "Share evacuation info, warn others in affected areas",
+      "consequence": "Massive coordinated evacuation saved thousands of lives. Emergency services mobilized across 3 states.",
+      "real_impact": "Despite Category 4 intensity, only 2 deaths reported \u2014 proving early warning systems work.",
+      "educational_note": "This is a VERIFIED FACT. IMD (India Meteorological Department) issued official warnings. The lesson: real disaster news triggers sharing urges \u2014 verify before amplifying.",
+      "why_hard_to_distinguish": "Disaster news triggers the same 'share to warn others' instinct as fake warnings. Players must check: Is this from IMD/government, not a forwarded image?",
+      "mil_laws": [
+        1,
+        4
+      ],
+      "mil_law_explanation": "Law 1: Disaster warnings from IMD/government. Law 4: Safety information saves lives."
+    },
+    {
+      "id": 39,
+      "domain": "International",
+      "truth_status": "real",
+      "headline": "Canada suspends visa services in India amid diplomatic row over Nijjar killing",
+      "source": "Global Affairs Canada + Reuters + The Hindu",
+      "year": 2023,
+      "type": "verified news",
+      "trigger": "International tension + national pride/anger",
+      "expected_behavior": "Discuss diplomatic implications, share opinions on both nations",
+      "consequence": "Thousands of Indian students and workers affected. Diplomatic relations strained for months.",
+      "real_impact": "Canada reduced diplomatic staff in India. The row became the biggest India-Canada crisis in decades.",
+      "educational_note": "This is a VERIFIED FACT. Both governments issued official statements. The lesson: international diplomatic news is real but often framed with nationalistic bias on social media.",
+      "why_hard_to_distinguish": "Diplomatic crisis headlines trigger emotional sharing from both sides. Players must check: Do both governments confirm? Is reporting balanced?",
+      "mil_laws": [
+        1,
+        3
+      ],
+      "mil_law_explanation": "Law 1: Diplomatic news from official government channels. Law 3: International events carry nationalistic bias in framing."
+    },
+    {
+      "id": 40,
+      "domain": "Finance",
+      "truth_status": "real",
+      "headline": "India overtakes UK to become world's 5th largest economy",
+      "source": "IMF + World Bank + Economic Times",
+      "year": 2023,
+      "type": "verified news",
+      "trigger": "National pride + economic achievement",
+      "expected_behavior": "Share as milestone, discuss growth trajectory",
+      "consequence": "Milestone celebrated as validation of India's economic rise. Projected to become 3rd largest by 2027.",
+      "real_impact": "India's GDP crossed $3.7 trillion. The achievement shifted global economic narratives about emerging markets.",
+      "educational_note": "This is a VERIFIED FACT. IMF and World Bank data confirms. The lesson: positive national news can be equally viral as negative \u2014 verify through international institutions.",
+      "why_hard_to_distinguish": "Achievement headlines are often exaggerated in fake versions ('India becomes #1 economy!'). Players must check: What does IMF actually say? Is the ranking accurate?",
+      "mil_laws": [
+        1,
+        2
+      ],
+      "mil_law_explanation": "Law 1: Economic data from IMF/World Bank. Law 2: Citizens share national achievements."
+    },
+    {
+      "id": 41,
+      "domain": "Finance",
+      "truth_status": "real",
+      "headline": "Adani Group loses $150 billion in market value after Hindenburg short-seller report",
+      "source": "Hindenburg Research + Bloomberg + Reuters",
+      "year": 2023,
+      "type": "verified news",
+      "trigger": "Shock + curiosity about corporate scandal",
+      "expected_behavior": "Share the report, discuss corporate governance, panic sell stocks",
+      "consequence": "Biggest single-day wealth destruction in Indian market history. Retail investors lost billions.",
+      "real_impact": "Adani shares fell 60%+ in some cases. The report triggered SEBI investigation and global debate on short-selling.",
+      "educational_note": "This is a VERIFIED FACT. Market data is publicly verifiable. The lesson: financial news that causes panic is real but can be exploited by bad actors to manipulate prices further.",
+      "why_hard_to_distinguish": "Massive financial losses sound like panic-inducing fake news. Players must check: Is this reflected in actual stock market data?",
+      "mil_laws": [
+        1,
+        3,
+        4
+      ],
+      "mil_law_explanation": "Law 1: Financial data from stock exchanges. Law 3: Market panic driven by fear bias. Law 4: Investors' right to accurate market information."
+    },
+    {
+      "id": 42,
+      "domain": "Defence",
+      "truth_status": "real",
+      "headline": "India successfully tests Agni-V missile with MIRV technology \u2014 can strike multiple targets simultaneously",
+      "source": "DRDO + PIB + The Hindu",
+      "year": 2024,
+      "type": "verified news",
+      "trigger": "National security pride + strategic achievement",
+      "expected_behavior": "Share as defence milestone, discuss strategic implications",
+      "consequence": "India joined elite club of nations with MIRV capability (US, Russia, China, UK, France).",
+      "real_impact": "Enhanced India's nuclear deterrence. Regional strategic balance shifted significantly.",
+      "educational_note": "This is a VERIFIED FACT. DRDO and PIB confirmed officially. The lesson: defence news is real but often sensationalized \u2014 check if the source is the actual defence organization.",
+      "why_hard_to_distinguish": "Missile/defence news triggers patriotic sharing. Fake versions exaggerate capabilities ('India can now destroy any country!'). Players must check: What did DRDO actually announce?",
+      "mil_laws": [
+        1,
+        2
+      ],
+      "mil_law_explanation": "Law 1: Defence news from DRDO/PIB official. Law 2: National achievements shared by citizens."
+    },
+    {
+      "id": 43,
+      "domain": "Technology/Business",
+      "truth_status": "real",
+      "headline": "Apple becomes world's first company to reach $3 trillion market value",
+      "source": "Bloomberg + CNBC + Reuters",
+      "year": 2024,
+      "type": "verified news",
+      "trigger": "Awe + business curiosity",
+      "expected_behavior": "Share milestone, discuss tech dominance",
+      "consequence": "Marked a new era in tech valuation. Only 5 companies have ever crossed $1 trillion.",
+      "real_impact": "Apple's market cap exceeded the GDP of most countries. Sparked debates on tech monopolies and wealth concentration.",
+      "educational_note": "This is a VERIFIED FACT. Stock market data confirms. The lesson: extreme numbers in business news are real but verify through financial data platforms.",
+      "why_hard_to_distinguish": "$3 trillion sounds absurdly large \u2014 like fake viral stats. Players must check: Is this on Bloomberg/Reuters, or just a social media graphic?",
+      "mil_laws": [
+        1
+      ],
+      "mil_law_explanation": "Law 1: Business milestones verified through financial data platforms."
+    },
+    {
+      "id": 44,
+      "domain": "International",
+      "truth_status": "real",
+      "headline": "Israel-Hamas war erupts after October 7 attack \u2014 thousands killed in ongoing conflict",
+      "source": "Reuters + BBC + Al Jazeera",
+      "year": 2023,
+      "type": "verified news",
+      "trigger": "Horror + urgency to share breaking news",
+      "expected_behavior": "Share updates rapidly, take sides, amplify emotional content",
+      "consequence": "Most-covered conflict in social media history. Massive misinformation from both sides.",
+      "real_impact": "40,000+ deaths in Gaza. Social media became a battleground for narrative control \u2014 real and fake content mixed constantly.",
+      "educational_note": "This is a VERIFIED FACT but was accompanied by MORE fake content than any event in history. The lesson: during crises, misinformation spikes \u2014 verify before sharing even real-seeming content.",
+      "why_hard_to_distinguish": "During this conflict, AI-generated images, old footage, and fake casualty numbers flooded social media alongside real news. Players must check: Is this from a credible news organization with on-ground reporters?",
+      "mil_laws": [
+        1,
+        3,
+        4
+      ],
+      "mil_law_explanation": "Law 1: War news from multiple independent outlets. Law 3: Conflict content heavily biased from all sides. Law 4: Right to accurate crisis information."
+    },
+    {
+      "id": 45,
+      "domain": "Technology",
+      "truth_status": "real",
+      "headline": "ChatGPT reaches 100 million users in just 2 months \u2014 fastest-growing app in history",
+      "source": "OpenAI + CNBC + TechCrunch",
+      "year": 2023,
+      "type": "verified news",
+      "trigger": "Curiosity + FOMO about new technology",
+      "expected_behavior": "Try ChatGPT, share experiences, discuss AI impact",
+      "consequence": "Triggered the global AI race. Google, Microsoft, Meta all accelerated AI development.",
+      "real_impact": "Changed how billions interact with technology. Sparked debates on AI safety, job displacement, and education.",
+      "educational_note": "This is a VERIFIED FACT. OpenAI announced the milestone publicly. The lesson: tech milestone news is real but often accompanied by exaggerated AI hype claims.",
+      "why_hard_to_distinguish": "Rapid growth numbers sound like marketing hype or fake stats. Players must check: Did the company itself announce this? Do tech media confirm?",
+      "mil_laws": [
+        1,
+        2
+      ],
+      "mil_law_explanation": "Law 1: Tech milestones from company announcements. Law 2: Citizens participate in AI revolution."
+    },
+    {
+      "id": 46,
+      "domain": "Finance",
+      "truth_status": "real",
+      "headline": "RBI withdraws \u20b92000 notes from circulation \u2014 exchange at banks before deadline",
+      "source": "RBI Official Notification + PIB + All major banks",
+      "year": 2023,
+      "type": "verified news",
+      "trigger": "Urgency + concern about own money",
+      "expected_behavior": "Rush to banks to exchange notes, share the deadline with family",
+      "consequence": "Long queues at banks. People panicked about savings becoming worthless.",
+      "real_impact": "\u20b93.62 lakh crore worth of \u20b92000 notes in circulation. RBI gave 4 months to exchange. Most notes returned within deadline.",
+      "educational_note": "This is a VERIFIED FACT. RBI's official website had the notification. The lesson: real financial urgency news looks IDENTICAL to fake 'your money is invalid' scams \u2014 always check the official website URL.",
+      "why_hard_to_distinguish": "Note withdrawal news creates the same panic as fake 'demonetization' scams (like Card 11). Players must check: Is this on rbi.org.in, or a forwarded image?",
+      "mil_laws": [
+        1,
+        3,
+        4
+      ],
+      "mil_law_explanation": "Law 1: Financial notices only from RBI official website. Law 3: Real urgency vs fake urgency \u2014 verify the source URL. Law 4: Citizens' right to accurate financial information."
+    },
+    {
+      "id": 47,
+      "domain": "Politics",
+      "truth_status": "real",
+      "headline": "India hosts G20 Summit in New Delhi \u2014 African Union admitted as permanent member",
+      "source": "MEA India + G20 Official + Reuters",
+      "year": 2023,
+      "type": "verified news",
+      "trigger": "National pride + diplomatic achievement",
+      "expected_behavior": "Share India's hosting success, discuss global leadership",
+      "consequence": "India positioned itself as voice of Global South. Historic African Union inclusion changed G20 dynamics.",
+      "real_impact": "New Delhi Declaration adopted by consensus despite geopolitical tensions. India's diplomatic standing elevated globally.",
+      "educational_note": "This is a VERIFIED FACT. G20 and MEA India confirmed. The lesson: positive political news is real but verify \u2014 fake versions add false claims ('India banned China from G20!').",
+      "why_hard_to_distinguish": "Summit hosting news is often mixed with fake claims about diplomatic victories. Players must check: What was actually in the official declaration?",
+      "mil_laws": [
+        1,
+        2
+      ],
+      "mil_law_explanation": "Law 1: Diplomatic events from MEA/G20 official. Law 2: Citizens share national pride."
+    },
+    {
+      "id": 48,
+      "domain": "Sports",
+      "truth_status": "real",
+      "headline": "Paris Olympics 2024 opens on the Seine River \u2014 first time in history",
+      "source": "IOC + Olympics.com + BBC",
+      "year": 2024,
+      "type": "verified news",
+      "trigger": "Excitement + visual spectacle",
+      "expected_behavior": "Share photos/videos, discuss the historic moment",
+      "consequence": "300,000 spectators watched along the Seine. Redefined how opening ceremonies work.",
+      "real_impact": "Most-watched opening ceremony in history. Paris proved cities can host Olympics in existing infrastructure.",
+      "educational_note": "This is a VERIFIED FACT. IOC confirmed. The lesson: spectacular event news is real but AI-generated images of events also circulate \u2014 verify through official event coverage.",
+      "why_hard_to_distinguish": "Spectacular visuals from events are often replaced by AI-generated versions. Players must check: Is this from official Olympic coverage or a viral image?",
+      "mil_laws": [
+        1,
+        2
+      ],
+      "mil_law_explanation": "Law 1: Event coverage from IOC official. Law 2: Citizens share spectacular moments."
+    },
+    {
+      "id": 49,
+      "domain": "Sports",
+      "truth_status": "real",
+      "headline": "Neeraj Chopra wins silver at Paris Olympics \u2014 first Indian to win 2 individual Olympic medals",
+      "source": "Olympics.com + TOI + BBC Sport",
+      "year": 2024,
+      "type": "verified news",
+      "trigger": "National pride + athletic achievement",
+      "expected_behavior": "Celebrate and share the achievement",
+      "consequence": "India celebrated another historic Olympic moment. Neeraj became a national icon.",
+      "real_impact": "India won 29 medals total at Paris 2024 \u2014 best ever. Athletics participation in India surged.",
+      "educational_note": "This is a VERIFIED FACT. Olympic results are official records. The lesson: sports achievements are verifiable through official Olympic records \u2014 always the most reliable source.",
+      "why_hard_to_distinguish": "Sports achievement news is sometimes faked ('India won gold!') to generate engagement. Players must check: What does the official Olympics.com result page say?",
+      "mil_laws": [
+        1,
+        2
+      ],
+      "mil_law_explanation": "Law 1: Sports results from Olympics.com official. Law 2: Citizens celebrate athletic achievement."
+    },
+    {
+      "id": 50,
+      "domain": "World",
+      "truth_status": "real",
+      "headline": "World population officially crosses 8 billion \u2014 a milestone reached in November 2022",
+      "source": "UN Population Division + WHO + Reuters",
+      "year": 2022,
+      "type": "verified news",
+      "trigger": "Awe + concern about resources and future",
+      "expected_behavior": "Share milestone, discuss population challenges",
+      "consequence": "Global conversation about sustainability, resources, and development intensified.",
+      "real_impact": "UN projected population to reach 9.7 billion by 2050. Climate and resource debates gained urgency.",
+      "educational_note": "This is a VERIFIED FACT. UN published the milestone officially. The lesson: world milestone news is real but verify \u2014 fake versions add false predictions ('population will double by 2030!').",
+      "why_hard_to_distinguish": "Big population/environment numbers are often exaggerated in fake claims. Players must check: What does the UN Population Division actually report?",
+      "mil_laws": [
+        1
+      ],
+      "mil_law_explanation": "Law 1: Population data from UN official sources."
+    },
+    {
+      "id": 51,
+      "domain": "Politics",
+      "truth_status": "real",
+      "headline": "New Parliament building inaugurated in New Delhi by PM Modi",
+      "source": "PIB + Lok Sabha TV + All major outlets",
+      "year": 2024,
+      "type": "verified news",
+      "trigger": "Political interest + national development pride",
+      "expected_behavior": "Share images, discuss the new building's significance",
+      "consequence": "India's legislative body moved to a purpose-built triangular structure. Symbolized modern India's aspirations.",
+      "real_impact": "The building accommodates 888 MPs in Lok Sabha (up from 543). Cost \u20b9971 crore. Became a symbol of India's infrastructure push.",
+      "educational_note": "This is a VERIFIED FACT. PIB and Parliament confirmed. The lesson: government announcements are real but verify through official government channels, not forwarded images.",
+      "why_hard_to_distinguish": "Government project news often gets fake additions ('Parliament has secret rooms!'). Players must check: What did PIB actually announce vs. what social media adds?",
+      "mil_laws": [
+        1,
+        2
+      ],
+      "mil_law_explanation": "Law 1: Government announcements from PIB official. Law 2: Citizens engage with national development."
+    },
+    {
+      "id": 52,
+      "domain": "Science",
+      "truth_status": "real",
+      "headline": "ISRO's Aditya-L1 spacecraft successfully reaches Lagrange Point L1 \u2014 India's first solar mission",
+      "source": "ISRO + PIB + Nature",
+      "year": 2024,
+      "type": "verified news",
+      "trigger": "Scientific achievement + national pride",
+      "expected_behavior": "Share the milestone, discuss solar science",
+      "consequence": "India began studying the Sun from 1.5 million km away. Data contributes to space weather prediction.",
+      "real_impact": "Aditya-L1 will study solar storms that affect satellites and power grids. India joined elite solar research nations.",
+      "educational_note": "This is a VERIFIED FACT. ISRO confirmed the achievement. The lesson: space science news is real but verify \u2014 fake versions exaggerate ('ISRO found life on Sun!').",
+      "why_hard_to_distinguish": "Space mission headlines often get fake sensational additions. Players must check: What did ISRO's official statement say vs. what viral posts claim?",
+      "mil_laws": [
+        1,
+        2
+      ],
+      "mil_law_explanation": "Law 1: Space science from ISRO official. Law 2: Citizens share scientific milestones."
+    },
+    {
+      "id": 53,
+      "domain": "International",
+      "truth_status": "real",
+      "headline": "Russia invades Ukraine \u2014 largest military conflict in Europe since WWII begins",
+      "source": "Reuters + BBC + UN",
+      "year": 2022,
+      "type": "verified news",
+      "trigger": "Shock + concern + urgency to share breaking news",
+      "expected_behavior": "Share updates rapidly, form opinions, amplify emotional content",
+      "consequence": "Global energy crisis, food shortage fears, refugee crisis affecting millions.",
+      "real_impact": "14 million Ukrainians displaced. Global grain and energy prices spiked. NATO expanded with Finland and Sweden joining.",
+      "educational_note": "This is a VERIFIED FACT but was accompanied by massive propaganda from both sides. The lesson: during wars, ALL sources have agendas \u2014 cross-reference multiple independent outlets.",
+      "why_hard_to_distinguish": "War news is the most manipulated content category. Both sides spread propaganda alongside real reports. Players must check: Is this from independent international media with verified on-ground sources?",
+      "mil_laws": [
+        1,
+        3,
+        4
+      ],
+      "mil_law_explanation": "Law 1: War news from independent international media. Law 3: Propaganda from all sides during conflict. Law 4: Right to verified crisis information."
+    },
+    {
+      "id": 54,
+      "domain": "Finance",
+      "truth_status": "real",
+      "headline": "India's digital payment volume surpasses US + UK + France combined \u2014 world's largest",
+      "source": "World Payments Report + RBI + Financial Times",
+      "year": 2024,
+      "type": "verified news",
+      "trigger": "National pride + digital transformation achievement",
+      "expected_behavior": "Share as milestone, discuss digital India success",
+      "consequence": "India became the global leader in digital transactions. Other nations studied India's UPI model.",
+      "real_impact": "India processed 88 billion digital transactions in 2023 \u2014 more than US (17B), UK (14B), and France (7B) combined.",
+      "educational_note": "This is a VERIFIED FACT. World Payments Report (Capgemini/BNP Paribas) confirms. The lesson: comparison statistics are real but verify \u2014 fake versions inflate the numbers further.",
+      "why_hard_to_distinguish": "Comparison stats ('more than US+UK+France!') sound too good to be true. Players must check: What does the actual World Payments Report say?",
+      "mil_laws": [
+        1
+      ],
+      "mil_law_explanation": "Law 1: Economic comparisons from World Payments Report."
+    },
+    {
+      "id": 55,
+      "domain": "Science/Health",
+      "truth_status": "real",
+      "headline": "WHO confirms: Malaria vaccine RTS,S approved for children in Africa \u2014 first-ever malaria vaccine",
+      "source": "WHO Official + Reuters + The Lancet",
+      "year": 2023,
+      "type": "verified news",
+      "trigger": "Hope + humanitarian concern",
+      "expected_behavior": "Share the breakthrough, discuss global health progress",
+      "consequence": "First vaccine against a parasitic disease in humans. Potential to save 300,000+ children annually.",
+      "real_impact": "Ghana, Kenya, and Malawi began rollout. Malaria kills 600,000+ people yearly, mostly African children under 5.",
+      "educational_note": "This is a VERIFIED FACT. WHO and The Lancet published the results. The lesson: medical breakthroughs are real but verify \u2014 fake versions claim cures for ALL diseases using the same language.",
+      "why_hard_to_distinguish": "Medical breakthrough headlines look similar to fake 'miracle cure' claims (like Cards 16, 27). Players must check: Is this from WHO/Lancet, or a health blog selling products?",
+      "mil_laws": [
+        1,
+        3,
+        4
+      ],
+      "mil_law_explanation": "Law 1: Medical breakthroughs from WHO/Lancet. Law 3: Health news distinguishes real breakthroughs from fake cures. Law 4: Patients' right to evidence-based medicine."
+    }
+  ],
+  "usage_notes": {
+    "how_to_use": "Replace or merge this deck with your existing card data. Each card has all fields needed for the AI Inspector (3C2B framework), the ripple effect (consequence), and the ABC model (trigger \u2192 expected_behavior \u2192 consequence).",
+    "integration": "These map directly to your existing card structure. Add 'trigger', 'expected_behavior', 'consequence', 'real_impact', and 'ai_analysis' fields to your current card type.",
+    "attribution": "All cases are documented real-world events with verifiable sources. Cite them in your proposal under 'Real-World Case Studies'."
+  }
+}

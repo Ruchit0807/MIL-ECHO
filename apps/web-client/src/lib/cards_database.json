@@ -30,7 +30,13 @@
       "context": "Posted during peak COVID panic when people sought scapegoats",
       "bias": "Fear-mongering, false causation, us-vs-technology framing",
       "business": "Distraction from real public health measures"
-    }
+    },
+    "mil_laws": [
+      1,
+      2,
+      3
+    ],
+    "mil_law_explanation": "Law 1: Technology (5G) becomes misinformation target. Law 2: Anonymous citizens created this message. Law 3: Content exploits bias and fear."
   },
   {
     "id": "card-002",
@@ -63,7 +69,12 @@
       "context": "Rushed vaccine development created legitimate questions that conspiracies filled",
       "bias": "Appeal to distrust, false authority subversion, hidden agenda framing",
       "business": "Anti-vaccine content creators monetized fear through views and book sales"
-    }
+    },
+    "mil_laws": [
+      2,
+      3
+    ],
+    "mil_law_explanation": "Law 2: Citizen-created conspiracy content. Law 3: Information carries hidden agendas and bias."
   },
   {
     "id": "card-003",
@@ -96,7 +107,13 @@
       "context": "Desperation during early pandemic when no treatment existed",
       "bias": "False hope, appeal to desperation, authority misquoting",
       "business": "Engagement farming — extreme claims get maximum shares"
-    }
+    },
+    "mil_laws": [
+      1,
+      3,
+      4
+    ],
+    "mil_law_explanation": "Law 1: Medical information must come from credible sources. Law 3: Misinterpreted statements carry dangerous bias. Law 4: Right to accurate health information."
   },
   {
     "id": "card-004",
@@ -129,7 +146,12 @@
       "context": "US election cycle when political tribes were hypersensitive",
       "bias": "Appeal to authority, false endorsement, tribal validation",
       "business": "Ad revenue — each viral share earned $0.01-0.05 per view"
-    }
+    },
+    "mil_laws": [
+      2,
+      3
+    ],
+    "mil_law_explanation": "Law 2: Fake content created to look authoritative. Law 3: Fake endorsement exploits political bias."
   },
   {
     "id": "card-005",
@@ -162,7 +184,13 @@
       "context": "Close election + existing immigration debate made this believable",
       "bias": "Scapegoating, manufactured crisis, democratic erosion framing",
       "business": "Political gain — suppressing opponent voter turnout"
-    }
+    },
+    "mil_laws": [
+      1,
+      3,
+      4
+    ],
+    "mil_law_explanation": "Law 1: Political information requires verification. Law 3: Immigration claims carry ideological bias. Law 4: Voter rights depend on accurate information."
   },
   {
     "id": "card-006",
@@ -195,7 +223,13 @@
       "context": "Markets were already anxious about debt ceiling crisis",
       "bias": "Shock value, false authority (appeared to be from real news outlet)",
       "business": "Market manipulation — short sellers profited from the dip"
-    }
+    },
+    "mil_laws": [
+      1,
+      2,
+      4
+    ],
+    "mil_law_explanation": "Law 1: Financial information from AI sources needs verification. Law 2: Citizens can create and spread AI content. Law 4: Market stability depends on truthful information."
   },
   {
     "id": "card-007",
@@ -228,7 +262,12 @@
       "context": "Crypto boom created unrealistic profit expectations",
       "bias": "Appeal to greed, urgency ('limited time'), false celebrity endorsement",
       "business": "Direct theft — victims send crypto that is never returned"
-    }
+    },
+    "mil_laws": [
+      2,
+      3
+    ],
+    "mil_law_explanation": "Law 2: Scam content created by criminal networks. Law 3: Celebrity endorsement exploits greed bias."
   },
   {
     "id": "card-008",
@@ -261,7 +300,13 @@
       "context": "WhatsApp groups amplify parental fear rapidly",
       "bias": "Fear for children, contamination disgust, no verifiable source",
       "business": "Engagement through fear — forwards generate infinite reach"
-    }
+    },
+    "mil_laws": [
+      1,
+      3,
+      4
+    ],
+    "mil_law_explanation": "Law 1: Community health information must be verified. Law 3: Fear-based content exploits social bias. Law 4: Children's safety requires accurate information."
   },
   {
     "id": "card-009",
@@ -294,7 +339,13 @@
       "context": "Rural areas with limited fact-checking infrastructure",
       "bias": "Urgency without evidence, moral panic, share-to-protect framing",
       "business": "Pure viral engineering — designed for maximum forward velocity"
-    }
+    },
+    "mil_laws": [
+      1,
+      2,
+      4
+    ],
+    "mil_law_explanation": "Law 1: Safety warnings must come from authorities. Law 2: Chain messages are citizen-created content. Law 4: Community safety depends on verified alerts."
   },
   {
     "id": "card-010",
@@ -327,7 +378,12 @@
       "context": "Existing social tensions made fabricated inequality believable",
       "bias": "Us-vs-them framing, economic injustice trigger, fabricated policy",
       "business": "Political mobilization — riots serve electoral/communal agendas"
-    }
+    },
+    "mil_laws": [
+      1,
+      3
+    ],
+    "mil_law_explanation": "Law 1: Political promises require fact-checking. Law 3: Communal claims exploit identity bias."
   },
   {
     "id": "card-011",
@@ -360,7 +416,13 @@
       "context": "2016 demonetization trauma made this immediately believable",
       "bias": "False authority (RBI logo), urgency, fear of financial loss",
       "business": "Distraction — while people panicked, other scams ran simultaneously"
-    }
+    },
+    "mil_laws": [
+      1,
+      2,
+      3
+    ],
+    "mil_law_explanation": "Law 1: Financial announcements come only from official sources. Law 2: Fake notices look official. Law 3: Financial panic is bias-driven."
   },
   {
     "id": "card-012",
@@ -393,7 +455,13 @@
       "context": "Real scheme exists, making the fake version indistinguishable to non-tech users",
       "bias": "False authority, free money trigger, urgency ('limited slots')",
       "business": "Direct financial theft via credential harvesting"
-    }
+    },
+    "mil_laws": [
+      1,
+      2,
+      3
+    ],
+    "mil_law_explanation": "Law 1: Government schemes announced through official channels only. Law 2: Scam SMS is citizen-targeted content. Law 3: Urgency creates false trust bias."
   },
   {
     "id": "card-013",
@@ -426,7 +494,11 @@
       "context": "Genuine anger about healthcare costs makes manipulation believable",
       "bias": "Truth wrapped in exaggeration, corporate villain framing, conspiracy undertones",
       "business": "Views from outrage content + alternative medicine promotion"
-    }
+    },
+    "mil_laws": [
+      3
+    ],
+    "mil_law_explanation": "Law 3: Real issue (drug pricing) exaggerated with misleading framing."
   },
   {
     "id": "card-014",
@@ -459,7 +531,13 @@
       "context": "Pre-election period when political tensions were already high",
       "bias": "False authority arrest, manufactured outrage, mobilization framing",
       "business": "Political destabilization before elections"
-    }
+    },
+    "mil_laws": [
+      1,
+      2,
+      3
+    ],
+    "mil_law_explanation": "Law 1: Political images from AI need verification. Law 2: Deepfakes show citizens can create fake political content. Law 3: Political distrust is exploited through bias."
   },
   {
     "id": "card-015",
@@ -492,7 +570,12 @@
       "context": "Post-2020 election distrust made any fraud claim instantly viral",
       "bias": "Selective truth manipulation, democratic erosion, tribal validation",
       "business": "Political mobilization and media engagement revenue"
-    }
+    },
+    "mil_laws": [
+      3,
+      4
+    ],
+    "mil_law_explanation": "Law 3: Real event (dead voter) framed with false context of fraud. Law 4: Voter confidence requires accurate framing."
   },
   {
     "id": "card-016",
@@ -525,7 +608,13 @@
       "context": "Cancer patients are desperate and vulnerable to false hope",
       "bias": "Conspiracy against 'Big Pharma,' false hope, natural vs artificial framing",
       "business": "Selling alternative medicine products, books, and courses"
-    }
+    },
+    "mil_laws": [
+      1,
+      3,
+      4
+    ],
+    "mil_law_explanation": "Law 1: Health claims need scientific verification. Law 3: 'Doctors don't want you to know' exploits distrust bias. Law 4: Health decisions require accurate information."
   },
   {
     "id": "card-017",
@@ -558,7 +647,13 @@
       "context": "Real data privacy concerns exist, making exaggeration believable",
       "bias": "Paranoia amplification, truth-exaggeration mix, loss of agency framing",
       "business": "YouTube/TikTok views from fear-based content"
-    }
+    },
+    "mil_laws": [
+      1,
+      2,
+      3
+    ],
+    "mil_law_explanation": "Law 1: Tech claims about privacy need fact-checking. Law 2: Fear content is citizen-spread. Law 3: Privacy anxiety is exploited as bias."
   },
   {
     "id": "card-018",
@@ -591,7 +686,12 @@
       "context": "Market anxiety periods make crash predictions viral",
       "bias": "Fear of loss, herd behavior exploitation, false certainty",
       "business": "Short selling profits or influencer credibility building"
-    }
+    },
+    "mil_laws": [
+      3,
+      4
+    ],
+    "mil_law_explanation": "Law 3: Market predictions carry false certainty bias. Law 4: Financial decisions need verified information."
   },
   {
     "id": "card-019",
@@ -624,7 +724,12 @@
       "context": "Early pandemic when people desperately wanted to feel safe",
       "bias": "False relief, selective science interpretation, in-group comfort",
       "business": "Reduced compliance benefits those selling alternative solutions"
-    }
+    },
+    "mil_laws": [
+      1,
+      3
+    ],
+    "mil_law_explanation": "Law 1: Health information from WHO, not WhatsApp. Law 3: Misinterpreted science exploits false hope bias."
   },
   {
     "id": "card-020",
@@ -657,7 +762,13 @@
       "context": "Religious communities have strong trust in leaders — betrayal is devastating",
       "bias": "Religious identity attack, authority betrayal, fabricated evidence",
       "business": "Communal division serves political/religious rival agendas"
-    }
+    },
+    "mil_laws": [
+      1,
+      2,
+      3
+    ],
+    "mil_law_explanation": "Law 1: Religious content must be verified. Law 2: Deepfakes of religious leaders are citizen-created harm. Law 3: Religious bias exploited to destroy trust."
   },
   {
     "id": "card-021",
@@ -690,7 +801,13 @@
       "context": "Pre-election period targeting elderly voters' financial anxiety",
       "bias": "Livelihood fear, authority betrayal, leaked document framing",
       "business": "Electoral manipulation targeting senior citizens"
-    }
+    },
+    "mil_laws": [
+      1,
+      2,
+      4
+    ],
+    "mil_law_explanation": "Law 1: Audio leaks need authentication. Law 2: Voice cloning shows citizens can create fake audio. Law 4: Pension rights depend on accurate government information."
   },
   {
     "id": "card-022",
@@ -723,7 +840,12 @@
       "context": "Ongoing debate about screen time makes health claims believable",
       "bias": "Parental protection instinct, fake scientific authority, fear appeal",
       "business": "Selling parental control apps and anti-tech products"
-    }
+    },
+    "mil_laws": [
+      1,
+      3
+    ],
+    "mil_law_explanation": "Law 1: Health studies need scientific peer review. Law 3: Parental fear exploited as bias."
   },
   {
     "id": "card-023",
@@ -756,7 +878,13 @@
       "context": "Real geopolitical tensions make surveillance claims credible",
       "bias": "Nationalism trigger, surveillance paranoia, foreign enemy framing",
       "business": "Views from geopolitical fear content"
-    }
+    },
+    "mil_laws": [
+      1,
+      3,
+      4
+    ],
+    "mil_law_explanation": "Law 1: Data privacy claims need evidence. Law 3: National security fear used as bias. Law 4: Users deserve transparent data practices."
   },
   {
     "id": "card-024",
@@ -789,7 +917,13 @@
       "context": "Real welfare schemes exist, making fake versions believable",
       "bias": "Free money trigger, government authority mimicry, urgency",
       "business": "Direct financial theft and identity fraud"
-    }
+    },
+    "mil_laws": [
+      1,
+      2,
+      3
+    ],
+    "mil_law_explanation": "Law 1: Government money schemes only through official channels. Law 2: Fake websites mimic real government content. Law 3: Greed exploited through urgency bias."
   },
   {
     "id": "card-025",
@@ -822,7 +956,12 @@
       "context": "Celebrity death hoaxes have a long history, now amplified by AI",
       "bias": "Shock value, grief exploitation, false urgency",
       "business": "Viral engagement — death news gets maximum shares"
-    }
+    },
+    "mil_laws": [
+      2,
+      3
+    ],
+    "mil_law_explanation": "Law 2: AI-generated content of real people shows citizen creation power. Law 3: Shock value exploits emotional bias."
   },
   {
     "id": "card-026",
@@ -855,7 +994,13 @@
       "context": "Political rivalry makes corruption accusations instantly believable",
       "bias": "Confirmation bias, moral outrage, 'before deleted' urgency",
       "business": "Electoral sabotage and opponent reputation destruction"
-    }
+    },
+    "mil_laws": [
+      1,
+      2,
+      3
+    ],
+    "mil_law_explanation": "Law 1: Political evidence needs verification. Law 2: Deepfakes show creation capability. Law 3: Political bias exploited to destroy reputation."
   },
   {
     "id": "card-027",
@@ -888,7 +1033,13 @@
       "context": "Chronic disease patients are desperate for affordable solutions",
       "bias": "False hope, secret knowledge framing, anti-establishment appeal",
       "business": "Direct product sales to vulnerable patients"
-    }
+    },
+    "mil_laws": [
+      1,
+      3,
+      4
+    ],
+    "mil_law_explanation": "Law 1: Medical claims need FDA/scientific backing. Law 3: 'Secret cure' exploits desperation bias. Law 4: Patients' right to evidence-based treatment."
   },
   {
     "id": "card-028",
@@ -921,7 +1072,13 @@
       "context": "Digital literacy gap makes technical threats seem real",
       "bias": "Protection of loved ones, technical fear, chain obligation",
       "business": "Pure viral engineering — no monetization, just spread"
-    }
+    },
+    "mil_laws": [
+      1,
+      2,
+      4
+    ],
+    "mil_law_explanation": "Law 1: Security warnings from tech companies, not chain messages. Law 2: Chain letters are citizen-spread content. Law 4: Digital safety requires verified alerts."
   },
   {
     "id": "card-029",
@@ -954,7 +1111,12 @@
       "context": "Social justice movements make brutality footage instantly shareable",
       "bias": "Moral outrage, injustice framing, misattribution exploitation",
       "business": "Social movement manipulation and engagement farming"
-    }
+    },
+    "mil_laws": [
+      3,
+      4
+    ],
+    "mil_law_explanation": "Law 3: Real video with wrong context = misleading framing bias. Law 4: Justice requires accurate attribution."
   },
   {
     "id": "card-030",
@@ -987,7 +1149,13 @@
       "context": "Crypto hype cycles create unrealistic profit expectations",
       "bias": "Extreme greed, scarcity urgency ('before it's too late'), social proof",
       "business": "Pump and dump — creators sell at peak, retail investors lose everything"
-    }
+    },
+    "mil_laws": [
+      1,
+      2,
+      3
+    ],
+    "mil_law_explanation": "Law 1: Financial advice needs regulatory verification. Law 2: Influencers create pump content. Law 3: Greed and FOMO exploited as bias."
   },
   {
     "id": "card-031",
@@ -1020,7 +1188,11 @@
       "context": "Weight loss culture makes simple rules appealing",
       "bias": "Simplicity appeal, body anxiety, false scientific certainty",
       "business": "Selling diet plans, courses, and supplement products"
-    }
+    },
+    "mil_laws": [
+      3
+    ],
+    "mil_law_explanation": "Law 3: Real health topic oversimplified with false certainty bias."
   },
   {
     "id": "card-032",
@@ -1053,7 +1225,13 @@
       "context": "Pre-election period targeting demographics likely to vote against specific candidates",
       "bias": "Learned helplessness, democratic cynicism, powerlessness framing",
       "business": "Electoral advantage through voter suppression"
-    }
+    },
+    "mil_laws": [
+      1,
+      3,
+      4
+    ],
+    "mil_law_explanation": "Law 1: Election information from official bodies only. Law 3: Cynicism exploited through powerlessness bias. Law 4: Democratic rights depend on accurate information."
   },
   {
     "id": "card-033",
@@ -1086,7 +1264,12 @@
       "context": "Public news reporting",
       "bias": "Standard editorial perspective",
       "business": "Public information dissemination"
-    }
+    },
+    "mil_laws": [
+      1,
+      2
+    ],
+    "mil_law_explanation": "Law 1: Science news verified through ISRO. Law 2: Citizens celebrate and share achievements."
   },
   {
     "id": "card-034",
@@ -1119,7 +1302,12 @@
       "context": "Public news reporting",
       "bias": "Standard editorial perspective",
       "business": "Public information dissemination"
-    }
+    },
+    "mil_laws": [
+      1,
+      4
+    ],
+    "mil_law_explanation": "Law 1: Health emergencies declared by WHO officially. Law 4: Right to timely health information."
   },
   {
     "id": "card-035",
@@ -1152,7 +1340,12 @@
       "context": "Public news reporting",
       "bias": "Standard editorial perspective",
       "business": "Public information dissemination"
-    }
+    },
+    "mil_laws": [
+      1,
+      3
+    ],
+    "mil_law_explanation": "Law 1: Court judgments are public records. Law 3: Political transparency exposes bias in funding."
   },
   {
     "id": "card-036",
@@ -1185,7 +1378,12 @@
       "context": "Public news reporting",
       "bias": "Standard editorial perspective",
       "business": "Public information dissemination"
-    }
+    },
+    "mil_laws": [
+      1,
+      2
+    ],
+    "mil_law_explanation": "Law 1: Corporate announcements verified through official channels. Law 2: CEO's own platform as source."
   },
   {
     "id": "card-037",
@@ -1218,7 +1416,12 @@
       "context": "Public news reporting",
       "bias": "Standard editorial perspective",
       "business": "Public information dissemination"
-    }
+    },
+    "mil_laws": [
+      1,
+      4
+    ],
+    "mil_law_explanation": "Law 1: Financial data from NPCI/RBI official sources. Law 4: Digital economy information is a public right."
   },
   {
     "id": "card-038",
@@ -1251,7 +1454,12 @@
       "context": "Public news reporting",
       "bias": "Standard editorial perspective",
       "business": "Public information dissemination"
-    }
+    },
+    "mil_laws": [
+      1,
+      4
+    ],
+    "mil_law_explanation": "Law 1: Disaster warnings from IMD/government. Law 4: Safety information saves lives."
   },
   {
     "id": "card-039",
@@ -1284,7 +1492,12 @@
       "context": "Public news reporting",
       "bias": "Standard editorial perspective",
       "business": "Public information dissemination"
-    }
+    },
+    "mil_laws": [
+      1,
+      3
+    ],
+    "mil_law_explanation": "Law 1: Diplomatic news from official government channels. Law 3: International events carry nationalistic bias in framing."
   },
   {
     "id": "card-040",
@@ -1317,7 +1530,12 @@
       "context": "Public news reporting",
       "bias": "Standard editorial perspective",
       "business": "Public information dissemination"
-    }
+    },
+    "mil_laws": [
+      1,
+      2
+    ],
+    "mil_law_explanation": "Law 1: Economic data from IMF/World Bank. Law 2: Citizens share national achievements."
   },
   {
     "id": "card-041",
@@ -1350,7 +1568,13 @@
       "context": "Public news reporting",
       "bias": "Standard editorial perspective",
       "business": "Public information dissemination"
-    }
+    },
+    "mil_laws": [
+      1,
+      3,
+      4
+    ],
+    "mil_law_explanation": "Law 1: Financial data from stock exchanges. Law 3: Market panic driven by fear bias. Law 4: Investors' right to accurate market information."
   },
   {
     "id": "card-042",
@@ -1383,7 +1607,12 @@
       "context": "Public news reporting",
       "bias": "Standard editorial perspective",
       "business": "Public information dissemination"
-    }
+    },
+    "mil_laws": [
+      1,
+      2
+    ],
+    "mil_law_explanation": "Law 1: Defence news from DRDO/PIB official. Law 2: National achievements shared by citizens."
   },
   {
     "id": "card-043",
@@ -1416,7 +1645,11 @@
       "context": "Public news reporting",
       "bias": "Standard editorial perspective",
       "business": "Public information dissemination"
-    }
+    },
+    "mil_laws": [
+      1
+    ],
+    "mil_law_explanation": "Law 1: Business milestones verified through financial data platforms."
   },
   {
     "id": "card-044",
@@ -1449,7 +1682,13 @@
       "context": "Public news reporting",
       "bias": "Standard editorial perspective",
       "business": "Public information dissemination"
-    }
+    },
+    "mil_laws": [
+      1,
+      3,
+      4
+    ],
+    "mil_law_explanation": "Law 1: War news from multiple independent outlets. Law 3: Conflict content heavily biased from all sides. Law 4: Right to accurate crisis information."
   },
   {
     "id": "card-045",
@@ -1482,7 +1721,12 @@
       "context": "Public news reporting",
       "bias": "Standard editorial perspective",
       "business": "Public information dissemination"
-    }
+    },
+    "mil_laws": [
+      1,
+      2
+    ],
+    "mil_law_explanation": "Law 1: Tech milestones from company announcements. Law 2: Citizens participate in AI revolution."
   },
   {
     "id": "card-046",
@@ -1515,7 +1759,13 @@
       "context": "Public news reporting",
       "bias": "Standard editorial perspective",
       "business": "Public information dissemination"
-    }
+    },
+    "mil_laws": [
+      1,
+      3,
+      4
+    ],
+    "mil_law_explanation": "Law 1: Financial notices only from RBI official website. Law 3: Real urgency vs fake urgency — verify the source URL. Law 4: Citizens' right to accurate financial information."
   },
   {
     "id": "card-047",
@@ -1548,7 +1798,12 @@
       "context": "Public news reporting",
       "bias": "Standard editorial perspective",
       "business": "Public information dissemination"
-    }
+    },
+    "mil_laws": [
+      1,
+      2
+    ],
+    "mil_law_explanation": "Law 1: Diplomatic events from MEA/G20 official. Law 2: Citizens share national pride."
   },
   {
     "id": "card-048",
@@ -1581,7 +1836,12 @@
       "context": "Public news reporting",
       "bias": "Standard editorial perspective",
       "business": "Public information dissemination"
-    }
+    },
+    "mil_laws": [
+      1,
+      2
+    ],
+    "mil_law_explanation": "Law 1: Event coverage from IOC official. Law 2: Citizens share spectacular moments."
   },
   {
     "id": "card-049",
@@ -1614,7 +1874,12 @@
       "context": "Public news reporting",
       "bias": "Standard editorial perspective",
       "business": "Public information dissemination"
-    }
+    },
+    "mil_laws": [
+      1,
+      2
+    ],
+    "mil_law_explanation": "Law 1: Sports results from Olympics.com official. Law 2: Citizens celebrate athletic achievement."
   },
   {
     "id": "card-050",
@@ -1647,7 +1912,11 @@
       "context": "Public news reporting",
       "bias": "Standard editorial perspective",
       "business": "Public information dissemination"
-    }
+    },
+    "mil_laws": [
+      1
+    ],
+    "mil_law_explanation": "Law 1: Population data from UN official sources."
   },
   {
     "id": "card-051",
@@ -1680,7 +1949,12 @@
       "context": "Public news reporting",
       "bias": "Standard editorial perspective",
       "business": "Public information dissemination"
-    }
+    },
+    "mil_laws": [
+      1,
+      2
+    ],
+    "mil_law_explanation": "Law 1: Government announcements from PIB official. Law 2: Citizens engage with national development."
   },
   {
     "id": "card-052",
@@ -1713,7 +1987,12 @@
       "context": "Public news reporting",
       "bias": "Standard editorial perspective",
       "business": "Public information dissemination"
-    }
+    },
+    "mil_laws": [
+      1,
+      2
+    ],
+    "mil_law_explanation": "Law 1: Space science from ISRO official. Law 2: Citizens share scientific milestones."
   },
   {
     "id": "card-053",
@@ -1746,7 +2025,13 @@
       "context": "Public news reporting",
       "bias": "Standard editorial perspective",
       "business": "Public information dissemination"
-    }
+    },
+    "mil_laws": [
+      1,
+      3,
+      4
+    ],
+    "mil_law_explanation": "Law 1: War news from independent international media. Law 3: Propaganda from all sides during conflict. Law 4: Right to verified crisis information."
   },
   {
     "id": "card-054",
@@ -1779,7 +2064,11 @@
       "context": "Public news reporting",
       "bias": "Standard editorial perspective",
       "business": "Public information dissemination"
-    }
+    },
+    "mil_laws": [
+      1
+    ],
+    "mil_law_explanation": "Law 1: Economic comparisons from World Payments Report."
   },
   {
     "id": "card-055",
@@ -1812,6 +2101,12 @@
       "context": "Public news reporting",
       "bias": "Standard editorial perspective",
       "business": "Public information dissemination"
-    }
+    },
+    "mil_laws": [
+      1,
+      3,
+      4
+    ],
+    "mil_law_explanation": "Law 1: Medical breakthroughs from WHO/Lancet. Law 3: Health news distinguishes real breakthroughs from fake cures. Law 4: Patients' right to evidence-based medicine."
   }
 ]
