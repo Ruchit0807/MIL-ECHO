@@ -667,12 +667,12 @@ export default function Home() {
       <div className="dark bg-background grid-bg text-on-background font-body-md min-h-screen flex flex-col selection:bg-neo-mint selection:text-neo-black">
         
         {/* Navigation Top Bar */}
-        <nav className="sticky top-0 w-full z-50 flex justify-between items-center px-6 lg:px-margin-desktop h-24 border-b-4 border-neo-black bg-surface-container shadow-[0px_6px_0px_0px_#000]">
+        <nav className="sticky top-0 w-full z-50 flex justify-between items-center px-6 lg:px-margin-desktop h-20 border-b-4 border-neo-black bg-surface-container shadow-[0px_6px_0px_0px_#000]">
           <div className="flex items-center gap-4 relative">
             <img
               src="/mil_logo.png"
               alt="MIL ECHO Logo"
-              className="h-16 lg:h-20 w-auto cursor-pointer object-contain max-w-[260px] lg:max-w-[340px] transition-transform hover:scale-105"
+              className="h-12 lg:h-14 w-auto cursor-pointer object-contain transition-transform hover:scale-105"
               onClick={handleExitRoom}
             />
           </div>
