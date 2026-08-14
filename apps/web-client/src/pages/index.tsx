@@ -227,6 +227,21 @@ export default function Home() {
   const [isExtensionInboxOpen, setIsExtensionInboxOpen] = useState<boolean>(false);
   const [isPassConfirmOpen, setIsPassConfirmOpen] = useState<boolean>(false);
   const [isMuted, setIsMuted] = useState<boolean>(soundFx.isMuted());
+  const [isExportDropdownOpen, setIsExportDropdownOpen] = useState<boolean>(false);
+
+  const exportDropdownRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (exportDropdownRef.current && !exportDropdownRef.current.contains(event.target as Node)) {
+        setIsExportDropdownOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   const handleToggleMute = () => {
     const mutedState = soundFx.toggleMute();
@@ -1489,12 +1504,48 @@ export default function Home() {
             © 2026 MIL ECHO — PREBUNKING PROTOCOL ACTIVE
           </div>
           <div className="flex items-center gap-6 font-headline-lg text-sm">
-            <button
-              onClick={() => window.open('/api/v1/export-pdf', '_blank')}
-              className="text-neo-mint bg-neo-black py-1.5 px-4 font-black neu-btn hover:bg-neo-mint hover:text-neo-black flex items-center gap-2"
-            >
-              <span className="material-symbols-outlined text-base font-bold">download</span> EXPORT PDF
-            </button>
+            <div className="relative" ref={exportDropdownRef}>
+              <button
+                onClick={() => setIsExportDropdownOpen(!isExportDropdownOpen)}
+                className="text-neo-mint bg-neo-black py-1.5 px-4 font-black neu-btn hover:bg-neo-mint hover:text-neo-black flex items-center gap-2"
+              >
+                <span className="material-symbols-outlined text-base font-bold">download</span> EXPORT PDF
+              </button>
+              {isExportDropdownOpen && (
+                <div className="absolute bottom-full right-0 mb-3 bg-surface-container border-4 border-neo-black shadow-[6px_6px_0_#000] py-2 w-64 z-50 flex flex-col font-label-mono text-xs font-bold text-on-surface">
+                  <button
+                    onClick={() => {
+                      window.open('/api/v1/export-pdf', '_blank');
+                      setIsExportDropdownOpen(false);
+                    }}
+                    className="w-full text-left px-4 py-2 hover:bg-neo-mint hover:text-neo-black transition-colors flex items-center gap-2 border-b-2 border-neo-black/20 text-on-surface hover:text-neo-black"
+                  >
+                    <span className="material-symbols-outlined text-sm font-bold">article</span>
+                    EXPORT ACTIVE DECK
+                  </button>
+                  <button
+                    onClick={() => {
+                      window.open('/mil_echo_offline_cards.pdf', '_blank');
+                      setIsExportDropdownOpen(false);
+                    }}
+                    className="w-full text-left px-4 py-2 hover:bg-neo-mint hover:text-neo-black transition-colors flex items-center gap-2 border-b-2 border-neo-black/20 text-on-surface hover:text-neo-black"
+                  >
+                    <span className="material-symbols-outlined text-sm font-bold">style</span>
+                    OFFLINE CARDS
+                  </button>
+                  <button
+                    onClick={() => {
+                      window.open('/teacher_manual.pdf', '_blank');
+                      setIsExportDropdownOpen(false);
+                    }}
+                    className="w-full text-left px-4 py-2 hover:bg-neo-mint hover:text-neo-black transition-colors flex items-center gap-2 text-on-surface hover:text-neo-black"
+                  >
+                    <span className="material-symbols-outlined text-sm font-bold">menu_book</span>
+                    TEACHER MANUAL
+                  </button>
+                </div>
+              )}
+            </div>
             <a className="text-on-background hover:text-neo-coral transition-colors font-bold uppercase cursor-pointer" onClick={() => setIsRulesModalOpen(true)}>RULES</a>
           </div>
         </footer>
