@@ -669,9 +669,12 @@ export default function Home() {
         {/* Navigation Top Bar */}
         <nav className="sticky top-0 w-full z-50 flex justify-between items-center px-6 lg:px-margin-desktop h-20 border-b-4 border-neo-black bg-surface-container shadow-[0px_6px_0px_0px_#000]">
           <div className="flex items-center gap-4 relative">
-            <h1 className="font-display-xl text-3xl lg:text-4xl text-neo-mint italic tracking-tighter cursor-pointer" onClick={handleExitRoom} style={{ textShadow: '3px 3px 0 #000' }}>
-              MIL ECHO
-            </h1>
+            <img
+              src="/mil_logo.png"
+              alt="MIL ECHO Logo"
+              className="h-12 w-auto cursor-pointer object-contain"
+              onClick={handleExitRoom}
+            />
           </div>
 
           <div className="flex items-center gap-4">
@@ -710,14 +713,6 @@ export default function Home() {
               UNESCO MIL LAWS
             </button>
 
-
-            <button
-              onClick={() => setIsExtensionInboxOpen(true)}
-              className="hidden md:flex px-4 py-2 bg-neo-mint text-neo-black font-label-mono text-xs font-bold neu-btn items-center gap-2"
-            >
-              <span className="material-symbols-outlined text-base font-bold">inbox</span>
-              EXTENSION INBOX ({capturedCards.length})
-            </button>
             {room && (
               <button
                 onClick={handleExitRoom}
@@ -1500,8 +1495,13 @@ export default function Home() {
 
         {/* Footer */}
         <footer className="mt-auto w-full flex justify-between items-center px-6 lg:px-margin-desktop py-3 border-t-4 border-neo-black bg-surface-container-highest shadow-[0px_-6px_0px_0px_#000] relative z-10">
-          <div className="font-label-mono text-xs text-neo-lavender font-black uppercase tracking-wider bg-neo-black px-3 py-1 neu-border">
-            © 2026 MIL ECHO — PREBUNKING PROTOCOL ACTIVE
+          <div className="flex flex-col gap-1">
+            <div className="font-label-mono text-xs text-neo-lavender font-black uppercase tracking-wider bg-neo-black px-3 py-1 neu-border w-fit">
+              © 2026 MIL ECHO — PREBUNKING PROTOCOL ACTIVE
+            </div>
+            <div className="font-label-mono text-xs text-on-surface-variant font-bold px-1">
+              Contact Us: <a href="mailto:milecho@gmail.com" className="text-neo-mint hover:underline">milecho@gmail.com</a>
+            </div>
           </div>
           <div className="flex items-center gap-6 font-headline-lg text-sm">
             <div className="relative" ref={exportDropdownRef}>
@@ -1513,16 +1513,6 @@ export default function Home() {
               </button>
               {isExportDropdownOpen && (
                 <div className="absolute bottom-full right-0 mb-3 bg-surface-container border-4 border-neo-black shadow-[6px_6px_0_#000] py-2 w-64 z-50 flex flex-col font-label-mono text-xs font-bold text-on-surface">
-                  <button
-                    onClick={() => {
-                      window.open('/api/v1/export-pdf', '_blank');
-                      setIsExportDropdownOpen(false);
-                    }}
-                    className="w-full text-left px-4 py-2 hover:bg-neo-mint hover:text-neo-black transition-colors flex items-center gap-2 border-b-2 border-neo-black/20 text-on-surface hover:text-neo-black"
-                  >
-                    <span className="material-symbols-outlined text-sm font-bold">article</span>
-                    EXPORT ACTIVE DECK
-                  </button>
                   <button
                     onClick={() => {
                       window.open('/mil_echo_offline_cards.pdf', '_blank');
