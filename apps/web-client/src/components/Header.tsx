@@ -24,43 +24,34 @@ export const Header: React.FC<HeaderProps> = ({
   };
 
   return (
-    <header className="glass-panel" style={{ margin: '16px 24px 0 24px', padding: '16px 28px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '16px' }}>
-      <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
-        <div style={{ background: 'linear-gradient(135deg, #00f2fe 0%, #9d4edd 100%)', padding: '10px', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-          <ShieldCheck size={28} color="#000" />
+    <header className="glass-panel mx-3 sm:mx-6 mt-3 sm:mt-4 p-3 sm:p-5 flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-4">
+      <div className="flex items-center gap-3">
+        <div className="bg-gradient-to-br from-[#00f2fe] to-[#9d4edd] p-2 sm:p-2.5 rounded-xl flex items-center justify-center shrink-0 shadow-[0_0_12px_rgba(0,242,254,0.4)]">
+          <ShieldCheck className="w-6 h-6 sm:w-7 sm:h-7" color="#000" />
         </div>
         <div>
-          <h1 style={{ fontSize: '24px', fontWeight: 800, letterSpacing: '-0.5px', background: 'linear-gradient(90deg, #00f2fe, #ffffff)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
-            MIL ECHO <span style={{ fontSize: '14px', fontWeight: 600, color: 'var(--accent-purple)', WebkitTextFillColor: 'initial', background: 'rgba(157, 78, 225, 0.2)', padding: '2px 8px', borderRadius: '6px' }}>VIRAL SPIRAL</span>
+          <h1 className="text-lg sm:text-2xl font-black tracking-tight bg-gradient-to-r from-[#00f2fe] to-white bg-clip-text text-transparent flex items-center gap-2 flex-wrap">
+            MIL ECHO <span className="text-[10px] sm:text-xs font-bold text-neo-black bg-[#9d4edd]/30 px-2 py-0.5 rounded-md border border-[#9d4edd]/50">VIRAL SPIRAL</span>
           </h1>
-          <p style={{ fontSize: '12px', color: 'var(--text-muted)', marginTop: '2px', display: 'flex', alignItems: 'center', gap: '6px' }}>
-            <Cpu size={14} color="#00f2fe" /> 3C2B Socratic AI Prebunking Arena (UNESCO Youth Hackathon)
+          <p className="text-[10px] sm:text-xs text-on-surface-variant mt-0.5 flex items-center gap-1.5 font-label-mono">
+            <Cpu className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[#00f2fe]" /> 3C2B Socratic AI Prebunking Arena
           </p>
         </div>
       </div>
 
-      <div style={{ display: 'flex', alignItems: 'center', gap: '12px', flexWrap: 'wrap' }}>
+      <div className="flex items-center gap-1.5 sm:gap-3 flex-wrap justify-center sm:justify-end w-full sm:w-auto">
         {/* Sound FX Toggle Button */}
         <button
           onClick={handleToggleMute}
           title={isMuted ? 'Unmute Sound Effects' : 'Mute Sound Effects'}
-          style={{
-            background: isMuted ? 'rgba(255, 0, 127, 0.15)' : 'rgba(0, 242, 254, 0.12)',
-            border: isMuted ? '1px solid rgba(255, 0, 127, 0.3)' : '1px solid rgba(0, 242, 254, 0.3)',
-            color: isMuted ? '#ff4d94' : '#00f2fe',
-            padding: '8px 12px',
-            borderRadius: '10px',
-            cursor: 'pointer',
-            fontSize: '13px',
-            fontWeight: 700,
-            display: 'flex',
-            alignItems: 'center',
-            gap: '6px',
-            transition: 'all 0.2s ease'
-          }}
+          className={`px-2 py-1 sm:px-3 sm:py-2 text-[10px] sm:text-xs font-bold rounded-lg transition-all flex items-center gap-1 sm:gap-1.5 ${
+            isMuted
+              ? 'bg-[#ff007f]/15 border border-[#ff007f]/40 text-[#ff4d94]'
+              : 'bg-[#00f2fe]/12 border border-[#00f2fe]/40 text-[#00f2fe]'
+          }`}
         >
-          {isMuted ? <VolumeX size={16} /> : <Volume2 size={16} />}
-          {isMuted ? 'Muted' : 'Sound FX'}
+          {isMuted ? <VolumeX className="w-3.5 h-3.5 sm:w-4 sm:h-4" /> : <Volume2 className="w-3.5 h-3.5 sm:w-4 sm:h-4" />}
+          <span>{isMuted ? 'MUTED' : 'SOUND FX'}</span>
         </button>
 
         {/* How to Play Guide Button */}
@@ -69,24 +60,10 @@ export const Header: React.FC<HeaderProps> = ({
             soundFx.playCardDraw();
             onOpenHowToPlay();
           }}
-          style={{
-            background: 'linear-gradient(135deg, rgba(0, 242, 254, 0.2) 0%, rgba(79, 172, 254, 0.2) 100%)',
-            border: '1px solid #00f2fe',
-            color: '#fff',
-            padding: '8px 16px',
-            borderRadius: '10px',
-            cursor: 'pointer',
-            fontSize: '13px',
-            fontWeight: 700,
-            display: 'flex',
-            alignItems: 'center',
-            gap: '8px',
-            boxShadow: '0 0 12px rgba(0, 242, 254, 0.25)',
-            transition: 'all 0.2s ease'
-          }}
+          className="px-2.5 py-1 sm:px-4 sm:py-2 bg-gradient-to-r from-[#00f2fe]/20 to-[#4facfe]/20 border border-[#00f2fe] text-white text-[10px] sm:text-xs font-bold rounded-lg flex items-center gap-1.5 shadow-[0_0_10px_rgba(0,242,254,0.2)] transition-all hover:scale-105"
         >
-          <HelpCircle size={16} color="#00f2fe" />
-          🎮 How to Play (Guide)
+          <HelpCircle className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#00f2fe]" />
+          <span><span className="hidden sm:inline">🎮 HOW TO PLAY </span>GUIDE</span>
         </button>
 
         {/* Extension Inbox Button */}
@@ -95,28 +72,16 @@ export const Header: React.FC<HeaderProps> = ({
             soundFx.playCardDraw();
             onOpenExtensionDeck();
           }}
-          style={{
-            background: 'rgba(255, 255, 255, 0.05)',
-            border: '1px solid rgba(255, 255, 255, 0.1)',
-            color: '#fff',
-            padding: '8px 16px',
-            borderRadius: '10px',
-            cursor: 'pointer',
-            fontSize: '13px',
-            fontWeight: 600,
-            display: 'flex',
-            alignItems: 'center',
-            gap: '8px',
-            transition: 'all 0.2s ease'
-          }}
+          className="px-2.5 py-1 sm:px-4 sm:py-2 bg-white/5 border border-white/10 text-white text-[10px] sm:text-xs font-semibold rounded-lg flex items-center gap-1.5 transition-all hover:bg-white/10"
         >
-          <Chrome size={16} color="#00f2fe" />
-          Extension Inbox ({extensionCardCount})
+          <Chrome className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#00f2fe]" />
+          <span>INBOX ({extensionCardCount})</span>
         </button>
 
-        <div style={{ background: 'rgba(16, 185, 129, 0.15)', border: '1px solid rgba(16, 185, 129, 0.3)', color: '#10b981', padding: '6px 14px', borderRadius: '20px', fontSize: '12px', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '6px' }}>
-          <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#10b981', display: 'inline-block' }}></span>
-          AI Service Connected
+        <div className="bg-[#10b981]/15 border border-[#10b981]/30 text-[#10b981] px-2 py-1 sm:px-3 sm:py-1.5 rounded-full text-[10px] sm:text-xs font-bold flex items-center gap-1.5">
+          <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-[#10b981] animate-pulse"></span>
+          <span className="hidden sm:inline">AI CONNECTED</span>
+          <span className="sm:hidden">LIVE</span>
         </div>
       </div>
     </header>

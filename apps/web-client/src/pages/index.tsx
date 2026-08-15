@@ -667,28 +667,29 @@ export default function Home() {
       <div className="dark bg-background grid-bg text-on-background font-body-md min-h-screen flex flex-col selection:bg-neo-mint selection:text-neo-black">
         
         {/* Navigation Top Bar */}
-        <nav className="sticky top-0 w-full z-50 flex justify-between items-center px-6 lg:px-margin-desktop h-20 border-b-4 border-neo-black bg-surface-container shadow-[0px_6px_0px_0px_#000]">
-          <div className="flex items-center gap-4 relative">
+        <nav className="sticky top-0 w-full z-50 flex justify-between items-center px-3 sm:px-6 lg:px-margin-desktop h-16 sm:h-20 border-b-4 border-neo-black bg-surface-container shadow-[0px_6px_0px_0px_#000]">
+          <div className="flex items-center gap-2 sm:gap-4 relative shrink-0">
             <img
               src="/mil_logo.png"
               alt="MIL ECHO Logo"
-              className="h-12 lg:h-14 w-auto cursor-pointer object-contain transition-transform hover:scale-105"
+              className="h-10 sm:h-12 lg:h-14 w-auto cursor-pointer object-contain transition-transform hover:scale-105 filter drop-shadow-[0_0_10px_rgba(0,242,254,0.5)] max-w-[130px] sm:max-w-none"
               onClick={handleExitRoom}
             />
           </div>
 
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-1.5 sm:gap-3 flex-nowrap shrink-0">
             <button
               onClick={handleToggleMute}
-              className={`px-3 py-2 font-label-mono text-xs font-bold neu-btn flex items-center gap-2 ${
+              className={`px-2 py-1 sm:px-3 sm:py-2 font-label-mono text-[10px] sm:text-xs font-bold neu-btn flex items-center gap-1 sm:gap-2 shrink-0 ${
                 isMuted ? 'bg-neo-black text-neo-coral' : 'bg-neo-mint text-neo-black'
               }`}
               title={isMuted ? 'Unmute Audio Sound Effects' : 'Mute Audio Sound Effects'}
             >
-              <span className="material-symbols-outlined text-base font-bold">
+              <span className="material-symbols-outlined text-sm sm:text-base font-bold">
                 {isMuted ? 'volume_off' : 'volume_up'}
               </span>
-              {isMuted ? 'MUTED' : 'SOUND FX'}
+              <span className="hidden xs:inline sm:inline">{isMuted ? 'MUTED' : 'SOUND FX'}</span>
+              <span className="xs:hidden sm:hidden">{isMuted ? 'OFF' : 'SFX'}</span>
             </button>
 
             <button
@@ -696,10 +697,11 @@ export default function Home() {
                 soundFx.playCardDraw();
                 setIsHowToPlayOpen(true);
               }}
-              className="px-4 py-2 bg-neo-lavender text-neo-black font-label-mono text-xs font-bold neu-btn flex items-center gap-2"
+              className="px-2 py-1 sm:px-3 sm:py-2 bg-neo-lavender text-neo-black font-label-mono text-[10px] sm:text-xs font-bold neu-btn flex items-center gap-1 sm:gap-2 shrink-0"
             >
-              <span className="material-symbols-outlined text-base font-bold">help_outline</span>
-              HOW TO PLAY &amp; AI GUIDE
+              <span className="material-symbols-outlined text-sm sm:text-base font-bold">help_outline</span>
+              <span className="hidden sm:inline">HOW TO PLAY &amp; AI GUIDE</span>
+              <span className="inline sm:hidden">GUIDE</span>
             </button>
 
             <button
@@ -707,18 +709,19 @@ export default function Home() {
                 soundFx.playCardDraw();
                 setIsMilLawsOpen(true);
               }}
-              className="px-4 py-2 bg-neo-coral text-neo-black font-label-mono text-xs font-bold neu-btn flex items-center gap-2"
+              className="px-2 py-1 sm:px-3 sm:py-2 bg-neo-coral text-neo-black font-label-mono text-[10px] sm:text-xs font-bold neu-btn flex items-center gap-1 sm:gap-2 shrink-0"
             >
-              <span className="material-symbols-outlined text-base font-bold">gavel</span>
-              UNESCO MIL LAWS
+              <span className="material-symbols-outlined text-sm sm:text-base font-bold">gavel</span>
+              <span className="hidden sm:inline">UNESCO MIL LAWS</span>
+              <span className="inline sm:hidden">LAWS</span>
             </button>
 
             {room && (
               <button
                 onClick={handleExitRoom}
-                className="px-3 py-2 bg-neo-black text-neo-coral font-label-mono text-xs font-bold neu-btn"
+                className="px-2 py-1 sm:px-3 sm:py-2 bg-neo-black text-neo-coral font-label-mono text-[10px] sm:text-xs font-bold neu-btn shrink-0"
               >
-                LEAVE ROOM
+                LEAVE
               </button>
             )}
           </div>
@@ -727,17 +730,17 @@ export default function Home() {
         {/* MAIN BODY AREA */}
         {!room ? (
           /* HOMEPAGE LANDING LOBBY (When No Active Room) */
-          <main className="flex-1 w-full max-w-7xl mx-auto p-6 flex flex-col gap-8 justify-center items-center my-auto">
+          <main className="flex-1 w-full max-w-7xl mx-auto p-4 sm:p-6 flex flex-col gap-6 sm:gap-8 justify-center items-center my-auto">
             
             {/* Hero Header */}
-            <div className="text-center flex flex-col items-center gap-4 max-w-3xl">
-              <div className="bg-neo-coral text-neo-black font-label-mono text-xs font-black uppercase px-4 py-1 neu-border shadow-[4px_4px_0_#000] rotate-[-2deg]">
+            <div className="text-center flex flex-col items-center gap-3 sm:gap-4 max-w-3xl px-2">
+              <div className="bg-neo-coral text-neo-black font-label-mono text-[10px] sm:text-xs font-black uppercase px-3 py-1 neu-border shadow-[3px_3px_0_#000] rotate-[-2deg]">
                 ⚡ MULTIPLAYER PREBUNKING ARENA
               </div>
-              <h2 className="font-display-xl text-5xl lg:text-7xl text-neo-mint uppercase tracking-tight font-black" style={{ textShadow: '4px 4px 0 #000' }}>
+              <h2 className="font-display-xl text-3xl sm:text-5xl lg:text-7xl text-neo-mint uppercase tracking-tight font-black leading-tight" style={{ textShadow: '3px 3px 0 #000' }}>
                 NAVIGATE STREAMS. BUILD CRED. PREVENT CHAOS.
               </h2>
-              <p className="font-body-md text-on-surface-variant text-base lg:text-lg leading-relaxed">
+              <p className="font-body-md text-on-surface-variant text-sm sm:text-base lg:text-lg leading-relaxed">
                 Welcome to <strong>MIL ECHO</strong>. Inspect online news cards, pass authentic content to build your <strong>CRED</strong> score (+1), and stop unverified prejudice from driving the global <strong>CHAOS</strong> meter to zero!
               </p>
               <div className="flex flex-wrap gap-3 justify-center items-center mt-1">
@@ -746,7 +749,7 @@ export default function Home() {
                     soundFx.playCardDraw();
                     setIsMilLawsOpen(true);
                   }}
-                  className="bg-neo-coral text-neo-black font-label-mono text-xs font-black uppercase px-4 py-2 neu-btn flex items-center gap-2"
+                  className="bg-neo-coral text-neo-black font-label-mono text-[11px] sm:text-xs font-black uppercase px-3.5 py-2 neu-btn flex items-center gap-1.5 sm:gap-2"
                 >
                   <span className="material-symbols-outlined text-base font-bold">gavel</span>
                   LEARN THE 5 UNESCO MIL LAWS
@@ -755,46 +758,46 @@ export default function Home() {
             </div>
 
             {/* Main Action Grid Cards */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-4xl mt-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-8 w-full max-w-4xl mt-2 sm:mt-4">
               
               {/* CREATE ROOM CARD */}
-              <div className="crt-screen border-neo-mint p-8 flex flex-col justify-between gap-6 hover:scale-[1.02] transition-transform">
-                <div className="flex flex-col gap-3">
+              <div className="crt-screen border-neo-mint p-4 sm:p-8 flex flex-col justify-between gap-4 sm:gap-6 hover:scale-[1.01] transition-transform">
+                <div className="flex flex-col gap-2 sm:gap-3">
                   <div className="flex justify-between items-center">
-                    <span className="material-symbols-outlined text-neo-mint text-4xl font-bold">add_circle</span>
-                    <span className="bg-neo-black text-neo-mint font-label-mono text-xs font-black px-2 py-1 neu-border">HOST MODE</span>
+                    <span className="material-symbols-outlined text-neo-mint text-3xl sm:text-4xl font-bold">add_circle</span>
+                    <span className="bg-neo-black text-neo-mint font-label-mono text-[10px] sm:text-xs font-black px-2 py-0.5 sm:py-1 neu-border">HOST MODE</span>
                   </div>
-                  <h3 className="font-headline-lg text-2xl text-on-background uppercase font-black">CREATE ROOM</h3>
+                  <h3 className="font-headline-lg text-xl sm:text-2xl text-on-background uppercase font-black">CREATE ROOM</h3>
                   <p className="font-body-md text-xs text-on-surface-variant leading-relaxed">
                     Generate a unique 6-digit room code, configure player capacity (2-6), set starting Chaos level, and select AI Copilot mode.
                   </p>
                 </div>
                 <button
                   onClick={() => setIsCreateModalOpen(true)}
-                  className="w-full bg-neo-mint text-neo-black py-4 px-6 font-headline-lg text-lg font-black neu-btn hover:bg-[#a3e635] flex items-center justify-center gap-2"
+                  className="w-full bg-neo-mint text-neo-black py-3 sm:py-4 px-4 sm:px-6 font-headline-lg text-base sm:text-lg font-black neu-btn hover:bg-[#a3e635] flex items-center justify-center gap-2"
                 >
-                  <span className="material-symbols-outlined text-xl font-bold">sports_esports</span>
+                  <span className="material-symbols-outlined text-lg sm:text-xl font-bold">sports_esports</span>
                   CREATE NEW ROOM
                 </button>
               </div>
 
               {/* JOIN ROOM CARD */}
-              <div className="crt-screen border-neo-coral p-8 flex flex-col justify-between gap-6 hover:scale-[1.02] transition-transform">
-                <div className="flex flex-col gap-3">
+              <div className="crt-screen border-neo-coral p-4 sm:p-8 flex flex-col justify-between gap-4 sm:gap-6 hover:scale-[1.01] transition-transform">
+                <div className="flex flex-col gap-2 sm:gap-3">
                   <div className="flex justify-between items-center">
-                    <span className="material-symbols-outlined text-neo-coral text-4xl font-bold">login</span>
-                    <span className="bg-neo-black text-neo-coral font-label-mono text-xs font-black px-2 py-1 neu-border">PLAYER MODE</span>
+                    <span className="material-symbols-outlined text-neo-coral text-3xl sm:text-4xl font-bold">login</span>
+                    <span className="bg-neo-black text-neo-coral font-label-mono text-[10px] sm:text-xs font-black px-2 py-0.5 sm:py-1 neu-border">PLAYER MODE</span>
                   </div>
-                  <h3 className="font-headline-lg text-2xl text-on-background uppercase font-black">JOIN ROOM</h3>
+                  <h3 className="font-headline-lg text-xl sm:text-2xl text-on-background uppercase font-black">JOIN ROOM</h3>
                   <p className="font-body-md text-xs text-on-surface-variant leading-relaxed">
                     Enter an active 6-digit session code and custom username to join an existing lobby with friends or simulated agents.
                   </p>
                 </div>
                 <button
                   onClick={() => setIsJoinModalOpen(true)}
-                  className="w-full bg-neo-coral text-neo-black py-4 px-6 font-headline-lg text-lg font-black neu-btn hover:bg-[#fb7185] flex items-center justify-center gap-2"
+                  className="w-full bg-neo-coral text-neo-black py-3 sm:py-4 px-4 sm:px-6 font-headline-lg text-base sm:text-lg font-black neu-btn hover:bg-[#fb7185] flex items-center justify-center gap-2"
                 >
-                  <span className="material-symbols-outlined text-xl font-bold">key</span>
+                  <span className="material-symbols-outlined text-lg sm:text-xl font-bold">key</span>
                   JOIN WITH ROOM CODE
                 </button>
               </div>
@@ -802,34 +805,34 @@ export default function Home() {
             </div>
 
             {/* Player HUD Preview Footer */}
-            <div className="w-full max-w-4xl bg-surface-container neu-border p-6 shadow-[6px_6px_0_#000] flex flex-wrap justify-between items-center gap-4 mt-6">
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 neu-border bg-neo-lavender flex items-center justify-center font-bold text-neo-black">
-                  <span className="material-symbols-outlined text-3xl">badge</span>
+            <div className="w-full max-w-4xl bg-surface-container neu-border p-4 sm:p-6 shadow-[4px_4px_0_#000] sm:shadow-[6px_6px_0_#000] flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mt-2 sm:mt-6">
+              <div className="flex items-center gap-3 sm:gap-4">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 neu-border bg-neo-lavender flex items-center justify-center font-bold text-neo-black shrink-0">
+                  <span className="material-symbols-outlined text-2xl sm:text-3xl">badge</span>
                 </div>
                 <div>
-                  <div className="font-label-mono text-xs text-neo-lavender font-bold uppercase">PLAYER PREVIEW BADGE</div>
-                  <div className="font-headline-lg text-lg text-on-background font-black">AGENT INITIATE • RED COMMUNITY</div>
+                  <div className="font-label-mono text-[10px] sm:text-xs text-neo-lavender font-bold uppercase">PLAYER PREVIEW BADGE</div>
+                  <div className="font-headline-lg text-sm sm:text-lg text-on-background font-black">AGENT INITIATE • RED COMMUNITY</div>
                 </div>
               </div>
-              <div className="flex items-center gap-6 font-label-mono text-xs">
-                <div className="bg-surface-container-lowest neu-border p-2 text-neo-mint font-bold">TARGET CRED: 10</div>
-                <div className="bg-surface-container-lowest neu-border p-2 text-neo-coral font-bold">STARTING CHAOS: 10</div>
+              <div className="flex items-center gap-3 sm:gap-6 font-label-mono text-xs w-full sm:w-auto justify-between sm:justify-end">
+                <div className="bg-surface-container-lowest neu-border p-1.5 sm:p-2 text-neo-mint font-bold text-[10px] sm:text-xs">TARGET CRED: 10</div>
+                <div className="bg-surface-container-lowest neu-border p-1.5 sm:p-2 text-neo-coral font-bold text-[10px] sm:text-xs">STARTING CHAOS: 10</div>
               </div>
             </div>
 
           </main>
         ) : (
           /* ACTIVE ROOM & GAME ARENA VIEW */
-          <main className="flex-1 w-full max-w-full flex flex-col lg:flex-row gap-6 p-6 bg-background overflow-hidden lg:h-[calc(100vh-80px-56px)]">
+          <main className="flex-1 w-full max-w-full flex flex-col lg:flex-row gap-4 sm:gap-6 p-3 sm:p-6 bg-background overflow-y-auto lg:overflow-hidden h-auto lg:h-[calc(100vh-80px-56px)]">
             
             {/* LEFT COLUMN: Players HUD & Global Chaos Meter */}
-            <aside className="w-full lg:w-1/4 flex flex-col gap-6 overflow-y-auto pr-2 pb-8 h-full">
+            <aside className="w-full lg:w-1/4 flex flex-col gap-4 sm:gap-6 overflow-y-visible lg:overflow-y-auto pr-0 lg:pr-2 pb-4 lg:pb-8 h-auto lg:h-full">
               
               {/* Room Status & Code Header */}
-              <div className="bg-surface-container border-4 border-neo-black p-4 shadow-[6px_6px_0_#000] flex flex-col gap-3">
+              <div className="bg-surface-container border-4 border-neo-black p-3 sm:p-4 shadow-[4px_4px_0_#000] sm:shadow-[6px_6px_0_#000] flex flex-col gap-3">
                 <div className="flex justify-between items-center">
-                  <span className="font-label-mono text-xs text-neo-mint font-black bg-neo-black px-2 py-0.5 neu-border">
+                  <span className="font-label-mono text-[11px] sm:text-xs text-neo-mint font-black bg-neo-black px-2 py-0.5 neu-border">
                     ROOM #{room.config.room_code}
                   </span>
                   <div className="flex items-center gap-2">
@@ -865,22 +868,22 @@ export default function Home() {
               </div>
 
               {/* Global CHAOS Meter */}
-              <div className="crt-screen border-neo-coral p-5 flex flex-col gap-3 relative">
+              <div className="crt-screen border-neo-coral p-4 sm:p-5 flex flex-col gap-3 relative">
                 <div className="flex justify-between items-center z-10">
-                  <h2 className="font-label-mono text-xs text-neo-coral uppercase tracking-wider font-black bg-neo-black px-2 py-1 inline-block neu-border">
+                  <h2 className="font-label-mono text-[11px] sm:text-xs text-neo-coral uppercase tracking-wider font-black bg-neo-black px-2 py-1 inline-block neu-border">
                     GLOBAL CHAOS METER
                   </h2>
-                  <span className="material-symbols-outlined text-neo-coral text-2xl animate-pulse">
+                  <span className="material-symbols-outlined text-neo-coral text-xl sm:text-2xl animate-pulse">
                     warning
                   </span>
                 </div>
-                <div className="bg-[#020617] neu-border p-3 mt-1 flex justify-between items-center z-10">
-                  <span className="font-label-mono text-xs text-on-surface-variant font-bold">SYSTEM INTEGRITY:</span>
-                  <div className="font-score-display text-4xl text-neo-coral tracking-widest lcd-text">
+                <div className="bg-[#020617] neu-border p-2.5 sm:p-3 mt-1 flex justify-between items-center z-10">
+                  <span className="font-label-mono text-[11px] sm:text-xs text-on-surface-variant font-bold">SYSTEM INTEGRITY:</span>
+                  <div className="font-score-display text-3xl sm:text-4xl text-neo-coral tracking-widest lcd-text">
                     {room.chaos_level}/10
                   </div>
                 </div>
-                <div className="w-full h-5 neu-border bg-surface-container-highest overflow-hidden flex z-10">
+                <div className="w-full h-4 sm:h-5 neu-border bg-surface-container-highest overflow-hidden flex z-10">
                   <div
                     className={`h-full border-r-4 border-neo-black transition-all duration-300 ${
                       room.chaos_level <= 3 ? 'bg-error animate-pulse' : room.chaos_level <= 6 ? 'bg-neo-coral' : 'bg-neo-mint'
@@ -888,7 +891,7 @@ export default function Home() {
                     style={{ width: `${(room.chaos_level / room.config.starting_chaos) * 100}%` }}
                   ></div>
                 </div>
-                <div className="font-label-mono text-[10px] text-neo-coral text-right font-bold uppercase z-10">
+                <div className="font-label-mono text-[9px] sm:text-[10px] text-neo-coral text-right font-bold uppercase z-10">
                   {room.chaos_level <= 3 ? '⚠️ CRITICAL: ECHO CHAMBER COLLAPSE NEAR' : 'CHAOS CONTROLLED'}
                 </div>
               </div>
@@ -898,62 +901,64 @@ export default function Home() {
                 <h3 className="font-headline-lg text-sm text-neo-lavender uppercase border-b-4 border-neo-lavender pb-1 font-black">
                   CONNECTED PLAYERS
                 </h3>
-                {room.players.map((p, idx) => {
-                  const isActive = room.status === 'PLAYING' && idx === room.active_player_index;
-                  return (
-                    <div
-                      key={p.id}
-                      className={`p-3 border-4 border-neo-black shadow-[4px_4px_0_#000] flex justify-between items-center transition-colors ${
-                        isActive ? 'bg-neo-mint/20 border-neo-mint' : 'bg-surface-container'
-                      }`}
-                    >
-                      <div className="flex flex-col gap-0.5">
-                        <div className="flex items-center gap-2">
-                          <span className="font-bold text-sm text-on-background">{p.name}</span>
-                          {p.is_host && <span className="text-[9px] bg-neo-coral text-neo-black font-black px-1 neu-border">HOST</span>}
-                          {isActive && <span className="text-[9px] bg-neo-mint text-neo-black font-black px-1 neu-border animate-pulse">TURN</span>}
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-2.5 sm:gap-3">
+                  {room.players.map((p, idx) => {
+                    const isActive = room.status === 'PLAYING' && idx === room.active_player_index;
+                    return (
+                      <div
+                        key={p.id}
+                        className={`p-3 border-4 border-neo-black shadow-[4px_4px_0_#000] flex justify-between items-center transition-colors ${
+                          isActive ? 'bg-neo-mint/20 border-neo-mint' : 'bg-surface-container'
+                        }`}
+                      >
+                        <div className="flex flex-col gap-0.5">
+                          <div className="flex items-center gap-2">
+                            <span className="font-bold text-sm text-on-background">{p.name}</span>
+                            {p.is_host && <span className="text-[9px] bg-neo-coral text-neo-black font-black px-1 neu-border">HOST</span>}
+                            {isActive && <span className="text-[9px] bg-neo-mint text-neo-black font-black px-1 neu-border animate-pulse">TURN</span>}
+                          </div>
+                          <span className="font-label-mono text-[10px] text-on-surface-variant">
+                            {p.community} • Hand: {p.hand.length} cards
+                          </span>
                         </div>
-                        <span className="font-label-mono text-[10px] text-on-surface-variant">
-                          {p.community} • Hand: {p.hand.length} cards
-                        </span>
-                      </div>
-                      <div className="text-right">
-                        <div className="font-label-mono text-xs font-bold text-neo-mint bg-neo-black px-2 py-0.5 neu-border">
-                          CRED: {p.cred_score}/10
+                        <div className="text-right">
+                          <div className="font-label-mono text-xs font-bold text-neo-mint bg-neo-black px-2 py-0.5 neu-border">
+                            CRED: {p.cred_score}/10
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  );
-                })}
+                    );
+                  })}
+                </div>
               </div>
 
             </aside>
 
             {/* CENTER COLUMN: Active Arena & Turn Controller */}
-            <section className="w-full lg:w-2/4 flex flex-col gap-6 overflow-y-auto pr-2 pb-8 h-full">
+            <section className="w-full lg:w-2/4 flex flex-col gap-4 sm:gap-6 overflow-y-visible lg:overflow-y-auto pr-0 lg:pr-2 pb-4 lg:pb-8 h-auto lg:h-full">
               
               {/* Victory / Defeat Overlay Screens */}
               {room.status === 'INDIVIDUAL_VICTORY' && (
-                <div className="bg-neo-mint text-neo-black border-4 border-neo-black p-6 shadow-[8px_8px_0_#000] flex flex-col items-center gap-4 text-center">
-                  <span className="material-symbols-outlined text-6xl">emoji_events</span>
-                  <h2 className="font-display-xl text-3xl uppercase font-black">INDIVIDUAL VICTORY!</h2>
-                  <p className="font-body-md text-sm">
+                <div className="bg-neo-mint text-neo-black border-4 border-neo-black p-4 sm:p-6 shadow-[6px_6px_0_#000] sm:shadow-[8px_8px_0_#000] flex flex-col items-center gap-4 text-center">
+                  <span className="material-symbols-outlined text-5xl sm:text-6xl">emoji_events</span>
+                  <h2 className="font-display-xl text-2xl sm:text-3xl uppercase font-black">INDIVIDUAL VICTORY!</h2>
+                  <p className="font-body-md text-xs sm:text-sm">
                     Player <strong>{room.players.find(p => p.id === room.winner_player_id)?.name}</strong> reached 10 CRED while preserving global network integrity!
                   </p>
-                  <button onClick={handleExitRoom} className="bg-neo-black text-neo-mint px-6 py-3 neu-btn text-sm font-black">
+                  <button onClick={handleExitRoom} className="bg-neo-black text-neo-mint px-5 py-2.5 sm:px-6 sm:py-3 neu-btn text-xs sm:text-sm font-black">
                     RETURN TO HOMEPAGE LOBBY
                   </button>
                 </div>
               )}
 
               {room.status === 'GLOBAL_DEFEAT' && (
-                <div className="bg-error-container text-on-error-container border-4 border-neo-black p-6 shadow-[8px_8px_0_#000] flex flex-col items-center gap-4 text-center">
-                  <span className="material-symbols-outlined text-6xl text-neo-coral animate-bounce">explosion</span>
-                  <h2 className="font-display-xl text-3xl uppercase font-black text-neo-coral">💥 GLOBAL DEFEAT!</h2>
-                  <p className="font-body-md text-sm text-on-background">
+                <div className="bg-error-container text-on-error-container border-4 border-neo-black p-4 sm:p-6 shadow-[6px_6px_0_#000] sm:shadow-[8px_8px_0_#000] flex flex-col items-center gap-4 text-center">
+                  <span className="material-symbols-outlined text-5xl sm:text-6xl text-neo-coral animate-bounce">explosion</span>
+                  <h2 className="font-display-xl text-2xl sm:text-3xl uppercase font-black text-neo-coral">💥 GLOBAL DEFEAT!</h2>
+                  <p className="font-body-md text-xs sm:text-sm text-on-background">
                     The CHAOS meter reached 0! Polarization and unverified echo chambers collapsed the network. <strong>ALL PLAYERS LOSE!</strong>
                   </p>
-                  <button onClick={handleExitRoom} className="bg-neo-black text-neo-coral px-6 py-3 neu-btn text-sm font-black">
+                  <button onClick={handleExitRoom} className="bg-neo-black text-neo-coral px-5 py-2.5 sm:px-6 sm:py-3 neu-btn text-xs sm:text-sm font-black">
                     TRY AGAIN IN NEW ROOM
                   </button>
                 </div>
@@ -961,30 +966,30 @@ export default function Home() {
 
               {/* Turn Result Feedback Banner */}
               {lastTurnFeedback && (
-                <div className={`p-5 border-4 border-neo-black shadow-[6px_6px_0_#000] mb-6 flex flex-col gap-4 neu-border ${
+                <div className={`p-4 sm:p-5 border-4 border-neo-black shadow-[4px_4px_0_#000] sm:shadow-[6px_6px_0_#000] mb-4 sm:mb-6 flex flex-col gap-3 sm:gap-4 neu-border ${
                   lastTurnFeedback.isCorrect ? 'bg-neo-mint/15 border-neo-mint text-on-background' : 'bg-neo-coral/15 border-neo-coral text-on-background'
                 }`}>
-                  <div className="flex justify-between items-start gap-4">
+                  <div className="flex justify-between items-start gap-3">
                     <div className="flex items-center gap-3">
-                      <span className={`material-symbols-outlined text-3xl font-black ${
+                      <span className={`material-symbols-outlined text-2xl sm:text-3xl font-black ${
                         lastTurnFeedback.isCorrect ? 'text-neo-mint' : 'text-neo-coral'
                       }`}>
                         {lastTurnFeedback.isCorrect ? 'task_alt' : 'warning'}
                       </span>
                       <div>
-                        <span className={`font-label-mono text-xs font-black uppercase block ${
+                        <span className={`font-label-mono text-[10px] sm:text-xs font-black uppercase block ${
                           lastTurnFeedback.isCorrect ? 'text-neo-mint' : 'text-neo-coral'
                         }`}>
                           {lastTurnFeedback.isCorrect ? '🎉 CRITICAL THINKING SUCCESS!' : '⚠️ HYPOTHESIS MISJUDGMENT'}
                         </span>
-                        <p className="font-body-md text-sm font-black leading-snug">
+                        <p className="font-body-md text-xs sm:text-sm font-black leading-snug">
                           You guessed <strong className="underline decoration-2">{lastTurnFeedback.guessed}</strong>. The card was actually <strong className="underline decoration-2">{lastTurnFeedback.actual}</strong> ({lastTurnFeedback.actionTaken}).
                         </p>
                       </div>
                     </div>
                     <button
                       onClick={() => setLastTurnFeedback(null)}
-                      className="text-xs font-label-mono font-black text-neo-black bg-neo-lavender hover:bg-white px-3 py-1.5 neu-btn flex-none"
+                      className="text-[10px] sm:text-xs font-label-mono font-black text-neo-black bg-neo-lavender hover:bg-white px-2.5 py-1 sm:px-3 sm:py-1.5 neu-btn flex-none"
                     >
                       DISMISS ✕
                     </button>
@@ -992,10 +997,10 @@ export default function Home() {
 
                   {/* MIL Laws Learning Section */}
                   {((lastTurnFeedback.mil_laws && lastTurnFeedback.mil_laws.length > 0) || lastTurnFeedback.mil_law_explanation) && (
-                    <div className="mt-2 bg-neo-black border-2 border-neo-black p-4 text-xs flex flex-col gap-3 font-label-mono shadow-[4px_4px_0_rgba(0,0,0,0.5)]">
+                    <div className="mt-2 bg-neo-black border-2 border-neo-black p-3 sm:p-4 text-xs flex flex-col gap-3 font-label-mono shadow-[4px_4px_0_rgba(0,0,0,0.5)]">
                       <div className="flex items-center gap-2 border-b border-dashed border-neo-lavender/40 pb-2">
-                        <span className="material-symbols-outlined text-neo-mint text-lg">menu_book</span>
-                        <span className="font-bold text-neo-mint text-xs uppercase tracking-wider">
+                        <span className="material-symbols-outlined text-neo-mint text-base sm:text-lg">menu_book</span>
+                        <span className="font-bold text-neo-mint text-[11px] sm:text-xs uppercase tracking-wider">
                           UNESCO MIL Laws Education Panel
                         </span>
                       </div>
@@ -1007,8 +1012,8 @@ export default function Home() {
                             const lawDetail = UNESCO_MIL_LAWS[lawNum];
                             if (!lawDetail) return null;
                             return (
-                              <div key={lawNum} className="bg-surface-container/10 p-2.5 neu-border border-l-4 border-l-neo-mint flex flex-col gap-1">
-                                <span className="text-[11px] font-black text-neo-mint uppercase">
+                              <div key={lawNum} className="bg-surface-container/10 p-2 sm:p-2.5 neu-border border-l-4 border-l-neo-mint flex flex-col gap-1">
+                                <span className="text-[10px] sm:text-[11px] font-black text-neo-mint uppercase">
                                   Law {lawNum}: {lawDetail.title}
                                 </span>
                                 <p className="text-[10px] text-on-surface-variant leading-relaxed">
@@ -1022,7 +1027,7 @@ export default function Home() {
 
                       {/* Specific Card Law Explanation */}
                       {lastTurnFeedback.mil_law_explanation && (
-                        <div className="bg-surface-container/20 p-3 neu-border border-l-4 border-l-neo-lavender text-[11px] leading-relaxed text-on-background">
+                        <div className="bg-surface-container/20 p-2.5 sm:p-3 neu-border border-l-4 border-l-neo-lavender text-[10px] sm:text-[11px] leading-relaxed text-on-background">
                           <strong className="text-neo-lavender block text-[10px] uppercase font-black mb-1">
                             🎯 Scenario Application
                           </strong>
@@ -1035,29 +1040,29 @@ export default function Home() {
               )}
 
               {/* Turn Control Header Banner */}
-              <div className="bg-surface-container border-4 border-neo-black p-4 shadow-[6px_6px_0_#000] flex justify-between items-center">
+              <div className="bg-surface-container border-4 border-neo-black p-3 sm:p-4 shadow-[4px_4px_0_#000] sm:shadow-[6px_6px_0_#000] flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
                 <div className="flex items-center gap-3">
-                  <span className="material-symbols-outlined text-neo-mint text-2xl">published_with_changes</span>
+                  <span className="material-symbols-outlined text-neo-mint text-xl sm:text-2xl">published_with_changes</span>
                   <div>
-                    <span className="font-label-mono text-xs text-neo-mint font-bold uppercase">CURRENT TURN PHASE</span>
-                    <h3 className="font-headline-lg text-lg font-black text-on-background uppercase">
+                    <span className="font-label-mono text-[10px] sm:text-xs text-neo-mint font-bold uppercase">CURRENT TURN PHASE</span>
+                    <h3 className="font-headline-lg text-sm sm:text-lg font-black text-on-background uppercase">
                       {room.turn_phase === 'DRAW' && '1. DRAW PHASE — PULL CARD'}
                       {room.turn_phase === 'INSPECT' && '2. INSPECTION PHASE — EVALUATE SOURCE'}
                       {room.turn_phase === 'ACTION' && '3. ACTION PHASE — PASS, KEEP OR DISCARD'}
                     </h3>
                   </div>
                 </div>
-                <div className="text-right font-label-mono text-xs font-bold text-neo-lavender">
+                <div className="text-right font-label-mono text-[10px] sm:text-xs font-bold text-neo-lavender">
                   ACTIVE: {activePlayer?.name}
                 </div>
               </div>
 
               {/* ACTIVE SCENARIO CARD */}
               {room.active_card ? (
-                <div className="bg-surface-container-low border-4 border-neo-black shadow-[10px_10px_0px_0px_#000] p-0 flex flex-col relative group">
+                <div className="bg-surface-container-low border-4 border-neo-black shadow-[6px_6px_0px_0px_#000] sm:shadow-[10px_10px_0px_0px_#000] p-0 flex flex-col relative group">
                   
                   {/* Card Category Header */}
-                  <div className="p-3 border-b-4 border-neo-black flex justify-between items-center font-black font-label-mono text-xs bg-neo-black text-neo-lavender">
+                  <div className="p-2.5 sm:p-3 border-b-4 border-neo-black flex justify-between items-center font-black font-label-mono text-[10px] sm:text-xs bg-neo-black text-neo-lavender flex-wrap gap-2">
                     <span className="flex items-center gap-2">
                       {!playerGuess ? (
                         <>
@@ -1067,19 +1072,18 @@ export default function Home() {
                       ) : (
                         <>
                           <span>🔒 HYPOTHESIS RECORDED:</span>
-                          <span className="bg-neo-lavender text-neo-black px-2 py-0.5 neu-border font-bold uppercase text-[11px]">{playerGuess}</span>
-                          <span className="text-[10px] text-neo-mint font-normal hidden sm:inline">(Evaluation revealed upon turn action)</span>
+                          <span className="bg-neo-lavender text-neo-black px-2 py-0.5 neu-border font-bold uppercase text-[10px] sm:text-[11px]">{playerGuess}</span>
                         </>
                       )}
                     </span>
-                    <span className="bg-surface-container text-on-background px-2 py-0.5 neu-border text-[10px]">
+                    <span className="bg-surface-container text-on-background px-2 py-0.5 neu-border text-[9px] sm:text-[10px]">
                       {room.active_card.domain?.toUpperCase() || 'GENERAL NEWS'}
                     </span>
                   </div>
 
                   {/* Media Preview */}
                   {(room.active_card.image || room.active_card.media_url) && (
-                    <div className="relative w-full aspect-video border-b-4 border-neo-black overflow-hidden bg-surface-dim">
+                    <div className="relative w-full aspect-video border-b-4 border-neo-black overflow-hidden bg-surface-dim max-h-[180px] sm:max-h-[240px]">
                       <img
                         className="w-full h-full object-cover grayscale contrast-125 brightness-75 group-hover:grayscale-0 transition-all duration-500 hover:scale-105"
                         src={room.active_card.image || room.active_card.media_url}
@@ -1088,12 +1092,12 @@ export default function Home() {
                           (e.target as HTMLImageElement).src = 'https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=600&auto=format&fit=crop&q=80';
                         }}
                       />
-                      <div className="absolute top-4 left-4 w-4 h-4 border-t-4 border-l-4 border-neo-mint"></div>
-                      <div className="absolute top-4 right-4 w-4 h-4 border-t-4 border-r-4 border-neo-mint"></div>
-                      <div className="absolute bottom-4 left-4 w-4 h-4 border-b-4 border-l-4 border-neo-mint"></div>
-                      <div className="absolute bottom-4 right-4 w-4 h-4 border-b-4 border-r-4 border-neo-mint"></div>
+                      <div className="absolute top-3 left-3 w-3 h-3 border-t-2 border-l-2 border-neo-mint sm:top-4 sm:left-4 sm:w-4 sm:h-4 sm:border-t-4 sm:border-l-4"></div>
+                      <div className="absolute top-3 right-3 w-3 h-3 border-t-2 border-r-2 border-neo-mint sm:top-4 sm:right-4 sm:w-4 sm:h-4 sm:border-t-4 sm:border-r-4"></div>
+                      <div className="absolute bottom-3 left-3 w-3 h-3 border-b-2 border-l-2 border-neo-mint sm:bottom-4 sm:left-4 sm:w-4 sm:h-4 sm:border-b-4 sm:border-l-4"></div>
+                      <div className="absolute bottom-3 right-3 w-3 h-3 border-b-2 border-r-2 border-neo-mint sm:bottom-4 sm:right-4 sm:w-4 sm:h-4 sm:border-b-4 sm:border-r-4"></div>
                       {room.active_card.year && (
-                        <span className="absolute bottom-3 right-3 bg-neo-black text-neo-mint font-label-mono text-[10px] font-bold px-2 py-0.5 neu-border">
+                        <span className="absolute bottom-2.5 right-2.5 bg-neo-black text-neo-mint font-label-mono text-[9px] sm:text-[10px] font-bold px-1.5 py-0.5 neu-border">
                           {room.active_card.year} CASE
                         </span>
                       )}
@@ -1101,19 +1105,19 @@ export default function Home() {
                   )}
 
                   {/* Scenario Content */}
-                  <div className="p-6 bg-surface-container flex flex-col gap-4">
-                    <h3 className="font-display-xl text-xl lg:text-2xl text-on-background leading-tight font-black">
+                  <div className="p-4 sm:p-6 bg-surface-container flex flex-col gap-3 sm:gap-4">
+                    <h3 className="font-display-xl text-lg sm:text-xl lg:text-2xl text-on-background leading-tight font-black">
                       "{room.active_card.fake_headline || room.active_card.headline}"
                     </h3>
-                    <div className="font-body-md text-on-background text-xs leading-relaxed bg-surface-container-highest p-4 neu-border flex flex-col gap-2">
+                    <div className="font-body-md text-on-background text-xs leading-relaxed bg-surface-container-highest p-3 sm:p-4 neu-border flex flex-col gap-2">
                       <div className="flex justify-between items-center flex-wrap gap-2">
                         <span>Source Attribution: <strong>{room.active_card.source || 'Social Media Feed'}</strong></span>
-                        <span className="bg-neo-black text-neo-mint font-label-mono font-bold text-[10px] uppercase px-2 py-0.5 neu-border border-neo-mint flex items-center gap-1">
+                        <span className="bg-neo-black text-neo-mint font-label-mono font-bold text-[9px] sm:text-[10px] uppercase px-2 py-0.5 neu-border border-neo-mint flex items-center gap-1">
                           <span>🕵️ TYPE HIDDEN</span> — USE AI INSPECTOR
                         </span>
                       </div>
                       {room.active_card.real_impact && (
-                        <div className="mt-1 font-label-mono text-[11px] text-neo-mint bg-neo-black p-2 neu-border border-l-4 border-l-neo-mint leading-relaxed">
+                        <div className="mt-1 font-label-mono text-[10px] sm:text-[11px] text-neo-mint bg-neo-black p-2 neu-border border-l-4 border-l-neo-mint leading-relaxed">
                           <strong>💥 Real-World Impact:</strong> {room.active_card.real_impact}
                         </div>
                       )}
@@ -1121,7 +1125,7 @@ export default function Home() {
 
                     {/* Guessing Widget */}
                     {!playerGuess ? (
-                      <div className="p-4 bg-surface-container-lowest border-4 border-neo-black shadow-[4px_4px_0_#000] flex flex-col gap-3 my-2">
+                      <div className="p-3 sm:p-4 bg-surface-container-lowest border-4 border-neo-black shadow-[4px_4px_0_#000] flex flex-col gap-3 my-1 sm:my-2">
                         <div className="flex justify-between items-center">
                           <span className="font-label-mono text-xs text-neo-lavender font-bold">🕵️ FORM YOUR HYPOTHESIS:</span>
                           <button
@@ -1141,13 +1145,13 @@ export default function Home() {
                           </div>
                         )}
 
-                        <div className="flex gap-2">
+                        <div className="flex flex-col sm:flex-row gap-2">
                           <button
                             onClick={() => {
                               setPlayerGuess('FACTUAL');
                               soundFx.playCardDraw();
                             }}
-                            className="flex-1 bg-neo-mint text-neo-black py-2 text-xs font-headline-lg font-black neu-btn"
+                            className="flex-1 bg-neo-mint text-neo-black py-2.5 sm:py-2 text-xs font-headline-lg font-black neu-btn"
                           >
                             🟢 FACTUAL
                           </button>
@@ -1156,7 +1160,7 @@ export default function Home() {
                               setPlayerGuess('OPINION');
                               soundFx.playCardDraw();
                             }}
-                            className="flex-1 bg-neo-lavender text-neo-black py-2 text-xs font-headline-lg font-black neu-btn"
+                            className="flex-1 bg-neo-lavender text-neo-black py-2.5 sm:py-2 text-xs font-headline-lg font-black neu-btn"
                           >
                             🟡 OPINION
                           </button>
@@ -1165,14 +1169,14 @@ export default function Home() {
                               setPlayerGuess('PREJUDICE');
                               soundFx.playCardDraw();
                             }}
-                            className="flex-1 bg-neo-coral text-neo-black py-2 text-xs font-headline-lg font-black neu-btn"
+                            className="flex-1 bg-neo-coral text-neo-black py-2.5 sm:py-2 text-xs font-headline-lg font-black neu-btn"
                           >
                             🔴 PREJUDICE
                           </button>
                         </div>
                       </div>
                     ) : (
-                      <div className="p-4 bg-surface-container-lowest border-4 border-neo-black shadow-[4px_4px_0_#000] flex flex-col gap-3 my-2">
+                      <div className="p-3 sm:p-4 bg-surface-container-lowest border-4 border-neo-black shadow-[4px_4px_0_#000] flex flex-col gap-3 my-1 sm:my-2">
                         <div className="flex justify-between items-center flex-wrap gap-2">
                           <div className="flex items-center gap-2">
                             <span className="font-label-mono text-xs text-neo-mint font-bold">🔒 HYPOTHESIS RECORDED:</span>
@@ -1187,9 +1191,9 @@ export default function Home() {
                             ✏️ CHANGE HYPOTHESIS
                           </button>
                         </div>
-                        <div className="p-2.5 bg-surface-container neu-border font-label-mono text-[11px] text-on-background flex items-center gap-2">
-                          <span className="material-symbols-outlined text-base text-neo-mint">verified_user</span>
-                          <span>Hypothesis locked. Execute your action (Pass, Keep, or Discard) below — your critical thinking score bonus will be evaluated after your decision.</span>
+                        <div className="p-2.5 bg-surface-container neu-border font-label-mono text-[10px] sm:text-[11px] text-on-background flex items-center gap-2">
+                          <span className="material-symbols-outlined text-base text-neo-mint shrink-0">verified_user</span>
+                          <span>Hypothesis locked. Execute your action (Pass, Keep, or Discard) below — your score bonus will be evaluated after your decision.</span>
                         </div>
                       </div>
                     )}
@@ -1197,25 +1201,25 @@ export default function Home() {
 
                   {/* ACTION PHASE BUTTONS */}
                   {myPlayerId !== activePlayer?.id ? (
-                    <div className="p-4 bg-surface-container-lowest border-t-4 border-neo-black flex items-center justify-center text-center">
-                      <span className="font-headline-lg text-sm text-neo-mint font-black animate-pulse">
+                    <div className="p-3 sm:p-4 bg-surface-container-lowest border-t-4 border-neo-black flex items-center justify-center text-center">
+                      <span className="font-headline-lg text-xs sm:text-sm text-neo-mint font-black animate-pulse">
                         ⏳ WAITING FOR {activePlayer?.name.toUpperCase()} TO MAKE A MOVE...
                       </span>
                     </div>
                   ) : (
                     <>
                       {room.turn_phase === 'INSPECT' && (
-                        <div className="p-4 bg-surface-container-lowest border-t-4 border-neo-black flex gap-4">
+                        <div className="p-3 sm:p-4 bg-surface-container-lowest border-t-4 border-neo-black flex flex-col sm:flex-row gap-2.5 sm:gap-4">
                           <button
                             onClick={handleRunAudit}
-                            className="flex-1 bg-neo-mint text-neo-black py-3 font-headline-lg font-black neu-btn flex items-center justify-center gap-2"
+                            className="flex-1 bg-neo-mint text-neo-black py-2.5 sm:py-3 font-headline-lg text-xs sm:text-sm font-black neu-btn flex items-center justify-center gap-2"
                           >
-                            <span className="material-symbols-outlined text-xl">manage_search</span>
+                            <span className="material-symbols-outlined text-lg sm:text-xl">manage_search</span>
                             RUN SOCRATIC AI INSPECTOR
                           </button>
                           <button
                             onClick={() => setRoom({ ...room, turn_phase: 'ACTION' })}
-                            className="bg-neo-lavender text-neo-black py-3 px-6 font-headline-lg font-black neu-btn"
+                            className="bg-neo-lavender text-neo-black py-2.5 sm:py-3 px-4 sm:px-6 font-headline-lg text-xs sm:text-sm font-black neu-btn"
                           >
                             PROCEED TO ACTION →
                           </button>
@@ -1223,13 +1227,13 @@ export default function Home() {
                       )}
 
                       {room.turn_phase === 'ACTION' && (
-                        <div className="p-4 bg-surface-container-lowest border-t-4 border-neo-black flex flex-col gap-4">
-                          <div className="flex items-center gap-3">
+                        <div className="p-3 sm:p-4 bg-surface-container-lowest border-t-4 border-neo-black flex flex-col gap-3 sm:gap-4">
+                          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-3">
                             <label className="text-xs font-bold font-label-mono text-neo-mint">Select Target Player to Pass:</label>
                             <select
                               value={selectedTargetPlayerId}
                               onChange={(e) => setSelectedTargetPlayerId(e.target.value)}
-                              className="bg-surface-container neu-border p-2 font-label-mono text-xs text-on-background font-bold"
+                              className="w-full sm:w-auto bg-surface-container neu-border p-2 font-label-mono text-xs text-on-background font-bold"
                             >
                               {room.players.filter(p => p.id !== activePlayer?.id).map(p => (
                                 <option key={p.id} value={p.id}>{p.name} ({p.community})</option>
@@ -1237,25 +1241,25 @@ export default function Home() {
                             </select>
                           </div>
 
-                          <div className="flex flex-wrap gap-4 justify-between items-center">
+                          <div className="flex flex-col sm:flex-row gap-2.5 sm:gap-4 justify-between items-stretch sm:items-center">
                             <button
                               onClick={handlePassCard}
-                              className="flex-1 min-w-[140px] flex items-center justify-center gap-2 bg-neo-mint text-neo-black py-3 px-4 font-headline-lg text-base neu-btn hover:bg-[#a3e635] font-black"
+                              className="flex-1 min-w-0 sm:min-w-[140px] flex items-center justify-center gap-2 bg-neo-mint text-neo-black py-2.5 sm:py-3 px-3 sm:px-4 font-headline-lg text-sm sm:text-base neu-btn hover:bg-[#a3e635] font-black"
                             >
-                              <span className="material-symbols-outlined text-xl font-bold">send</span> PASS (+1 CRED)
+                              <span className="material-symbols-outlined text-lg sm:text-xl font-bold">send</span> PASS (+1 CRED)
                             </button>
                             <button
                               onClick={handleKeepCard}
-                              className="flex-1 min-w-[140px] flex items-center justify-center gap-2 bg-neo-lavender text-neo-black py-3 px-4 font-headline-lg text-base neu-btn hover:bg-[#c084fc] font-black"
+                              className="flex-1 min-w-0 sm:min-w-[140px] flex items-center justify-center gap-2 bg-neo-lavender text-neo-black py-2.5 sm:py-3 px-3 sm:px-4 font-headline-lg text-sm sm:text-base neu-btn hover:bg-[#c084fc] font-black"
                             >
-                              <span className="material-symbols-outlined text-xl font-bold">inventory_2</span> KEEP IN HAND
+                              <span className="material-symbols-outlined text-lg sm:text-xl font-bold">inventory_2</span> KEEP IN HAND
                             </button>
                             <button
                               onClick={handleDiscardCard}
-                              className="flex-none flex items-center justify-center p-3 bg-neo-coral text-neo-black neu-btn hover:bg-[#fb7185]"
+                              className="flex-none flex items-center justify-center p-2.5 sm:p-3 bg-neo-coral text-neo-black neu-btn hover:bg-[#fb7185]"
                               title="Discard / Mute Card"
                             >
-                              <span className="material-symbols-outlined text-xl font-bold">delete_sweep</span>
+                              <span className="material-symbols-outlined text-lg sm:text-xl font-bold">delete_sweep</span>
                             </button>
                           </div>
                         </div>
@@ -1266,10 +1270,10 @@ export default function Home() {
                 </div>
               ) : (
                 /* DRAW PHASE CONTAINER */
-                <div className="border-4 border-neo-black bg-surface-container neu-shadow p-8 flex flex-col items-center justify-center gap-6 text-center min-h-[300px]">
-                  <span className="material-symbols-outlined text-6xl text-neo-mint animate-bounce">style</span>
+                <div className="border-4 border-neo-black bg-surface-container neu-shadow p-5 sm:p-8 flex flex-col items-center justify-center gap-4 sm:gap-6 text-center min-h-[250px] sm:min-h-[300px]">
+                  <span className="material-symbols-outlined text-5xl sm:text-6xl text-neo-mint animate-bounce">style</span>
                   <div className="flex flex-col gap-2">
-                    <h3 className="font-headline-lg text-2xl text-on-background uppercase font-black">
+                    <h3 className="font-headline-lg text-xl sm:text-2xl text-on-background uppercase font-black">
                       {activePlayer?.name}'s Turn
                     </h3>
                     <p className="font-body-md text-xs text-on-surface-variant max-w-md">
@@ -1281,13 +1285,13 @@ export default function Home() {
                   {myPlayerId === activePlayer?.id ? (
                     <button
                       onClick={handleDrawCard}
-                      className="bg-neo-mint text-neo-black py-4 px-8 font-headline-lg text-lg font-black neu-btn flex items-center gap-2 hover:bg-[#a3e635]"
+                      className="bg-neo-mint text-neo-black py-3 sm:py-4 px-6 sm:px-8 font-headline-lg text-base sm:text-lg font-black neu-btn flex items-center gap-2 hover:bg-[#a3e635]"
                     >
-                      <span className="material-symbols-outlined text-2xl">download</span>
+                      <span className="material-symbols-outlined text-xl sm:text-2xl">download</span>
                       DRAW NEWS CARD FROM DECK
                     </button>
                   ) : (
-                    <div className="bg-neo-black text-neo-mint py-3 px-6 font-label-mono text-xs font-bold neu-border uppercase animate-pulse">
+                    <div className="bg-neo-black text-neo-mint py-2.5 px-5 font-label-mono text-xs font-bold neu-border uppercase animate-pulse">
                       ⏳ WAITING FOR {activePlayer?.name.toUpperCase()}'S MOVE
                     </div>
                   )}
@@ -1296,25 +1300,25 @@ export default function Home() {
 
               {/* PLAYER HAND & SPECIAL POWER MOVES PANEL */}
               {myPlayer && myPlayer.hand.length > 0 && (
-                <div className="bg-surface-container border-4 border-neo-black p-4 shadow-[6px_6px_0_#000] flex flex-col gap-3">
-                  <h4 className="font-headline-lg text-sm text-neo-mint uppercase font-black flex justify-between items-center">
+                <div className="bg-surface-container border-4 border-neo-black p-3 sm:p-4 shadow-[4px_4px_0_#000] sm:shadow-[6px_6px_0_#000] flex flex-col gap-3">
+                  <h4 className="font-headline-lg text-xs sm:text-sm text-neo-mint uppercase font-black flex justify-between items-center">
                     <span>YOUR CARDS IN HAND ({myPlayer.hand.length})</span>
-                    <span className="text-[10px] font-label-mono text-neo-coral">SPECIAL POWER MOVES UNLOCKED</span>
+                    <span className="text-[9px] sm:text-[10px] font-label-mono text-neo-coral">POWER MOVES</span>
                   </h4>
                   <div className="flex flex-col gap-2 max-h-[200px] overflow-y-auto">
                     {myPlayer.hand.map((c, i) => (
-                      <div key={i} className="bg-surface-container-lowest neu-border p-3 flex justify-between items-center gap-2">
+                      <div key={i} className="bg-surface-container-lowest neu-border p-2.5 sm:p-3 flex justify-between items-center gap-2">
                         <div className="flex flex-col">
-                          <span className="text-xs font-bold text-on-background">"{c.headline.slice(0, 36)}..."</span>
+                          <span className="text-xs font-bold text-on-background">"{c.headline.slice(0, 32)}..."</span>
                           <span className="text-[10px] font-label-mono text-neo-mint">{c.card_type} • {c.category}</span>
                         </div>
                         <div className="flex gap-2">
                           <button
                             onClick={() => handleCascadePowerMove(c)}
-                            className="text-[10px] bg-neo-coral text-neo-black font-label-mono font-black px-2 py-1 neu-btn"
+                            className="text-[9px] sm:text-[10px] bg-neo-coral text-neo-black font-label-mono font-black px-2 py-1 neu-btn"
                             title="Mega Cascade Move: Broadcast to ALL players simultaneously"
                           >
-                            MEGA CASCADE
+                            CASCADE
                           </button>
                         </div>
                       </div>
@@ -1326,103 +1330,103 @@ export default function Home() {
             </section>
 
             {/* RIGHT COLUMN: AI Audit Engine & Socratic Coach */}
-            <aside className="w-full lg:w-1/4 flex flex-col gap-6 overflow-y-auto pr-2 pb-8 h-full">
-              <div className="bg-surface-container-high border-4 border-neo-black shadow-[10px_10px_0px_0px_#000] flex flex-col h-full relative">
+            <aside className="w-full lg:w-1/4 flex flex-col gap-4 sm:gap-6 overflow-y-visible lg:overflow-y-auto pr-0 lg:pr-2 pb-4 lg:pb-8 h-auto lg:h-full">
+              <div className="bg-surface-container-high border-4 border-neo-black shadow-[6px_6px_0px_0px_#000] sm:shadow-[10px_10px_0px_0px_#000] flex flex-col h-full relative">
                 
                 {/* Header */}
-                <div className="p-4 border-b-4 border-neo-black bg-neo-lavender flex items-center gap-3">
-                  <span className="material-symbols-outlined text-neo-black text-3xl font-bold">smart_toy</span>
-                  <h2 className="font-headline-lg text-xl uppercase font-black text-neo-black m-0 leading-none">
+                <div className="p-3 sm:p-4 border-b-4 border-neo-black bg-neo-lavender flex items-center gap-3">
+                  <span className="material-symbols-outlined text-neo-black text-2xl sm:text-3xl font-bold">smart_toy</span>
+                  <h2 className="font-headline-lg text-lg sm:text-xl uppercase font-black text-neo-black m-0 leading-none">
                     AI AUDIT ENGINE
                   </h2>
                 </div>
 
                 {/* 3C2B Checklist Accordion */}
-                <div className="flex-grow overflow-y-auto p-4 flex flex-col gap-4 bg-background min-h-[260px]">
+                <div className="flex-grow overflow-y-auto p-3 sm:p-4 flex flex-col gap-3 sm:gap-4 bg-background min-h-[220px]">
                   
                   {/* Accordion Item 1: Content Analysis */}
                   <div className="border-4 border-neo-black shadow-[4px_4px_0_#000] bg-surface-container-low">
                     <button
                       onClick={() => setOpenAccordion(openAccordion === 'content' ? null : 'content')}
-                      className="w-full p-4 flex justify-between items-center bg-surface-container hover:bg-surface-container-highest transition-colors font-headline-lg text-sm border-b-4 border-neo-black font-black"
+                      className="w-full p-3 sm:p-4 flex justify-between items-center bg-surface-container hover:bg-surface-container-highest transition-colors font-headline-lg text-xs sm:text-sm border-b-4 border-neo-black font-black"
                     >
                       <span className="text-neo-mint font-bold tracking-wide">1. CONTENT &amp; TRIGGERS</span>
-                      <span className="material-symbols-outlined text-xl font-bold">
+                      <span className="material-symbols-outlined text-lg sm:text-xl font-bold">
                         {openAccordion === 'content' ? 'expand_less' : 'expand_more'}
                       </span>
                     </button>
                     {openAccordion === 'content' && (
-                      <div className="p-4 bg-surface-container-lowest font-body-md text-xs flex flex-col gap-4 text-on-background">
+                      <div className="p-3 sm:p-4 bg-surface-container-lowest font-body-md text-xs flex flex-col gap-3 sm:gap-4 text-on-background">
                         {isLoadingAudit ? (
-                          <div className="py-6 text-center font-label-mono text-xs animate-pulse text-neo-mint font-bold">
+                          <div className="py-4 sm:py-6 text-center font-label-mono text-xs animate-pulse text-neo-mint font-bold">
                             AUDITING MEDIA CONTENT...
                           </div>
                         ) : auditData ? (
                           <>
-                            <div className="flex items-center justify-between border-b-2 border-neo-black pb-2 border-dashed">
-                              <span className="font-bold text-neo-mint font-label-mono text-xs">🔥 EMOTIONAL TRIGGERS:</span>
+                            <div className="flex items-center justify-between border-b-2 border-neo-black pb-2 border-dashed flex-wrap gap-1">
+                              <span className="font-bold text-neo-mint font-label-mono text-[11px] sm:text-xs">🔥 EMOTIONAL TRIGGERS:</span>
                               <div className="flex gap-1 flex-wrap justify-end">
                                 {auditData.emotional_triggers.map((t, idx) => (
-                                  <span key={idx} className="text-neo-coral font-black font-label-mono bg-neo-black px-2 py-0.5 text-[10px] neu-border uppercase">
+                                  <span key={idx} className="text-neo-coral font-black font-label-mono bg-neo-black px-1.5 py-0.5 text-[9px] sm:text-[10px] neu-border uppercase">
                                     ⚠️ {t}
                                   </span>
                                 ))}
                               </div>
                             </div>
 
-                            <p className="text-xs font-label-mono p-3 bg-[#0f172a] neu-border border-l-8 border-l-neo-coral text-neo-coral leading-relaxed">
+                            <p className="text-[11px] sm:text-xs font-label-mono p-2.5 sm:p-3 bg-[#0f172a] neu-border border-l-4 sm:border-l-8 border-l-neo-coral text-neo-coral leading-relaxed">
                               <strong>💡 Socratic Question:</strong> "{auditData.socratic_question}"
                             </p>
 
                             {room.active_card && (
                               <>
                                 {/* 3C2B Framework Bite-Sized Cards */}
-                                <div className="flex flex-col gap-2 p-3 bg-surface-container neu-border border-l-4 border-l-neo-lavender">
-                                  <div className="font-headline-lg text-xs font-black text-neo-lavender uppercase flex items-center justify-between">
+                                <div className="flex flex-col gap-2 p-2.5 sm:p-3 bg-surface-container neu-border border-l-4 border-l-neo-lavender">
+                                  <div className="font-headline-lg text-[11px] sm:text-xs font-black text-neo-lavender uppercase flex items-center justify-between">
                                     <span>🏛️ 3C2B FRAMEWORK ANALYSIS</span>
                                     <span className="text-[9px] bg-neo-black text-neo-lavender px-1.5 py-0.5 neu-border">5 DIMS</span>
                                   </div>
-                                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-[11px] font-label-mono">
+                                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-[10px] sm:text-[11px] font-label-mono">
                                     <div className="p-2 bg-neo-black text-on-background neu-border border-l-2 border-l-neo-mint">
-                                      <strong className="text-neo-mint block text-[10px]">👤 CREATOR</strong>
-                                      <span className="text-[11px]">{room.active_card.ai_analysis?.creator || room.active_card.source}</span>
+                                      <strong className="text-neo-mint block text-[9px] sm:text-[10px]">👤 CREATOR</strong>
+                                      <span className="text-[10px] sm:text-[11px]">{room.active_card.ai_analysis?.creator || room.active_card.source}</span>
                                     </div>
                                     <div className="p-2 bg-neo-black text-on-background neu-border border-l-2 border-l-neo-lavender">
-                                      <strong className="text-neo-lavender block text-[10px]">📝 CONTENT</strong>
-                                      <span className="text-[11px]">{room.active_card.ai_analysis?.content || room.active_card.headline}</span>
+                                      <strong className="text-neo-lavender block text-[9px] sm:text-[10px]">📝 CONTENT</strong>
+                                      <span className="text-[10px] sm:text-[11px]">{room.active_card.ai_analysis?.content || room.active_card.headline}</span>
                                     </div>
                                     <div className="p-2 bg-neo-black text-on-background neu-border border-l-2 border-l-neo-yellow">
-                                      <strong className="text-neo-yellow block text-[10px]">🌐 CONTEXT</strong>
-                                      <span className="text-[11px]">{room.active_card.ai_analysis?.context || `${room.active_card.year} Context`}</span>
+                                      <strong className="text-neo-yellow block text-[9px] sm:text-[10px]">🌐 CONTEXT</strong>
+                                      <span className="text-[10px] sm:text-[11px]">{room.active_card.ai_analysis?.context || `${room.active_card.year} Context`}</span>
                                     </div>
                                     <div className="p-2 bg-neo-black text-on-background neu-border border-l-2 border-l-neo-coral">
-                                      <strong className="text-neo-coral block text-[10px]">👁️ BIAS</strong>
-                                      <span className="text-[11px]">{room.active_card.ai_analysis?.bias || 'Emotional bias framing'}</span>
+                                      <strong className="text-neo-coral block text-[9px] sm:text-[10px]">👁️ BIAS</strong>
+                                      <span className="text-[10px] sm:text-[11px]">{room.active_card.ai_analysis?.bias || 'Emotional bias framing'}</span>
                                     </div>
                                     <div className="p-2 bg-neo-black text-on-background neu-border border-l-2 border-l-neo-mint sm:col-span-2">
-                                      <strong className="text-neo-mint block text-[10px]">💼 BUSINESS / BEHAVIOR</strong>
-                                      <span className="text-[11px]">{room.active_card.ai_analysis?.business || 'Click monetization & engagement'}</span>
+                                      <strong className="text-neo-mint block text-[9px] sm:text-[10px]">💼 BUSINESS / BEHAVIOR</strong>
+                                      <span className="text-[10px] sm:text-[11px]">{room.active_card.ai_analysis?.business || 'Click monetization & engagement'}</span>
                                     </div>
                                   </div>
                                 </div>
 
                                 {/* ABC Psychological Model */}
-                                <div className="flex flex-col gap-2 p-3 bg-surface-container neu-border border-l-4 border-l-neo-coral">
-                                  <div className="font-headline-lg text-xs font-black text-neo-coral uppercase flex items-center justify-between">
+                                <div className="flex flex-col gap-2 p-2.5 sm:p-3 bg-surface-container neu-border border-l-4 border-l-neo-coral">
+                                  <div className="font-headline-lg text-[11px] sm:text-xs font-black text-neo-coral uppercase flex items-center justify-between">
                                     <span>🧠 ABC PSYCHOLOGICAL MODEL</span>
                                     <span className="text-[9px] bg-neo-black text-neo-coral px-1.5 py-0.5 neu-border">CHAIN</span>
                                   </div>
-                                  <div className="flex flex-col gap-1.5 text-[11px] font-label-mono">
+                                  <div className="flex flex-col gap-1.5 text-[10px] sm:text-[11px] font-label-mono">
                                     <div className="p-2 bg-neo-coral/10 border border-neo-coral/40 neu-border">
-                                      <strong className="text-neo-coral block text-[10px]">❤️ AFFECTIVE (EMOTION)</strong>
+                                      <strong className="text-neo-coral block text-[9px] sm:text-[10px]">❤️ AFFECTIVE (EMOTION)</strong>
                                       <span>{room.active_card.trigger || 'Fear + Need for control'}</span>
                                     </div>
                                     <div className="p-2 bg-neo-mint/10 border border-neo-mint/40 neu-border">
-                                      <strong className="text-neo-mint block text-[10px]">🏃 BEHAVIORAL (ACTION)</strong>
+                                      <strong className="text-neo-mint block text-[9px] sm:text-[10px]">🏃 BEHAVIORAL (ACTION)</strong>
                                       <span>{room.active_card.expected_behavior || 'Circulate urgently across feeds'}</span>
                                     </div>
                                     <div className="p-2 bg-neo-lavender/10 border border-neo-lavender/40 neu-border">
-                                      <strong className="text-neo-lavender block text-[10px]">💥 CONSEQUENCE</strong>
+                                      <strong className="text-neo-lavender block text-[9px] sm:text-[10px]">💥 CONSEQUENCE</strong>
                                       <span>{room.active_card.consequence || 'Amplifies societal chaos'}</span>
                                     </div>
                                   </div>
@@ -1441,28 +1445,28 @@ export default function Home() {
 
                   {/* Accordion Item 2: Socratic Dialogue Chat */}
                   <div className="border-4 border-neo-black shadow-[4px_4px_0_#000] bg-surface-container-low flex flex-col">
-                    <div className="p-4 bg-surface-container font-headline-lg text-sm border-b-4 border-neo-black font-black text-on-background flex justify-between items-center">
+                    <div className="p-3 sm:p-4 bg-surface-container font-headline-lg text-xs sm:text-sm border-b-4 border-neo-black font-black text-on-background flex justify-between items-center">
                       <span className="flex items-center gap-2">
                         <span className="material-symbols-outlined text-sm font-bold">forum</span>
                         SOCRATIC DIALOGUE
                       </span>
                     </div>
-                    <div className="p-3 bg-surface-container-lowest font-label-mono text-xs flex flex-col gap-3 max-h-[200px] overflow-y-auto">
+                    <div className="p-2.5 sm:p-3 bg-surface-container-lowest font-label-mono text-xs flex flex-col gap-2.5 sm:gap-3 max-h-[180px] sm:max-h-[200px] overflow-y-auto">
                       {chatHistory.map((chat, idx) => (
                         <div
                           key={idx}
-                          className={`flex flex-col p-2.5 neu-border ${
+                          className={`flex flex-col p-2 sm:p-2.5 neu-border ${
                             chat.sender === 'user'
-                              ? 'bg-neo-mint/10 border-neo-mint/35 self-end ml-6 shadow-[2px_2px_0px_0px_#bef264]'
-                              : 'bg-surface-container border-neo-lavender/35 self-start mr-6 shadow-[2px_2px_0px_0px_#d8b4fe]'
-                          } max-w-[90%]`}
+                              ? 'bg-neo-mint/10 border-neo-mint/35 self-end ml-4 sm:ml-6 shadow-[2px_2px_0px_0px_#bef264]'
+                              : 'bg-surface-container border-neo-lavender/35 self-start mr-4 sm:mr-6 shadow-[2px_2px_0px_0px_#d8b4fe]'
+                          } max-w-[95%] sm:max-w-[90%]`}
                         >
-                          <span className={`text-[10px] font-black tracking-wider uppercase mb-1 ${
+                          <span className={`text-[9px] sm:text-[10px] font-black tracking-wider uppercase mb-0.5 ${
                             chat.sender === 'user' ? 'text-neo-mint' : 'text-neo-lavender'
                           }`}>
                             {chat.sender === 'user' ? '▶ USER_SESSION' : '⚡ SOCRATIC_COACH'}
                           </span>
-                          <p className="text-xs text-on-background leading-relaxed font-semibold">
+                          <p className="text-[11px] sm:text-xs text-on-background leading-relaxed font-semibold">
                             {chat.text}
                           </p>
                         </div>
@@ -1473,17 +1477,17 @@ export default function Home() {
                 </div>
 
                 {/* Chat Input */}
-                <form onSubmit={handleSendChat} className="p-4 border-t-4 border-neo-black bg-surface-container mt-auto">
+                <form onSubmit={handleSendChat} className="p-3 sm:p-4 border-t-4 border-neo-black bg-surface-container mt-auto">
                   <div className="relative flex items-center">
                     <input
                       value={chatInput}
                       onChange={(e) => setChatInput(e.target.value)}
-                      className="w-full bg-surface-container-lowest neu-border p-4 pr-12 font-label-mono text-xs text-on-background placeholder:text-on-surface-variant/50 focus:border-neo-mint focus:ring-0 focus:outline-none shadow-[inset_4px_4px_0px_0px_rgba(0,0,0,0.8)] font-bold"
+                      className="w-full bg-surface-container-lowest neu-border p-3 sm:p-4 pr-10 sm:pr-12 font-label-mono text-xs text-on-background placeholder:text-on-surface-variant/50 focus:border-neo-mint focus:ring-0 focus:outline-none shadow-[inset_4px_4px_0px_0px_rgba(0,0,0,0.8)] font-bold"
                       placeholder="Ask AI Coach a question..."
                       type="text"
                     />
-                    <button type="submit" className="absolute right-3 text-neo-mint hover:text-neo-lavender transition-colors drop-shadow-[2px_2px_0_#000]">
-                      <span className="material-symbols-outlined text-3xl font-bold">send</span>
+                    <button type="submit" className="absolute right-2.5 sm:right-3 text-neo-mint hover:text-neo-lavender transition-colors drop-shadow-[2px_2px_0_#000]">
+                      <span className="material-symbols-outlined text-2xl sm:text-3xl font-bold">send</span>
                     </button>
                   </div>
                 </form>
@@ -1494,25 +1498,25 @@ export default function Home() {
         )}
 
         {/* Footer */}
-        <footer className="mt-auto w-full flex justify-between items-center px-6 lg:px-margin-desktop py-3 border-t-4 border-neo-black bg-surface-container-highest shadow-[0px_-6px_0px_0px_#000] relative z-10">
-          <div className="flex flex-col gap-1">
-            <div className="font-label-mono text-xs text-neo-lavender font-black uppercase tracking-wider bg-neo-black px-3 py-1 neu-border w-fit">
+        <footer className="mt-auto w-full flex flex-col sm:flex-row justify-between items-center gap-3 px-4 sm:px-6 lg:px-margin-desktop py-3 border-t-4 border-neo-black bg-surface-container-highest shadow-[0px_-6px_0px_0px_#000] relative z-10 text-center sm:text-left">
+          <div className="flex flex-col gap-1 items-center sm:items-start">
+            <div className="font-label-mono text-[10px] sm:text-xs text-neo-lavender font-black uppercase tracking-wider bg-neo-black px-2.5 py-1 neu-border w-fit">
               © 2026 MIL ECHO — PREBUNKING PROTOCOL ACTIVE
             </div>
-            <div className="font-label-mono text-xs text-on-surface-variant font-bold px-1">
+            <div className="font-label-mono text-[11px] sm:text-xs text-on-surface-variant font-bold px-1">
               Contact Us: <a href="mailto:milecho@gmail.com" className="text-neo-mint hover:underline">milecho@gmail.com</a>
             </div>
           </div>
-          <div className="flex items-center gap-6 font-headline-lg text-sm">
+          <div className="flex items-center gap-4 sm:gap-6 font-headline-lg text-xs sm:text-sm">
             <div className="relative" ref={exportDropdownRef}>
               <button
                 onClick={() => setIsExportDropdownOpen(!isExportDropdownOpen)}
-                className="text-neo-mint bg-neo-black py-1.5 px-4 font-black neu-btn hover:bg-neo-mint hover:text-neo-black flex items-center gap-2"
+                className="text-neo-mint bg-neo-black py-1.5 px-3 sm:px-4 font-black neu-btn hover:bg-neo-mint hover:text-neo-black flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm"
               >
                 <span className="material-symbols-outlined text-base font-bold">download</span> EXPORT PDF
               </button>
               {isExportDropdownOpen && (
-                <div className="absolute bottom-full right-0 mb-3 bg-surface-container border-4 border-neo-black shadow-[6px_6px_0_#000] py-2 w-64 z-50 flex flex-col font-label-mono text-xs font-bold text-on-surface">
+                <div className="absolute bottom-full right-0 mb-3 bg-surface-container border-4 border-neo-black shadow-[6px_6px_0_#000] py-2 w-56 sm:w-64 z-50 flex flex-col font-label-mono text-xs font-bold text-on-surface">
                   <button
                     onClick={() => {
                       window.open('/mil_echo_offline_cards.pdf', '_blank');
