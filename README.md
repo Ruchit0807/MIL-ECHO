@@ -5,8 +5,8 @@
 [![License](https://img.shields.io/badge/License-MIT-FF007A?style=for-the-badge)](LICENSE)
 [![Hackathon](https://img.shields.io/badge/UNESCO-Youth%20Hackathon%202026-7B2CBF?style=for-the-badge)](https://github.com/Ruchit0807/MIL-ECHO)
 
-> **NAVIGATE STREAMS. BUILD CRED. PREVENT CHAOS.**  
-> An interactive multiplayer card game empowering youth to build Media and Information Literacy (MIL) skills. Inspect online news cards, pass authentic content to build your CRED score (+1), and stop unverified prejudice from driving the global CHAOS meter to zero!
+> **EVERY CHOICE HAS OUTCOMES.**  
+> An interactive multiplayer card game empowering youth to build Media and Information Literacy (MIL) skills. Inspect news cards, verify information, and experience how your decisions shape the community. Earn CRED through critical thinking and work together to stop CHAOS before it reaches zero!
 
 ---
 

@@ -738,10 +738,10 @@ export default function Home() {
                 ⚡ MULTIPLAYER PREBUNKING ARENA
               </div>
               <h2 className="font-display-xl text-3xl sm:text-5xl lg:text-7xl text-neo-mint uppercase tracking-tight font-black leading-tight" style={{ textShadow: '3px 3px 0 #000' }}>
-                NAVIGATE STREAMS. BUILD CRED. PREVENT CHAOS.
+                EVERY CHOICE HAS OUTCOMES.
               </h2>
               <p className="font-body-md text-on-surface-variant text-sm sm:text-base lg:text-lg leading-relaxed">
-                Welcome to <strong>MIL ECHO</strong>. Inspect online news cards, pass authentic content to build your <strong>CRED</strong> score (+1), and stop unverified prejudice from driving the global <strong>CHAOS</strong> meter to zero!
+                Inspect news cards, verify information, and experience how your decisions shape the community. Earn <strong>CRED</strong> through critical thinking and work together to stop <strong>CHAOS</strong> before it reaches zero.
               </p>
               <div className="flex flex-wrap gap-3 justify-center items-center mt-1">
                 <button

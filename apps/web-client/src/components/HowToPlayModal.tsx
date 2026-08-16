@@ -130,6 +130,25 @@ export const HowToPlayModal: React.FC<HowToPlayModalProps> = ({ isOpen, onClose 
           {/* TAB 1: QUICK START GUIDE */}
           {activeTab === 'quickstart' && (
             <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+              
+              {/* Game Overview Infographic */}
+              <div className="border-4 border-neo-black p-3 bg-slate-900 shadow-[4px_4px_0_#000] flex flex-col items-center gap-2">
+                <div className="flex items-center justify-between w-full px-1">
+                  <span className="font-label-mono text-xs font-bold text-neo-mint uppercase tracking-wider flex items-center gap-1.5">
+                    <span className="material-symbols-outlined text-base">analytics</span>
+                    VISUAL GAMEPLAY GUIDE
+                  </span>
+                  <span className="font-label-mono text-[10px] text-slate-400 font-bold uppercase">
+                    EVERY CHOICE HAS OUTCOMES
+                  </span>
+                </div>
+                <img
+                  src="/how_to_play_infographic.png"
+                  alt="MIL ECHO - Every Choice Has Outcomes Guide"
+                  className="w-full h-auto max-h-[520px] object-contain border-2 border-neo-black rounded bg-white"
+                />
+              </div>
+
               <div className="border-4 border-neo-black p-4 shadow-[4px_4px_0_#000] bg-slate-800">
                 <h3 className="font-headline-lg text-lg text-neo-mint font-black flex items-center gap-2">
                   <Award size={20} /> THE OBJECTIVE

@@ -117,9 +117,13 @@ export const MilLawsModal: React.FC<MilLawsModalProps> = ({ isOpen, onClose }) =
 
         {/* Footer */}
         <div className="p-4 border-t-4 border-neo-black bg-surface-container-low flex justify-between items-center flex-wrap gap-3">
-          <span className="font-label-mono text-[11px] text-neo-mint font-bold">
-            🌐 UNESCO YOUTH HACKATHON 2026 • PREBUNKING PROTOCOL
-          </span>
+          <div className="flex items-center bg-white px-2 py-1 border-2 border-neo-black shadow-[2px_2px_0_#000]">
+            <img
+              src="/unesco_logo.jpeg"
+              alt="UNESCO Logo"
+              className="h-7 sm:h-8 object-contain"
+            />
+          </div>
           <button
             onClick={onClose}
             className="bg-neo-mint text-neo-black font-headline-lg font-black text-xs px-6 py-2.5 neu-btn"
