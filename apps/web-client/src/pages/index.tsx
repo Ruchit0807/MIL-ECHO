@@ -672,7 +672,7 @@ export default function Home() {
             <img
               src="/mil_logo.png"
               alt="MIL ECHO Logo"
-              className="h-10 sm:h-12 lg:h-14 w-auto cursor-pointer object-contain transition-transform hover:scale-105 filter drop-shadow-[0_0_10px_rgba(0,242,254,0.5)] max-w-[130px] sm:max-w-none"
+              className="h-10 sm:h-12 lg:h-14 w-auto cursor-pointer object-contain transition-transform hover:scale-105 max-w-[130px] sm:max-w-none"
               onClick={handleExitRoom}
             />
           </div>
@@ -1533,7 +1533,7 @@ export default function Home() {
               © 2026 MIL ECHO — PREBUNKING PROTOCOL ACTIVE
             </div>
             <div className="font-label-mono text-[11px] sm:text-xs text-on-surface-variant font-bold px-1">
-              Contact Us: <a href="mailto:milecho@gmail.com" className="text-neo-mint hover:underline">milecho@gmail.com</a>
+              Contact Us: <a href="mailto:milecho0812@gmail.com" className="text-neo-mint hover:underline">milecho0812@gmail.com</a>
             </div>
           </div>
           <div className="flex items-center gap-4 sm:gap-6 font-headline-lg text-xs sm:text-sm">
