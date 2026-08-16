@@ -804,6 +804,35 @@ export default function Home() {
 
             </div>
 
+            {/* PROJECT TUTORIAL & VIDEO GUIDE */}
+            <div className="w-full max-w-4xl bg-surface-container neu-border p-4 sm:p-6 shadow-[4px_4px_0_#000] sm:shadow-[6px_6px_0_#000] flex flex-col gap-3 sm:gap-4 mt-2 sm:mt-4">
+              <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 border-b-2 border-neo-black pb-3">
+                <div className="flex items-center gap-2.5">
+                  <span className="material-symbols-outlined text-neo-mint text-2xl sm:text-3xl font-bold">play_circle</span>
+                  <div>
+                    <h3 className="font-headline-lg text-lg sm:text-xl text-on-background font-black uppercase">
+                      PROJECT TUTORIAL &amp; VIDEO GUIDE
+                    </h3>
+                    <p className="font-body-md text-xs text-on-surface-variant leading-relaxed">
+                      Watch how to inspect cards, evaluate bias metrics, and prebunk misinformation with Socratic AI.
+                    </p>
+                  </div>
+                </div>
+                <span className="bg-neo-black text-neo-mint font-label-mono text-[10px] sm:text-xs font-black px-2.5 py-1 neu-border shrink-0 self-start sm:self-auto">
+                  🎬 WALKTHROUGH
+                </span>
+              </div>
+              <div className="w-full aspect-video neu-border bg-black overflow-hidden relative shadow-[3px_3px_0_#000]">
+                <iframe
+                  className="w-full h-full absolute inset-0"
+                  src="https://www.youtube.com/embed/Z0CzOlkPQGY"
+                  title="MIL ECHO Project Tutorial Guide"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowFullScreen
+                />
+              </div>
+            </div>
+
             {/* Player HUD Preview Footer */}
             <div className="w-full max-w-4xl bg-surface-container neu-border p-4 sm:p-6 shadow-[4px_4px_0_#000] sm:shadow-[6px_6px_0_#000] flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mt-2 sm:mt-6">
               <div className="flex items-center gap-3 sm:gap-4">
